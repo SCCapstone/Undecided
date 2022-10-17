@@ -1,7 +1,5 @@
 # # Life React
 
-Peyton's edit
-
 This first paragraph should be a short description of the app. You can add links
 to your wiki pages that have more detailed descriptions.
 

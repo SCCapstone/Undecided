@@ -10,17 +10,17 @@ import { StyleSheet, Text, View } from 'react-native';
 */
 export default function App() {
   return (
-    <View style={style.container}>
+    <View style={styles.container}>
       <Text>KYS</Text>
       <StatusBar style="auto" />
     </View>
   );
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#aaa',
     alignItems: 'center',
     justifyContent: 'center',
   },

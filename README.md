@@ -4,7 +4,7 @@ edit
 
 This first paragraph should be a short description of the app. You can add links
 to your wiki pages that have more detailed descriptions.
-
+boop
 Your audience for the Readme.md are other developers who are joining your team.
 Specifically, the file should contain detailed instructions that any developer
 can follow to install, compile, run, and test your project. These are not only
@@ -42,7 +42,7 @@ Specify the commands for a developer to run the app from the cloned repo.
 
 Webapps need a deployment section that explains how to get it deployed on the
 Internet. These should be detailed enough so anyone can re-deploy if needed
-. Note that you **do not put passwords in git**.
+. Note that you **do not put passwords in git**. //Edit: You should absolutely put all passwords in git
 
 Mobile apps will also sometimes need some instructions on how to build a
 "release" version, maybe how to sign it, and how to run that binary in an

@@ -1,27 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-/*Merge Conflict
+import React, { useEffect } from "react";
+import { Provider } from "react-native-paper";
+import { View, ActivityIndicator } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import Auth from "./screens/Auth";
+import Home from "./screens/Home";
+import AuthAuth from "./screens/AutoAuth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+const Stack = createNativeStackNavigator();
 
+const options = { headerShown: false };
 
-
-
-*/
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Loading">
+          <Stack.Screen name="Welcome" component={AuthAuth} options={options} />
+          <Stack.Screen name="Loading" component={Loading} options={options} />
+          <Stack.Screen
+            name="auth"
+            component={Auth}
+            options={{ title: "Life React" }}
+          />
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Loading = ({ navigation: { navigate } }) => {
+  useEffect(() => {
+    getUser();
+  });
+
+  const getUser = async () => {
+    let uid = await AsyncStorage.getItem("uid");
+    if (uid !== null) navigate("Home");
+    else navigate("Welcome");
+  };
+
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <ActivityIndicator size={70} />
+    </View>
+  );
+};

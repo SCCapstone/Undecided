@@ -38,14 +38,13 @@ const FoodSearchScreen = () => {
           onEndEditing={() => getUSDA(query.current)}
           style={styles.input}
          ></TextInput>
+
          <ScrollView> 
-          {results.map((food ) => (
-        
-            <SearchResult 
+          {results.map((food) => (
+            <SearchResult
+            key={food.fdcId} 
             foodItem = {food}
-           
             ></SearchResult>
-       
              ))}
          </ScrollView>
         

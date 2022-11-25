@@ -2,7 +2,8 @@ import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import React from 'react'
 
 const SearchResult = (props) => {
-   //on press method is a place holder untill food detail screens
+   //on press method is a place holder untill food detail screen is complete 
+
   return (
     <TouchableOpacity style={styles.tab} onPress={() => console.log(props.foodItem.description)} >
         <Text style={styles.text} >{props.foodItem.description} </Text>
@@ -20,12 +21,11 @@ const SearchResult = (props) => {
 // The USDA api sometimes returns empty arrays for nutrients resulting in a null pointer error 
 const getNutrientValue = (foods , nutrientName) => {
     let nutrientValue = 0
-    try {
-        nutrientValue = foods.foodNutrients.find(item => item.nutrientName == nutrientName).value
-      } catch (error) {
-        console.error(error);
-      }
-      return nutrientValue
+    let nutrient = foods.foodNutrients.find(item => item.nutrientName == nutrientName)
+    if(nutrient !== undefined){
+        nutrientValue = nutrient.value
+    }
+    return nutrientValue    
   }
 
 const styles = StyleSheet.create({

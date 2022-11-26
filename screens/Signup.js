@@ -42,19 +42,20 @@ export default function Signup({ navigation: { navigate } }) {
 
   const SignupHandle = () => {
     if (
-      firstName !== "" ||
-      lastName !== "" ||
-      height !== "" ||
-      weight !== "" ||
-      activity !== "" ||
-      goal !== "" ||
-      age !== "" ||
-      phone !== "" ||
-      email !== "" ||
+      firstName !== "" &&
+      lastName !== "" &&
+      height !== "" &&
+      weight !== "" &&
+      activity !== "" &&
+      goal !== "" &&
+      age !== "" &&
+      phone !== "" &&
+      email !== "" &&
       password !== ""
     ) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((user) => {
+          console.log('setdoc')
           setDoc(doc(db, "users", user.user.uid), {
             signinType: "Email",
             firstName,
@@ -68,24 +69,8 @@ export default function Signup({ navigation: { navigate } }) {
             email,
             password,
           })
-            .then(() => {
-              Alert.alert(
-                "Congrats",
-                "Your account has been created succesfully",
-                [
-                  {
-                    text: "Ok",
-                    onPress: async () => {
-                      await AsyncStorage.setItem("uid", user.user.uid);
-                      navigate("Home");
-                    },
-                  },
-                ]
-              );
-            })
-            .catch((error) => {
-              Alert.alert("Oops!", error.message, [{ text: "Ok" }]);
-            });
+          AsyncStorage.setItem("uid", user.user.uid);
+          navigate("Home");
         })
         .catch((error) =>
           Alert.alert("Oops!", error.message, [{ text: "Ok" }])

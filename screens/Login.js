@@ -18,6 +18,7 @@ export default function Login({ navigation: { navigate } }) {
             text: "Ok",
             onPress: async () => {
               await AsyncStorage.setItem("uid", user.user.uid);
+              console.log(user);
               navigate("Home");
             },
           },

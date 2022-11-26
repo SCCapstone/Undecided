@@ -22,6 +22,8 @@ export default function Home({ navigation: { navigate } }) {
     } else {
       setName(user.data().name);
     }
+  console.log(user.data())
+  
   };
 
   const log = async () => {

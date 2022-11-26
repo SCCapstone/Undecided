@@ -1,7 +1,5 @@
 # # Life React
 
-edit
-
 This first paragraph should be a short description of the app. You can add links
 to your wiki pages that have more detailed descriptions.
 
@@ -20,7 +18,13 @@ run in their laptop. For example:
 In order to build this project you first have to install:
 
 - [Node.js](https://nodejs.org/en/)
-- [MongoDB](https://www.mongodb.com/)
+- Alternatively, you can install the latest version of Node.js via a [package manager](https://nodejs.org/en/download/package-manager/).
+- To do so, follow the link above and find the instructions that correspond to your operating system.
+
+- [Expo Go](https://expo.dev/client). You can download this onto a physical device (iOS or Android), or on an emulator.
+
+- If you choose to use an emulator, there are many free options to choose from, such as the built-in [Android Emulator](https://developer.android.com/studio/run/emulator) from Android Studio.
+- If you're using macOS, you can download [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) via the Mac App store.
 
 If possible, list the actual commands you used to install these, so the reader
 can just cut-n-paste the commands and get everything setup.
@@ -36,7 +40,15 @@ database for running your webapp locally.
 
 ## Running
 
-Specify the commands for a developer to run the app from the cloned repo.
+After cloning, navigate to the repository on your local machine via the terminal of your choice. Run the following command to start the LifeReact by deploying a development server:
+
+```console
+npm run build
+```
+
+If you're using an emulator, once the development server has been deployed, the terminal will prompt you to press a for an Android simulator, or i for an iOS simulator.
+
+If you're using a physical device, ensure it is connected to the same wireless network as the device you launched the development server from. If you're using an iPhone, scan the QR code with the default iPhone camera to launch the app in Expo. If you're using an Android, navigate to the Expo Go app and scan the QR code from there.
 
 # Deployment
 

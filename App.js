@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Provider } from "react-native-paper";
 import { View, ActivityIndicator } from "react-native";
@@ -49,3 +50,4 @@ const Loading = ({ navigation: { navigate } }) => {
     </View>
   );
 };
+

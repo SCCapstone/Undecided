@@ -4,8 +4,10 @@ import * as AuthSession from "expo-auth-session";
 import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text, View, StyleSheet, ImageBackground, Button } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 export default function Home({ navigation: { navigate } }) {
+  const navigation = useNavigation();
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
 
@@ -15,15 +17,15 @@ export default function Home({ navigation: { navigate } }) {
 
   const getDb = async () => {
     let uid = await AsyncStorage.getItem("uid");
+    console.log("UUID: " + uid)
     let user = await getDoc(doc(db, "users", uid));
+    console.log("User: " + user)
     setType(user.data().signinType || "Email");
     if (user.data().signinType == "Email") {
       setName(`${user.data()?.firstName} ${user.data()?.lastName}`);
     } else {
       setName(user.data().name);
     }
-  console.log(user.data())
-  
   };
 
   const log = async () => {
@@ -45,6 +47,8 @@ export default function Home({ navigation: { navigate } }) {
     <View style={styles.container}>
       <ImageBackground style={styles.bgImage} source={require("../58c5cc.png")}>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
+        <Button title='diary screen' onPress={() => navigation.navigate('Diary')}/>
+        <Button title='food search screen' onPress={() => navigation.navigate('FoodSearch')}/>
         <Button title="Logout" onPress={log} />
       </ImageBackground>
     </View>

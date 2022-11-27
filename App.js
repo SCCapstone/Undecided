@@ -13,3 +13,11 @@ export default function App() {
   );
 }
 
+export function getNutrientValue(foods , nutrientName) {
+  let nutrientValue = 0
+  let nutrient = foods.foodNutrients.find(item => item.nutrientName == nutrientName)
+  if(nutrient !== undefined){
+      nutrientValue = nutrient.value
+  }
+  return nutrientValue    
+}

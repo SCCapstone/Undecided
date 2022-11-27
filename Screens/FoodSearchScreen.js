@@ -7,6 +7,7 @@ import SearchResult from '../components/SearchResult';
 
 
 
+
 const FoodSearchScreen = () => {
     const [results, setResults ] = useState([])
     const query = useRef("")
@@ -55,6 +56,7 @@ const FoodSearchScreen = () => {
  
 
 }
+
 const styles = StyleSheet.create({
   default:{
     backgroundColor: "#fe7b5f",

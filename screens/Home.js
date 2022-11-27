@@ -4,10 +4,10 @@ import * as AuthSession from "expo-auth-session";
 import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text, View, StyleSheet, ImageBackground, Button } from "react-native";
-import { useNavigation } from '@react-navigation/native';
 
-export default function Home({ navigation: { navigate } }) {
-  const navigation = useNavigation();
+
+export default function Home({ navigation }) {
+
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
 

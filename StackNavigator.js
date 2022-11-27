@@ -6,17 +6,20 @@ import FoodSearchScreen from './Screens/FoodSearchScreen'
 import Loading from './Screens/Loading'
 import Auth from "./Screens/Auth";
 import AuthAuth from "./Screens/AutoAuth";
+import FoodDetails from './Screens/FoodDetails';
+
 
 const Stack = createNativeStackNavigator();
 const options = { headerShown: false };
 const StackNavigator = () => {
     return(
-        <Stack.Navigator initialRouteName="Loading">
+        <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Welcome" component={AuthAuth} options={options} />
             <Stack.Screen name="Loading" component={Loading} options={options} />
             <Stack.Screen name="Home" component={HomeScreen} options={options}/>
             <Stack.Screen name="Diary" component={DiaryScreen}/>
-            <Stack.Screen name="FoodSearch" component={FoodSearchScreen}/>
+            <Stack.Screen name="FoodSearch" component={FoodSearchScreen} options={{ title: "Food Search" }}/>
+            <Stack.Screen name="FoodDetails" component={FoodDetails} options={{ title: "Nutritional Information" }} />
             <Stack.Screen name="auth" component={Auth} options={{ title: "Life React" }}/>
         </Stack.Navigator>
     )

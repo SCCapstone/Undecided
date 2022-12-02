@@ -9,6 +9,10 @@ export const globalStyles = StyleSheet.create({
         fontSize: 24,
         color: '#333',
     },
+    smallText: {
+        fontSize: 16,
+        color: '#333',
+    },
     paragraph: {
         fontSize: 16,
         marginVertical: 8,
@@ -22,5 +26,14 @@ export const globalStyles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderRadius: 15
+    },
+    inputField: {
+        flex: 1,
+        paddingTop: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
+        paddingLeft: 0,
+        backgroundColor: '#fff',
+        color: '#424242',
     }
 })

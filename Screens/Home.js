@@ -45,13 +45,11 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ImageBackground style={styles.bgImage} source={require("../58c5cc.png")}>
         <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
         <Button title='diary screen' onPress={() => navigation.navigate('Diary')}/>
         <Button title='User Settings' onPress={() => navigation.navigate('UserSettings')}/>
         <Button title="Logout" onPress={log} />
-      </ImageBackground>
     </View>
   );
 }
@@ -60,9 +58,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    backgroundColor: "rgba(254,123,95,255)",
+    backgroundColor: "#58c5cc",
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
   Home: {
     color: "white",
@@ -76,9 +76,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 50,
     marginTop: 20,
     textAlign: "center",
-  },
-  bgImage: {
-    width: "100%",
-    height: "100%",
   },
 });

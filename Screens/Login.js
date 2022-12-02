@@ -18,6 +18,10 @@ export default function Login({ navigation: { navigate } }) {
             text: "Ok",
             onPress: async () => {
               await AsyncStorage.setItem("uid", user.user.uid);
+<<<<<<< HEAD
+=======
+              console.log(user.user.uid);
+>>>>>>> 5178a7717863eca96c3925863eaa52776eab7ed1
               navigate("Home");
             },
           },

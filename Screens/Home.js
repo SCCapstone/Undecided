@@ -48,7 +48,6 @@ export default function Home({ navigation }) {
       <ImageBackground style={styles.bgImage} source={require("../58c5cc.png")}>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
         <Button title='diary screen' onPress={() => navigation.navigate('Diary')}/>
-        <Button title='food search screen' onPress={() => navigation.navigate('FoodSearch')}/>
         <Button title="Logout" onPress={log} />
       </ImageBackground>
     </View>

@@ -32,7 +32,7 @@ const DiaryScreen = ({navigation}) => {
     
     return(
      <ScrollView style={styles.default}>
-        <Text style={{ backgroundColor: "#fe7b5f", textAlign:"center", fontWeight:'bold', fontSize:20}}>breakfast</Text>
+        <Text style={{ backgroundColor: "#fe7b5f", textAlign:"center", fontWeight:'bold', fontSize:20}}>Breakfast</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
         <Button title='add breakfast' onPress={() => navigation.navigate("FoodSearch", {meal:'breakfast'}) }></Button>
         <ScrollView> 
@@ -55,7 +55,7 @@ const DiaryScreen = ({navigation}) => {
                 ></SearchResult>
              ))}
          </ScrollView>
-         <Text style={{ backgroundColor: "#fe7b5f", textAlign:"center", fontWeight:'bold', fontSize:20, marginTop:20}}>dinner</Text>
+         <Text style={{ backgroundColor: "#fe7b5f", textAlign:"center", fontWeight:'bold', fontSize:20, marginTop:20}}>Dinner</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
         <Button title='add dinner' onPress={() => navigation.navigate("FoodSearch", {meal:'dinner'}) }></Button>
         <ScrollView> 

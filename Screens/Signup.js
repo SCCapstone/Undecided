@@ -42,17 +42,6 @@ export default function Signup({ navigation: { navigate } }) {
 
   const SignupHandle = () => {
     if (
-<<<<<<< HEAD
-      firstName !== "" ||
-      lastName !== "" ||
-      height !== "" ||
-      weight !== "" ||
-      activity !== "" ||
-      goal !== "" ||
-      age !== "" ||
-      phone !== "" ||
-      email !== "" ||
-=======
       firstName !== "" &&
       lastName !== "" &&
       height !== "" &&
@@ -62,15 +51,11 @@ export default function Signup({ navigation: { navigate } }) {
       age !== "" &&
       phone !== "" &&
       email !== "" &&
->>>>>>> 5178a7717863eca96c3925863eaa52776eab7ed1
       password !== ""
     ) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((user) => {
-<<<<<<< HEAD
-=======
           console.log('setdoc')
->>>>>>> 5178a7717863eca96c3925863eaa52776eab7ed1
           setDoc(doc(db, "users", user.user.uid), {
             signinType: "Email",
             firstName,
@@ -84,29 +69,8 @@ export default function Signup({ navigation: { navigate } }) {
             email,
             password,
           })
-<<<<<<< HEAD
-            .then(() => {
-              Alert.alert(
-                "Congrats",
-                "Your account has been created succesfully",
-                [
-                  {
-                    text: "Ok",
-                    onPress: async () => {
-                      await AsyncStorage.setItem("uid", user.user.uid);
-                      navigate("Home");
-                    },
-                  },
-                ]
-              );
-            })
-            .catch((error) => {
-              Alert.alert("Oops!", error.message, [{ text: "Ok" }]);
-            });
-=======
           AsyncStorage.setItem("uid", user.user.uid);
           navigate("Home");
->>>>>>> 5178a7717863eca96c3925863eaa52776eab7ed1
         })
         .catch((error) =>
           Alert.alert("Oops!", error.message, [{ text: "Ok" }])
@@ -212,8 +176,4 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     backgroundColor: "black",
   },
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 5178a7717863eca96c3925863eaa52776eab7ed1

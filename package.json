@@ -26,14 +26,8 @@
     "react-native-gesture-handler": "^2.8.0",
     "react-native-paper": "^5.0.0-rc.9",
     "react-native-paper-select": "^0.3.8",
-<<<<<<< HEAD
-    "react-native-safe-area-context": "^4.3.1",
-    "react-native-screens": "~3.15.0",
-    "react-native-vector-icons": "^9.2.0"
-=======
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "~3.15.0"
->>>>>>> 5178a7717863eca96c3925863eaa52776eab7ed1
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

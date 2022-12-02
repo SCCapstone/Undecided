@@ -17,17 +17,10 @@ export default function AutoAuth({ navigation: { navigate } }) {
   const [request, response, promptAsync] = Google.useAuthRequest({
     expoClientId:
       "954859485255-fcf95mh4mu72ef803r09mb7re2anmutq.apps.googleusercontent.com",
-<<<<<<< HEAD
-    iosClientId:
-      "954859485255-gl8t79ltfon6jatru8ilaptnnrqtqbr2.apps.googleusercontent.com",
-    /*androidClientId:
-      """,*/
-=======
     /*iosClientId:
       "",
     androidClientId:
       "",*/
->>>>>>> 5178a7717863eca96c3925863eaa52776eab7ed1
     redirectUri: AuthSession.makeRedirectUri({ useProxy: true }),
   });
 

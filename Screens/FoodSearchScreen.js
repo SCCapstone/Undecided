@@ -8,9 +8,10 @@ import SearchResult from '../components/SearchResult';
 
 
 
-const FoodSearchScreen = () => {
+const FoodSearchScreen = ({route}) => {
     const [results, setResults ] = useState([])
     const query = useRef("")
+    const {meal} = route.params
     
     const getUSDA = async (data) => {
       let dataNoSpace = data.trim().replace(' ','%20')
@@ -45,6 +46,7 @@ const FoodSearchScreen = () => {
             <SearchResult
             key={food.fdcId} 
             foodItem = {food}
+            meal={meal}
             ></SearchResult>
              ))}
          </ScrollView>

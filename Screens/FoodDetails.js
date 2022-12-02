@@ -1,20 +1,46 @@
-import React,{useState} from 'react';
-import { View, Text, StyleSheet,Button} from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React,{useState, useContext} from 'react';
+import { View, Text, StyleSheet,Button, TouchableOpacity} from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { getNutrientValue, getNutrientUnit } from '../util';
+import { DiaryContext } from '../Contexts/DiaryContext';
+import { StackActions, useNavigation} from '@react-navigation/native';
 
 
 
 const FoodDetails = ({route}) => {
-    const {food} = route.params
+  const navigation = useNavigation();
+    const {food, meal} = route.params
     const [servings, setServings] = useState(1);
+    const {diary, setDiary} = useContext(DiaryContext)
+
     const UpdateServings = (newServings) =>{
       if(newServings !== ''){
         setServings(newServings)
         return
       }
       setServings(1)
+    }
+
+    const UpdateDiary = () =>{
+      const newDiary = diary
+      switch(meal){
+        case "breakfast":
+          newDiary.addBreakfast(food)
+          break
+        case "lunch":
+          newDiary.addLunch(food)
+          break
+        case "dinner":
+          newDiary.addDinner(food)
+          break
+      }
+
+
+      console.log("update")
+      setDiary(newDiary)
+      console.log(diary)
+      navigation.dispatch(StackActions.popToTop())
+      navigation.navigate("Diary")
     }
     return(
      <View>
@@ -58,7 +84,7 @@ const FoodDetails = ({route}) => {
             <Text style={styles.textRight}>{Math.ceil(food.servingSize/100 * getNutrientValue(food, 'Fiber, total dietary'))*servings}{getNutrientUnit(food, 'Fiber, total dietary')}</Text>
           </View>
           <View  style={styles.tab}>
-            <TouchableOpacity >
+            <TouchableOpacity onPress={() => UpdateDiary()}>
               <Text style={{textAlign: 'center', fontSize: 20}}>Add To Diary</Text>
             </TouchableOpacity>
           </View>

@@ -49,7 +49,6 @@ export default function Home({ navigation }) {
         <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
         <Button title='diary screen' onPress={() => navigation.navigate('Diary')}/>
-        <Button title='food search screen' onPress={() => navigation.navigate('FoodSearch')}/>
         <Button title='User Settings' onPress={() => navigation.navigate('UserSettings')}/>
         <Button title="Logout" onPress={log} />
       </ImageBackground>

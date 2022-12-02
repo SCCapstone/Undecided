@@ -46,6 +46,7 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground style={styles.bgImage} source={require("../58c5cc.png")}>
+        <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
         <Button title='diary screen' onPress={() => navigation.navigate('Diary')}/>
         <Button title='food search screen' onPress={() => navigation.navigate('FoodSearch')}/>
@@ -64,11 +65,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  Home: {
+    color: "white",
+    fontSize: 22,
+    textAlign:  "center",
+    marginTop: 50,
+  },
   welcomingText: {
     color: "white",
     fontSize: 22,
     marginHorizontal: 50,
-    marginTop: 60,
+    marginTop: 20,
     textAlign: "center",
   },
   bgImage: {

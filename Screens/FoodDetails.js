@@ -40,7 +40,7 @@ const FoodDetails = ({route}) => {
       setDiary(newDiary)
       console.log(diary)
       navigation.dispatch(StackActions.popToTop())
-      navigation.navigate("Diary")
+      
     }
     return(
      <View>

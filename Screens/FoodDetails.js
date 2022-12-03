@@ -34,12 +34,8 @@ const FoodDetails = ({route}) => {
           newDiary.addDinner(food)
           break
       }
-
-
-     
-      navigation.dispatch(StackActions.popToTop())
+      navigation.dispatch(StackActions.pop(3))
       navigation.navigate("Diary")
-      
     }
     return(
      <ScrollView style={{ backgroundColor: "#fe7b5f"}}>

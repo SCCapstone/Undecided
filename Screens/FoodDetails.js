@@ -36,10 +36,9 @@ const FoodDetails = ({route}) => {
       }
 
 
-      console.log("update")
-      setDiary(newDiary)
-      console.log(diary)
+     
       navigation.dispatch(StackActions.popToTop())
+      navigation.navigate("Diary")
       
     }
     return(

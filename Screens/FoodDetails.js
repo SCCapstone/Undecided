@@ -1,5 +1,5 @@
 import React,{useState, useContext} from 'react';
-import { View, Text, StyleSheet,Button, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet,Button, TouchableOpacity, ScrollView} from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { getNutrientValue, getNutrientUnit } from '../util';
 import { DiaryContext } from '../Contexts/DiaryContext';
@@ -43,7 +43,7 @@ const FoodDetails = ({route}) => {
       
     }
     return(
-     <ScrollView>
+     <ScrollView style={{ backgroundColor: "#fe7b5f"}}>
         <Text style={{ backgroundColor: "#fe7b5f", textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.description}</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
         <View style={{backgroundColor: "#fe7b5f",height:'100%',width:'100%'}}>

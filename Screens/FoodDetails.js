@@ -43,7 +43,7 @@ const FoodDetails = ({route}) => {
       
     }
     return(
-     <View>
+     <ScrollView>
         <Text style={{ backgroundColor: "#fe7b5f", textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.description}</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
         <View style={{backgroundColor: "#fe7b5f",height:'100%',width:'100%'}}>
@@ -89,7 +89,7 @@ const FoodDetails = ({route}) => {
             </TouchableOpacity>
           </View>
         </View>
-     </View>
+     </ScrollView>
     )
 }
 

@@ -5,9 +5,9 @@ import { View, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Auth from "./screens/Auth";
-import Home from "./screens/Home";
-import AuthAuth from "./screens/AutoAuth";
+import Auth from "./Screens/Auth";
+import Home from "./Screens/Home";
+import AuthAuth from "./Screens/AutoAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createNativeStackNavigator();

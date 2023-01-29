@@ -1,18 +1,14 @@
 import React, { useRef } from 'react';
 import { useState } from 'react';
-import { View, Text, Button,TextInput, StyleSheet, FlatList, ScrollView} from 'react-native';
+import { View, Text, Button,TextInput, StyleSheet, FlatList, ScrollView, } from 'react-native';
+import fetch from 'node-fetch';
 import SearchResult from '../components/SearchResult';
-
-
-
-
-
 
 const FoodSearchScreen = ({route}) => {
     const [results, setResults ] = useState([])
     const query = useRef("")
     const {meal} = route.params
-    
+
     const getUSDA = async (data) => {
       let dataNoSpace = data.trim().replace(' ','%20')
       if(dataNoSpace != ''){
@@ -27,7 +23,7 @@ const FoodSearchScreen = ({route}) => {
           console.error(error);
         }
       }
-      };
+    };
 
 
     return(
@@ -41,9 +37,11 @@ const FoodSearchScreen = ({route}) => {
           style={styles.input}
          ></TextInput>
 
-         <ScrollView> 
+         <ScrollView 
+         testID='foodList'> 
           {results.map((food) => (
             <SearchResult
+            testID='foodItem'
             key={food.fdcId} 
             foodItem = {food}
             meal={meal}

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import FoodSearchScreen from '../Screens/FoodSearchScreen';
+import FoodSearchScreen from '../../Screens/FoodSearchScreen';
 import {render, screen, fireEvent,} from '@testing-library/react-native';
 describe('FoodSearchScreen', () => {
-  const thisRoute = { params: { meal: 'breakfast' }};
+  const thisRoute = { params: 'breakfast' };
   beforeEach(() => {
     var wrapper = render(<FoodSearchScreen route={thisRoute}/>);
   });
@@ -11,6 +11,7 @@ describe('FoodSearchScreen', () => {
     fireEvent.changeText(searchInput, 'ham');
     fireEvent(searchInput, 'onEndEditing');
     const results = screen.getAllByTestId('foodList');
+    screen.debug();
     expect(results).not.toBeNull();
   });
 });

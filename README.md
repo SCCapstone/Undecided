@@ -68,12 +68,18 @@ Behavioral tests are located  in `/test/behavioral`.
 
 ## Testing Technology
 
-Testing is done using jest and the React Native Testing Library. These are included in the projects dependencies and can be installed with the command npm install
+Testing is done using jest and the React Native Testing Library. These are included in the projects dependencies and can be installed with the command 
+```console
+npm install
+```
 
 
 ## Running Tests
 
-Tests are ran with the command npm run test.
+Tests are ran with the following command .
+```console
+npm run test
+```
 
 # Authors
 

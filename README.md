@@ -62,20 +62,18 @@ emulator or in a physical phone.
 
 # Testing
 
-Testing is done using jest and the React Native Testing Library.
-Tests are ran with the command npm run test.
-
 Unit tests are located in `/test/unit`.
 
 Behavioral tests are located  in `/test/behavioral`.
 
 ## Testing Technology
 
-In some cases you need to install test runners, etc. Explain how.
+Testing is done using jest and the React Native Testing Library. These are included in the projects dependencies and can be installed with the command npm install
+
 
 ## Running Tests
 
-Explain how to run the automated tests.
+Tests are ran with the command npm run test.
 
 # Authors
 

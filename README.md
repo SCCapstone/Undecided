@@ -62,12 +62,12 @@ emulator or in a physical phone.
 
 # Testing
 
-In 492 you will write automated tests. When you do you will need to add a
-section that explains how to run them.
+Testing is done using jest and the React Native Testing Library.
+Tests are ran with the command npm run test.
 
-The unit tests are in `/test/unit`.
+Unit tests are located in `/test/unit/`.
 
-The behavioral tests are in `/test/casper/`.
+Behavioral tests are located  in `/test/behavioral/`.
 
 ## Testing Technology
 

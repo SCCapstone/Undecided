@@ -6,6 +6,7 @@ import { PaperSelect } from "react-native-paper-select";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { COLORS } from '../constants/colors.js'
 
 export default function Signup({ navigation: { navigate } }) {
   const [firstName, setFirstName] = React.useState("");
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 15,
     borderRadius: 120,
-    backgroundColor: "white",
+    backgroundColor: COLORS.cream,
   },
   fullWidth: {
     width: "90%",

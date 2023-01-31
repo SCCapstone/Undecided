@@ -4,6 +4,7 @@ import { TextInput, Button } from "react-native-paper";
 import { StyleSheet, View, Alert } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { COLORS } from "../constants/colors"
 
 export default function Login({ navigation: { navigate } }) {
   const [email, setEmail] = React.useState("");
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 15,
     borderRadius: 120,
-    backgroundColor: "white",
+    backgroundColor: COLORS.cream,
   },
   login: {
     width: 200,

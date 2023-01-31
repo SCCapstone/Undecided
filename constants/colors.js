@@ -1,0 +1,5 @@
+export const COLORS = {
+    backgroundColor: '#969F63',
+    cream: '#F3DAB8',
+    blue: '#58C5CC'
+  }

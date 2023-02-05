@@ -1,17 +1,20 @@
-export default class Diary {
+import DiaryEntry from "./DiaryEntry";
+
+export default class FoodDiary {
+    #diary;
     constructor(){
-        this.breakfast = []
-        this.lunch = []
-        this.dinner = []
-        console.log("new diary")
+        this.#diary = [];
     }
-    addBreakfast(food){
-        this.breakfast.push(food)
-    }
-    addLunch(food){
-        this.lunch.push(food)
-    }
-    addDinner(food){
-        this.dinner.push(food)
+
+    getEntry(date){
+        let index = this.FoodDiary.find(item => item.getDate() == date);
+
+        if(index === undefined){
+            index = this.#diary.push(new DiaryEntry(date));
+
+        }
+
+        return this.#diary[index];
+
     }
 }

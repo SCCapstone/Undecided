@@ -1,7 +1,6 @@
 
-import React, { useEffect } from "react";
 import { Provider } from "react-native-paper";
-import { View, ActivityIndicator } from "react-native";
+import StackNavigator from './StackNavigator';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -13,41 +12,28 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Stack = createNativeStackNavigator();
 
 const options = { headerShown: false };
+import { DiaryContext } from "./Contexts/DiaryContext";
+import { useState } from "react";
+import Diary from "./Classes/Diary"
 
 export default function App() {
+  const [diary, setDiary] = useState(new Diary())
   return (
     <Provider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Loading">
-          <Stack.Screen name="Welcome" component={AuthAuth} options={options} />
-          <Stack.Screen name="Loading" component={Loading} options={options} />
-          <Stack.Screen
-            name="auth"
-            component={Auth}
-            options={{ title: "Life React" }}
-          />
-          <Stack.Screen name="Home" component={Home} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <DiaryContext.Provider value={{diary, setDiary}}>
+        <NavigationContainer>
+          <StackNavigator/>
+        </NavigationContainer>
+      </DiaryContext.Provider>
     </Provider>
   );
 }
 
-const Loading = ({ navigation: { navigate } }) => {
-  useEffect(() => {
-    getUser();
-  });
-
-  const getUser = async () => {
-    let uid = await AsyncStorage.getItem("uid");
-    if (uid !== null) navigate("Home");
-    else navigate("Welcome");
-  };
-
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size={70} />
-    </View>
-  );
-};
-
+export function getNutrientValue(foods , nutrientName) {
+  let nutrientValue = 0
+  let nutrient = foods.foodNutrients.find(item => item.nutrientName == nutrientName)
+  if(nutrient !== undefined){
+      nutrientValue = nutrient.value
+  }
+  return nutrientValue    
+}

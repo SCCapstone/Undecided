@@ -13,12 +13,12 @@ export default function Login({ navigation: { navigate } }) {
   const LoginHandle = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        Alert.alert("Succes", "Logedin succesfully", [
+        Alert.alert("Success", "Logged in successfully", [
           {
             text: "Ok",
             onPress: async () => {
               await AsyncStorage.setItem("uid", user.user.uid);
-              console.log(user);
+              console.log(user.user.uid);
               navigate("Home");
             },
           },
@@ -31,7 +31,7 @@ export default function Login({ navigation: { navigate } }) {
     <View style={styles.container}>
       <TextInput
         value={email}
-        label="email"
+        label="Email"
         mode="outlined"
         style={styles.inpt}
         onChangeText={setEmail}
@@ -40,7 +40,7 @@ export default function Login({ navigation: { navigate } }) {
         secureTextEntry={visible}
         mode="outlined"
         value={password}
-        label="password"
+        label="Password"
         style={styles.inpt}
         onChangeText={setPassword}
         right={

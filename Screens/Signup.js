@@ -84,16 +84,16 @@ export default function Signup({ navigation: { navigate } }) {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <Input val={firstName} label = "first name" change={setFirstName} />
-        <Input val={lastName} label = "last name" change={setLastName} />
+        <Input val={firstName} label = "First" change={setFirstName} />
+        <Input val={lastName} label = "Last" change={setLastName} />
       </View>
       <View style={styles.row}>
-        <Input val={height} label = "height (in cm)" change={setHeight} />
-        <Input val={weight} label = "weight  (in kg)" change={setWeight} />
+        <Input val={height} label = "Height (cm)" change={setHeight} />
+        <Input val={weight} label = "Weight  (kg)" change={setWeight} />
       </View>
       <View style={styles.row}>
         <PaperSelect
-          label = "activity level"
+          label = "Activity Level"
           value={activity.value}
           onSelection={({ text, selectedList }) => {
             setActivity({ value: text, selectedList });
@@ -106,7 +106,7 @@ export default function Signup({ navigation: { navigate } }) {
           containerStyle={{ width: "48%", marginBottom: 0, marginRight: 15 }}
         />
         <PaperSelect
-          label = "goal"
+          label = "Goal"
           value={goal.value}
           onSelection={({ text, selectedList }) => {
             setGoal({ value: text, selectedList });
@@ -120,11 +120,11 @@ export default function Signup({ navigation: { navigate } }) {
         />
       </View>
       <View style={styles.row}>
-        <Input val={age} label = "age" change={setAge} />
-        <Input val={phone} label = "phone no." change={setPhone} />
+        <Input val={age} label = "Age" change={setAge} />
+        <Input val={phone} label = "Phone #" change={setPhone} />
       </View>
-      <Input val={email} label = "email" full change={setEmail} />
-      <Input val={password} label = "password" full psw change={setPassword} />
+      <Input val={email} label = "Email" full change={setEmail} />
+      <Input val={password} label = "Password" full psw change={setPassword} />
       <Button
         mode="contained"
         style={styles.login}

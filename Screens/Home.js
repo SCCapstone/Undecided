@@ -5,7 +5,9 @@ import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text, View, StyleSheet, ImageBackground, Button } from "react-native";
 
-export default function Home({ navigation: { navigate } }) {
+
+export default function Home({ navigation }) {
+
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
 
@@ -15,15 +17,15 @@ export default function Home({ navigation: { navigate } }) {
 
   const getDb = async () => {
     let uid = await AsyncStorage.getItem("uid");
+    console.log("UUID: " + uid)
     let user = await getDoc(doc(db, "users", uid));
+    console.log("User: " + user)
     setType(user.data().signinType || "Email");
     if (user.data().signinType == "Email") {
       setName(`${user.data()?.firstName} ${user.data()?.lastName}`);
     } else {
       setName(user.data().name);
     }
-  console.log(user.data())
-  
   };
 
   const log = async () => {
@@ -43,10 +45,11 @@ export default function Home({ navigation: { navigate } }) {
 
   return (
     <View style={styles.container}>
-      <ImageBackground style={styles.bgImage} source={require("../58c5cc.png")}>
+        <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
+        <Button title='diary screen' onPress={() => navigation.navigate('Diary')}/>
+        <Button title='User Settings' onPress={() => navigation.navigate('UserSettings')}/>
         <Button title="Logout" onPress={log} />
-      </ImageBackground>
     </View>
   );
 }
@@ -55,19 +58,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    backgroundColor: "rgba(254,123,95,255)",
+    backgroundColor: "#58c5cc",
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
+    height: "100%",
+  },
+  Home: {
+    color: "white",
+    fontSize: 22,
+    textAlign:  "center",
+    marginTop: 50,
   },
   welcomingText: {
     color: "white",
     fontSize: 22,
     marginHorizontal: 50,
-    marginTop: 60,
+    marginTop: 20,
     textAlign: "center",
-  },
-  bgImage: {
-    width: "100%",
-    height: "100%",
   },
 });

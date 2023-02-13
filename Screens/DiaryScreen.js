@@ -62,13 +62,25 @@ const DiaryScreen = ({navigation}) => {
         <View style={{height:1, backgroundColor:'black'}}></View>
         <Button title='add lunch' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getLunch()}) }></Button>
         <ScrollView> 
-         
+        {entry.getLunch().map((food) => (
+                 <DiaryTile
+                 key={food.getName} 
+                 foodItem = {food}
+                 meal = {entry.getLunch()}
+                 ></DiaryTile>
+             ))}
          </ScrollView>
          <Text style={styles.meal}>Dinner</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
         <Button title='add dinner' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getDinner()}) }></Button>
         <ScrollView> 
-           
+        {entry.getDinner().map((food) => (
+                 <DiaryTile
+                 key={food.getName} 
+                 foodItem = {food}
+                 meal = {entry.getDinner()}
+                 ></DiaryTile>
+             ))}
          </ScrollView>
      </ScrollView>
     )

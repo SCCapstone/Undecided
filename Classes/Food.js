@@ -8,17 +8,23 @@ export default class Food {
     carbs;
     protein;
     fat;
+    sugar;
+    sodium;
+    fibre;
     servings;
     servingSize;
     servingSizeUnit;
 
-    constructor(name, brandName, calories, carbs, protein, fat, servings, servingSize, servingSizeUnit ){
+    constructor(name, brandName, calories, carbs, protein, fat, sugar, sodium, fibre,servings, servingSize, servingSizeUnit ){
         this.name = name;
         this.brandName = brandName;
-        this.calories = calories;
-        this.carbs = carbs;
-        this.protein = protein;
-        this.fat = fat;
+        this.calories =  Math.ceil((servingSize/100) * calories)
+        this.carbs = Math.ceil((servingSize/100) * carbs);
+        this.protein =Math.ceil((servingSize/100) * protein);
+        this.fat = Math.ceil((servingSize/100) * fat);
+        this.sugar = Math.ceil((servingSize/100) * sugar);
+        this.sodium = Math.ceil((servingSize/100) * sodium)
+        this.fibre = Math.ceil((servingSize/100) * fibre)
         this.servings = servings;
         this.servingSize = servingSize;
         this.servingSizeUnit = servingSizeUnit;
@@ -37,18 +43,30 @@ export default class Food {
         return this.calories*this.servings;
     }
 
+    getFat(){
+        return this.fat * this.servings;
+    }
+
     getCarbs(){
-        return this.carbs*servings;
+        return this.carbs*this.servings;
     }
 
     getProtein(){
-        return this.protein*servings;
+        return this.protein*this.servings;
     }
 
-    getFat(){
-        return this.fat*servings;
+    getSugar(){
+        return this.sugar*this.servings;
     }
     
+    getSodium(){
+        return this.sodium*this.servings;
+    }
+
+    getFibre(){
+        return this.fibre*this.servings;
+    }2
+
     getServings(){
         return this.servings;
     }
@@ -62,6 +80,6 @@ export default class Food {
     }
 
     setServings(servings){
-        this.servings = servings
+        this.servings = servings;
     }
 }

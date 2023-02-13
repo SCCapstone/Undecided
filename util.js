@@ -24,7 +24,10 @@ export function getNutrientValue(foods , nutrientName) {
     const carbs = getNutrientValue(jFood, 'Carbohydrate, by difference');
     const protein = getNutrientValue(jFood, 'Protein');
     const fat = getNutrientValue(jFood, 'Total lipid (fat)');
-    const food = new Food(jFood.description,jFood.brandName,cal,carbs,protein,fat,servings,Math.ceil(jFood.servingSize),jFood.servingSizeUnit);
+    const sugar = getNutrientValue(jFood, 'Sugars, total including NLEA');
+    const sodium = getNutrientValue(jFood, 'Sodium, Na');
+    const fibre = getNutrientValue(jFood, 'Fiber, total dietary');
+    const food = new Food(jFood.description,jFood.brandName,cal,carbs,protein,fat,sugar,sodium,fibre,servings,Math.ceil(jFood.servingSize),jFood.servingSizeUnit);
     
     return food;
 

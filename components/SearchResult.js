@@ -10,7 +10,7 @@ const SearchResult = (props) => {
 
   return (
     <TouchableOpacity style={styles.tab} onPress={() => navigation.navigate("FoodDetails", {food: props.foodItem, meal: props.meal}) } >
-        <Text style={styles.text} >{props.foodItem.description} </Text>
+        <Text style={styles.text}>{props.foodItem.description} </Text>
             <View style={{flexDirection: 'row'}}>
             <Text style={styles.textOnLeft}>{props.foodItem.brandName}</Text>
             <Text style={styles.textOnLeft}>{Math.ceil(props.foodItem.servingSize)}{props.foodItem.servingSizeUnit}</Text>

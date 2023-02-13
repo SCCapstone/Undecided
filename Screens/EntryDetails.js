@@ -1,8 +1,6 @@
-import React,{useState, useContext} from 'react';
+import React,{useState} from 'react';
 import { View, Text, StyleSheet,Button, TouchableOpacity, ScrollView} from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { getNutrientValue, getNutrientUnit, jsonToFoodObject } from '../util';
-import { DiaryContext } from '../Contexts/DiaryContext';
 import { StackActions, useNavigation} from '@react-navigation/native';
 
 

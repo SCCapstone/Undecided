@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useState } from 'react';
-import { View, Text, Button,TextInput, StyleSheet, FlatList, ScrollView} from 'react-native';
+import { View,TextInput, StyleSheet,ScrollView} from 'react-native';
 import SearchResult from '../components/SearchResult';
 
 

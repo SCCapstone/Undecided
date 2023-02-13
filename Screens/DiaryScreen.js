@@ -1,8 +1,6 @@
 import React, {useState, useRef, useContext} from 'react';
 import { DiaryContext } from '../Contexts/DiaryContext';
 import { View, Text, Button,ScrollView,StyleSheet} from 'react-native';
-import SearchResult from '../components/SearchResult'
-import Diary from '../Classes/Diary';
 import { TouchableOpacity } from 'react-native';
 import DiaryTile from '../components/DiaryTile'
 
@@ -10,7 +8,7 @@ import DiaryTile from '../components/DiaryTile'
 
 
 const DiaryScreen = ({navigation}) => {
-    const {diary, setDiary} = useContext(DiaryContext)
+    const {diary} = useContext(DiaryContext)
     const selectedDate = useRef(new Date())
     const [selectedDateString, setSelectedDate] = useState(selectedDate.current.toDateString())
     const entry = diary.getEntry(selectedDateString)

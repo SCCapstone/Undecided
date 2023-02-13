@@ -1,20 +1,27 @@
 import DiaryEntry from "./DiaryEntry";
 
-export default class FoodDiary {
-    #diary;
+export default class Diary {
+    diary;
     constructor(){
-        this.#diary = [];
+        this.diary = [];
+        c = 0;
+        console.log("new diary")
     }
 
     getEntry(date){
-        let index = this.FoodDiary.find(item => item.getDate() == date);
-
-        if(index === undefined){
-            index = this.#diary.push(new DiaryEntry(date));
+        let index = undefined
+        for(i = 0; i < this.diary.length; i++){
+            if(this.diary[i].getDate() === date){
+                index = i;
+            }
 
         }
 
-        return this.#diary[index];
+        if(index === undefined){
+            index = this.diary.push(new DiaryEntry(date)) - 1;
+        }
+
+        return this.diary[index];
 
     }
 }

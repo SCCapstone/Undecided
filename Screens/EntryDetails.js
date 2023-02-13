@@ -10,7 +10,7 @@ import { StackActions, useNavigation} from '@react-navigation/native';
 const FoodDetails = ({route}) => {
   const navigation = useNavigation();
     const {food, meal} = route.params
-    const [servings, setServings] = useState(1);
+    const [servings, setServings] = useState(food.getServings());
     const {diary, setDiary} = useContext(DiaryContext)
 
     const UpdateServings = (newServings) =>{
@@ -21,13 +21,7 @@ const FoodDetails = ({route}) => {
       setServings(1)
     }
 
-    const UpdateDiary = () =>{
-
-      meal.push(jsonToFoodObject(food,servings))
-      navigation.dispatch(StackActions.popToTop(3))
-      navigation.navigate("Diary")
-      
-    }
+  
     return(
      <ScrollView style={{ backgroundColor: "#fe7b5f"}}>
         <Text style={{ backgroundColor: "#fe7b5f", textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.description}</Text>

@@ -4,6 +4,7 @@ import { View, Text, Button,ScrollView,StyleSheet} from 'react-native';
 import SearchResult from '../components/SearchResult'
 import Diary from '../Classes/Diary';
 import { TouchableOpacity } from 'react-native';
+import DiaryTile from '../components/DiaryTile'
 
 
 
@@ -12,7 +13,7 @@ const DiaryScreen = ({navigation}) => {
     const {diary, setDiary} = useContext(DiaryContext)
     const selectedDate = useRef(new Date())
     const [selectedDateString, setSelectedDate] = useState(selectedDate.current.toDateString())
- 
+    const entry = diary.getEntry(selectedDateString)
  
 
     
@@ -47,38 +48,27 @@ const DiaryScreen = ({navigation}) => {
         </View>
         <Text style={styles.meal}>Breakfast</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
-        <Button title='add breakfast' onPress={() => navigation.navigate("FoodSearch", {meal:'breakfast'}) }></Button>
+        <Button title='add breakfast' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getBreakfast()}) }></Button>
         <ScrollView> 
-            {diary.breakfast.map((food) => (
-                <SearchResult
-                key={food.fdcId} 
-                foodItem = {food}
-                ></SearchResult>
+        {entry.getBreakfast().map((food) => (
+                 <DiaryTile
+                 key={food.getName} 
+                 foodItem = {food}
+                 meal = {entry.getBreakfast()}
+                 ></DiaryTile>
              ))}
          </ScrollView>
          <Text style={styles.meal}>lunch</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
-        <Button title='add lunch' onPress={() => navigation.navigate("FoodSearch", {meal:'lunch'}) }></Button>
+        <Button title='add lunch' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getLunch()}) }></Button>
         <ScrollView> 
-            {diary.lunch.map((food) => (
-                <SearchResult
-                key={food.fdcId} 
-                foodItem = {food}
-                 
-                ></SearchResult>
-             ))}
+         
          </ScrollView>
          <Text style={styles.meal}>Dinner</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
-        <Button title='add dinner' onPress={() => navigation.navigate("FoodSearch", {meal:'dinner'}) }></Button>
+        <Button title='add dinner' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getDinner()}) }></Button>
         <ScrollView> 
-            {diary.dinner.map((food) => (
-                <SearchResult
-                key={food.fdcId} 
-                foodItem = {food}
-                 
-                ></SearchResult>
-             ))}
+           
          </ScrollView>
      </ScrollView>
     )

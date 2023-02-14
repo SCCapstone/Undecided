@@ -9,8 +9,8 @@ const Loading = ({ navigation: { navigate } }) => {
   
     const getUser = async () => {
       let uid = await AsyncStorage.getItem("uid");
-      if (uid !== null) navigate("Home");
-      else navigate("Welcome");
+      if (uid !== null) navigate('Home');
+      else navigate('Auth');
     };
   
     return (

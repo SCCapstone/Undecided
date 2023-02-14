@@ -31,7 +31,7 @@ export default function Home({ navigation }) {
   const log = async () => {
     if (type == "Email") {
       AsyncStorage.removeItem("uid");
-      navigate("Welcome");
+      navigation.navigate('Auth');
     } else {
       AsyncStorage.removeItem("uid");
       let token = await AsyncStorage.getItem("token");
@@ -39,7 +39,7 @@ export default function Home({ navigation }) {
         { token },
         { revocationEndpoint: "https://oauth2.googleapis.com/revoke" }
       );
-      navigate("Welcome");
+      navigation.navigate('Auth');
     }
   };
 

@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { View, TextInput, Text, FlatList, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
 import { globalStyles } from "../../styles/global";
 import Setting from "../../components/Setting";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+
 
 export default function GoalsSettings({ navigation }) {
     

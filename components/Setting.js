@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { globalStyles } from "../styles/global";
 import { MaterialIcons } from '@expo/vector-icons';
+import { getAuth } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Setting({ item, handleChange }) {
+    
+    const [userDocSnap, setUserDocSnap] = useState(null);
+    const [userUid, setUserUid] = useState("userUid not set yet");
+
+    const getUserUid = async () => {
+        const uid = await AsyncStorage.getItem("uid");
+        setUserUid(uid);
+    };
+
+    useEffect(() => {
+        getUserUid();
+        getUserDocSnap();
+    }, []);
+
+    const getUserDocSnap = async () => {
+        const uid = await AsyncStorage.getItem("uid");
+        const docRef = doc(db, "users", uid);
+        setUserDocSnap(docRef)
+        // const snap = await getDoc(docRef);
+        // setUserDocSnap(snap);
+    };
 
     return (
         <View>
@@ -12,10 +37,18 @@ export default function Setting({ item, handleChange }) {
             </View>
             <View style={styles.settingLabel}>
                 <MaterialIcons style={styles.editIcon} name="edit" size={24} color="lightgray" />
-                <TextInput style={styles.inputField} onChangeText={handleChange} placeholder={"Placeholder"} editable={true} />
+                <TextInput style={styles.inputField} onChangeText={handleChange} value={userUid} editable={true} />
             </View>
         </View>
     );
+}
+
+async function getUserUid() {
+    return await AsyncStorage.getItem("uid");
+}
+
+function getUserDocRef(uid) {
+    return doc(db, "users", uid);
 }
 
 const styles = StyleSheet.create({

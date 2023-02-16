@@ -7,7 +7,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Setting({ item, handleChange }) {
+export default function Setting({ item, handleChange, dbField }) {
     
     const [userDocSnap, setUserDocSnap] = useState(null);
     const [userUid, setUserUid] = useState("userUid not set yet");
@@ -37,17 +37,17 @@ export default function Setting({ item, handleChange }) {
             </View>
             <View style={styles.settingLabel}>
                 <MaterialIcons style={styles.editIcon} name="edit" size={24} color="lightgray" />
-                <TextInput style={styles.inputField} onChangeText={handleChange} value={userUid} editable={true} />
+                <TextInput style={styles.inputField} onChangeText={handleChange} value={dbField} editable={true} />
             </View>
         </View>
     );
 }
 
-async function getUserUid() {
+const getUserUid = async () => {
     return await AsyncStorage.getItem("uid");
 }
 
-function getUserDocRef(uid) {
+const getUserDocRef = async (uid) => {
     return doc(db, "users", uid);
 }
 

@@ -10,24 +10,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Setting({ item, handleChange, dbField }) {
     
     const [userDocSnap, setUserDocSnap] = useState(null);
-    const [userUid, setUserUid] = useState("userUid not set yet");
-
-    const getUserUid = async () => {
-        const uid = await AsyncStorage.getItem("uid");
-        setUserUid(uid);
-    };
+    const [dataField, setDataField] = useState();
 
     useEffect(() => {
-        getUserUid();
         getUserDocSnap();
     }, []);
 
     const getUserDocSnap = async () => {
         const uid = await AsyncStorage.getItem("uid");
         const docRef = doc(db, "users", uid);
-        setUserDocSnap(docRef)
-        // const snap = await getDoc(docRef);
-        // setUserDocSnap(snap);
+        const snap = await getDoc(docRef);
+        console.log("from getUserDocSnap: " + snap.get("firstName"))
+        setUserDocSnap(snap);
     };
 
     return (
@@ -37,15 +31,20 @@ export default function Setting({ item, handleChange, dbField }) {
             </View>
             <View style={styles.settingLabel}>
                 <MaterialIcons style={styles.editIcon} name="edit" size={24} color="lightgray" />
-                <TextInput style={styles.inputField} onChangeText={handleChange} value={dbField} editable={true} />
+                {//conditionally render textInput after userDocSnap is no longer null
+                userDocSnap && (
+                <TextInput
+                    style={styles.inputField}
+                    onChangeText={handleChange}
+                    value={userDocSnap.get(dbField)}
+                    editable={true}
+                />
+                )}
             </View>
         </View>
     );
 }
 
-const getUserUid = async () => {
-    return await AsyncStorage.getItem("uid");
-}
 
 const getUserDocRef = async (uid) => {
     return doc(db, "users", uid);

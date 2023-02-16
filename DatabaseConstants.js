@@ -1,8 +1,8 @@
-export const DB_FIRST_NAME = "firstName",
-    DB_LAST_NAME = "lastName",
-    DB_EMAIL = "email",
-    DB_PHONE = "phone",
-    DB_AGE = "age",
-    DB_PASSWORD = "password"
+export const FIRST_NAME = "firstName"
+export const LAST_NAME = "lastName"
+export const EMAIL = "email"
+export const PHONE = "phone"
+export const AGE = "age"
+export const PASSWORD = "password"
 
 

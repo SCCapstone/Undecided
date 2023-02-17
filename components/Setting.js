@@ -7,22 +7,14 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Setting({ item, handleChange, dbField }) {
+export default function Setting({ item, initialData, parentCallback }) {
     
-    const [userDocSnap, setUserDocSnap] = useState(null);
-    const [dataField, setDataField] = useState();
+    const [dataField, setDataField] = useState(initialData);
 
-    useEffect(() => {
-        getUserDocSnap();
-    }, []);
-
-    const getUserDocSnap = async () => {
-        const uid = await AsyncStorage.getItem("uid");
-        const docRef = doc(db, "users", uid);
-        const snap = await getDoc(docRef);
-        console.log("from getUserDocSnap: " + snap.get("firstName"))
-        setUserDocSnap(snap);
-    };
+    const changeHandler = (val) => {
+        setDataField(val);
+        parentCallback(item, val)
+    }
 
     return (
         <View>
@@ -31,15 +23,12 @@ export default function Setting({ item, handleChange, dbField }) {
             </View>
             <View style={styles.settingLabel}>
                 <MaterialIcons style={styles.editIcon} name="edit" size={24} color="lightgray" />
-                {//conditionally render textInput after userDocSnap is no longer null
-                userDocSnap && (
                 <TextInput
                     style={styles.inputField}
-                    onChangeText={handleChange}
-                    value={userDocSnap.get(dbField)}
+                    onChangeText={changeHandler}
+                    value={dataField}
                     editable={true}
                 />
-                )}
             </View>
         </View>
     );

@@ -19,11 +19,18 @@ export default function Signup({ navigation: { navigate } }) {
   const [phone, setPhone] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [age, setAge] = React.useState("");
+
   const [activity, setActivity] = React.useState({
     value: "",
     selectedList: [],
   });
+
   const [goal, setGoal] = React.useState({
+    value: "",
+    selectedList: [],
+  });
+
+  const [dietary, setDietary] = React.useState({
     value: "",
     selectedList: [],
   });
@@ -42,6 +49,16 @@ export default function Signup({ navigation: { navigate } }) {
     { _id: "MUSCLE_GAIN", value: "Muscle Gain" },
   ];
 
+  const dietaryRestriction = [
+    { _id: "LACTOSE_INTOLERANCE", value: "Lactose Intolerance" },
+    { _id: "GLUTEN_INTOLERANCE", value: "Gluten Intolerance" },
+    { _id: "VEGETARIAN", value: "Vegetarian" },
+    { _id: "KETO", value: "Keto" },
+    { _id: "DIABETES", value: "Diabetes" },
+    { _id: "DIARY_FREE", value: "Dairy-Free" },
+    { _id: "LOW_CARB", value: "Low Carb" },
+  ];
+
   const SignupHandle = async () => {
     if (
       firstName !== "" &&
@@ -50,6 +67,7 @@ export default function Signup({ navigation: { navigate } }) {
       weight !== "" &&
       activity !== "" &&
       goal !== "" &&
+      dietary !== "" &&
       age !== "" &&
       phone !== "" &&
       email !== "" &&
@@ -66,6 +84,7 @@ export default function Signup({ navigation: { navigate } }) {
             weight,
             activity,
             goal,
+            dietary,
             age,
             phone,
             email,
@@ -85,12 +104,16 @@ export default function Signup({ navigation: { navigate } }) {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <Input val={firstName} label = "First" change={setFirstName} />
-        <Input val={lastName} label = "Last" change={setLastName} />
+        <Input val={firstName} label = "First Name" change={setFirstName} />
+        <Input val={lastName} label = "Last Name" change={setLastName} />
       </View>
       <View style={styles.row}>
         <Input val={height} label = "Height (cm)" change={setHeight} />
-        <Input val={weight} label = "Weight  (kg)" change={setWeight} />
+        <Input val={weight} label = "Weight (kg)" change={setWeight} />
+      </View>
+      <View style={styles.row}>
+        <Input val={age} label = "Age" change={setAge} />
+        <Input val={phone} label = "Phone #" change={setPhone} />
       </View>
       <View style={styles.row}>
         <PaperSelect
@@ -119,11 +142,24 @@ export default function Signup({ navigation: { navigate } }) {
           containerStyle={{ width: "48%", marginBottom: 0 }}
           textInputStyle={{ ...styles.inpt, width: "100%" }}
         />
-      </View>
+        </View>
       <View style={styles.row}>
-        <Input val={age} label = "Age" change={setAge} />
-        <Input val={phone} label = "Phone #" change={setPhone} />
+        <PaperSelect
+          label = "Dietary Restrictions"
+          value={dietary.value}
+          onSelection={({ text, selectedList }) => {
+            setDietary({ value: text, selectedList });
+          }}
+          arrayList={dietaryRestriction}
+          outlineColor="gray"
+          textInputMode="outlined"
+          multiEnable={true}
+          selectedArrayList={dietary.selectedList}
+          containerStyle={{ width: "100%", marginBottom: 0 }}
+          textInputStyle={{ ...styles.inpt, width: "100%" }}
+        />
       </View>
+      
       <Input val={email} label = "Email" full change={setEmail} />
       <Input val={password} label = "Password" full psw change={setPassword} />
       <Button

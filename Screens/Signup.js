@@ -29,17 +29,17 @@ export default function Signup({ navigation: { navigate } }) {
   });
 
   const activities = [
-    { _id: "1", value: "Sedentary" },
-    { _id: "2", value: "Light" },
-    { _id: "3", value: "Moderate" },
-    { _id: "4", value: "High" },
+    { _id: "SEDENTARY", value: "Sedentary" },
+    { _id: "LIGHT", value: "Light" },
+    { _id: "MODERATE", value: "Moderate" },
+    { _id: "HIGH", value: "High" },
   ];
 
   const goals = [
-    { _id: "1", value: "Calories" },
-    { _id: "2", value: "Weight Gain" },
-    { _id: "3", value: "Weight Loss" },
-    { _id: "4", value: "Muscle Gain" },
+    { _id: "CALORIES", value: "Calories" },
+    { _id: "WEIGHT_GAIN", value: "Weight Gain" },
+    { _id: "WEIGHT_LOSS", value: "Weight Loss" },
+    { _id: "MUSCLE_GAIN", value: "Muscle Gain" },
   ];
 
   const SignupHandle = async () => {

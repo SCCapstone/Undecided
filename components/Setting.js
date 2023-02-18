@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { globalStyles } from "../styles/global";
 import { MaterialIcons } from '@expo/vector-icons';
-import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Setting({ item, initialData, parentCallback }) {
     

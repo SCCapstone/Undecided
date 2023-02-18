@@ -1,8 +1,7 @@
 import React, { useState, useEffect, setState } from "react";
-import { View, TextInput, Text, FlatList, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
+import { View, FlatList, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
 import { globalStyles } from "../../styles/global";
 import Setting from "../../components/Setting";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import * as dbConstants from "../../DatabaseConstants";

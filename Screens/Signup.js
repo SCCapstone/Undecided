@@ -65,9 +65,9 @@ export default function Signup({ navigation: { navigate } }) {
       lastName !== "" &&
       height !== "" &&
       weight !== "" &&
-      activity !== "" &&
-      goal !== "" &&
-      dietary !== "" &&
+      activity.value !== "" &&
+      goal.value !== "" &&
+      dietary.value !== "" &&
       age !== "" &&
       phone !== "" &&
       email !== "" &&
@@ -82,9 +82,9 @@ export default function Signup({ navigation: { navigate } }) {
             lastName,
             height,
             weight,
-            activity,
-            goal,
-            dietary,
+            activity: activity.value,
+            goal: goal.value,
+            dietary: dietary.value,
             age,
             phone,
             email,
@@ -148,7 +148,11 @@ export default function Signup({ navigation: { navigate } }) {
           label = "Dietary Restrictions"
           value={dietary.value}
           onSelection={({ text, selectedList }) => {
-            setDietary({ value: text, selectedList });
+            setDietary((prev) => ({
+              ...prev,
+              value: text,
+              selectedList: [...selectedList],
+            }));
           }}
           arrayList={dietaryRestriction}
           outlineColor="gray"

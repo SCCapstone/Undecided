@@ -1,17 +1,27 @@
+import DiaryEntry from "./DiaryEntry";
+
 export default class Diary {
+    diary;
     constructor(){
-        this.breakfast = []
-        this.lunch = []
-        this.dinner = []
+        this.diary = [];
+        c = 0;
         console.log("new diary")
     }
-    addBreakfast(food){
-        this.breakfast.push(food)
-    }
-    addLunch(food){
-        this.lunch.push(food)
-    }
-    addDinner(food){
-        this.dinner.push(food)
+
+    getEntry(date){
+        let index = undefined
+        for(i = 0; i < this.diary.length; i++){
+            if(this.diary[i].getDate() === date){
+                index = i;
+            }
+
+        }
+
+        if(index === undefined){
+            index = this.diary.push(new DiaryEntry(date)) - 1;
+        }
+
+        return this.diary[index];
+
     }
 }

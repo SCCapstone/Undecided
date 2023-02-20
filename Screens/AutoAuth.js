@@ -3,7 +3,6 @@ import google from "../assets/google.png";
 import * as WebBrowser from "expo-web-browser";
 import * as AuthSession from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
-import * as AppleAuthentication from "expo-apple-authentication";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { setDoc, doc } from "firebase/firestore";
@@ -18,11 +17,9 @@ export default function AutoAuth({ navigation: { navigate } }) {
   const url = "https://www.googleapis.com/oauth2/v2/userinfo";
   const [request, response, promptAsync] = Google.useAuthRequest({
     expoClientId:
-      "954859485255-fcf95mh4mu72ef803r09mb7re2anmutq.apps.googleusercontent.com",
-    /*iosClientId:
-      "",
+      "412107851455-k47tmphid1iep6p5olco4pc9u0dkqlub.apps.googleusercontent.com",
     androidClientId:
-      "",*/
+    "412107851455-k47tmphid1iep6p5olco4pc9u0dkqlub.apps.googleusercontent.com",
     redirectUri: AuthSession.makeRedirectUri({ useProxy: true }),
   });
 
@@ -52,29 +49,6 @@ export default function AutoAuth({ navigation: { navigate } }) {
     }
   };
 
-  const handleLogin = async () => {
-    try {
-      const credential = await AppleAuthentication.signInAsync({
-        requestedScopes: [
-          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
-          AppleAuthentication.AppleAuthenticationScope.EMAIL,
-        ],
-      });
-      console.log("credential", credential);
-      await setDoc(doc(db, "users", credential.user), {
-        signinType: "Apple",
-        uid: credential.user,
-        email: credential.email || "****",
-        name: credential.fullName?.givenName || "****",
-      }).then(async () => {
-        await AsyncStorage.setItem("uid", credential.user);
-        navigate("Home");
-      });
-    } catch (e) {
-      alert(e);
-    }
-  };
-
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.logo} />
@@ -99,13 +73,6 @@ export default function AutoAuth({ navigation: { navigate } }) {
         <Image source={google} style={styles.socialIcon} />
         <Text style={styles.labelStyle}>Continue With Google</Text>
       </TouchableOpacity>
-      <AppleAuthentication.AppleAuthenticationButton
-        buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
-        buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
-        cornerRadius={5}
-        onPress={handleLogin}
-        style={{ width: "80%", height: 44 }}
-      />
 
       <Text style={styles.newUser} onPress={() => navigate("auth")}>
         Register a new user

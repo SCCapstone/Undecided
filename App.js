@@ -2,6 +2,20 @@
 import { Provider } from "react-native-paper";
 import StackNavigator from './StackNavigator';
 import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Auth from "./Screens/Auth";
+import Home from "./Screens/Home";
+import AuthAuth from "./Screens/AutoAuth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+//fix for "can't find variable: atob"
+import {decode, encode} from 'base-64'
+if (!global.btoa) { global.btoa = encode }
+if (!global.atob) { global.atob = decode }
+
+const Stack = createNativeStackNavigator();
+
+const options = { headerShown: false };
 import { DiaryContext } from "./Contexts/DiaryContext";
 import { useState } from "react";
 import Diary from "./Classes/Diary"

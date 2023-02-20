@@ -6,6 +6,9 @@ import { PaperSelect } from "react-native-paper-select";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getDatabase } from "firebase/database";
+
+const database = getDatabase();
 import { COLORS } from '../constants/colors.js'
 
 export default function Signup({ navigation: { navigate } }) {
@@ -41,7 +44,7 @@ export default function Signup({ navigation: { navigate } }) {
     { _id: "4", value: "Muscle Gain" },
   ];
 
-  const SignupHandle = () => {
+  const SignupHandle = async () => {
     if (
       firstName !== "" &&
       lastName !== "" &&
@@ -54,10 +57,10 @@ export default function Signup({ navigation: { navigate } }) {
       email !== "" &&
       password !== ""
     ) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((user) => {
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then(async (user) => {
           console.log('setdoc')
-          setDoc(doc(db, "users", user.user.uid), {
+          await setDoc(doc(db, "users", user.user.uid), {
             signinType: "Email",
             firstName,
             lastName,
@@ -70,7 +73,9 @@ export default function Signup({ navigation: { navigate } }) {
             email,
             password,
           })
-          AsyncStorage.setItem("uid", user.user.uid);
+          console.log("successfully set doc")
+          await AsyncStorage.setItem("uid", user.user.uid);
+          console.log("successfully set uid")
           navigate("Home");
         })
         .catch((error) =>

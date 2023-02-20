@@ -1,7 +1,7 @@
 import React,{useState, useContext} from 'react';
 import { View, Text, StyleSheet,Button, TouchableOpacity, ScrollView} from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { getNutrientValue, getNutrientUnit } from '../util';
+import { getNutrientValue, getNutrientUnit, jsonToFoodObject } from '../util';
 import { DiaryContext } from '../Contexts/DiaryContext';
 import { StackActions, useNavigation} from '@react-navigation/native';
 import { COLORS } from '../constants/colors.js'
@@ -23,20 +23,11 @@ const FoodDetails = ({route}) => {
     }
 
     const UpdateDiary = () =>{
-      const newDiary = diary
-      switch(meal){
-        case "breakfast":
-          newDiary.addBreakfast(food)
-          break
-        case "lunch":
-          newDiary.addLunch(food)
-          break
-        case "dinner":
-          newDiary.addDinner(food)
-          break
-      }
-      navigation.dispatch(StackActions.pop(3))
+
+      meal.push(jsonToFoodObject(food,servings))
+      navigation.dispatch(StackActions.popToTop(3))
       navigation.navigate("Diary")
+      
     }
     return(
      <ScrollView style={{ backgroundColor: COLORS.backgroundColor}}>

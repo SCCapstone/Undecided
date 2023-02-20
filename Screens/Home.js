@@ -3,7 +3,7 @@ import { db } from "../firebase";
 import * as AuthSession from "expo-auth-session";
 import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Text, View, StyleSheet, ImageBackground, Button } from "react-native";
+import { Text, View, StyleSheet,Button } from "react-native";
 import { COLORS } from '../constants/colors.js'
 
 
@@ -32,7 +32,7 @@ export default function Home({ navigation }) {
   const log = async () => {
     if (type == "Email") {
       AsyncStorage.removeItem("uid");
-      navigate("Welcome");
+      navigation.navigate('Auth');
     } else {
       AsyncStorage.removeItem("uid");
       let token = await AsyncStorage.getItem("token");
@@ -40,7 +40,7 @@ export default function Home({ navigation }) {
         { token },
         { revocationEndpoint: "https://oauth2.googleapis.com/revoke" }
       );
-      navigate("Welcome");
+      navigation.navigate('Auth');
     }
   };
 

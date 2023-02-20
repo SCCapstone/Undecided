@@ -1,16 +1,18 @@
-import React from "react";
+import React, {useContext} from "react";
 import { db } from "../firebase";
 import * as AuthSession from "expo-auth-session";
 import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text, View, StyleSheet,Button } from "react-native";
+import { getDiary } from "../App";
+import { DiaryContext } from '../Contexts/DiaryContext';
 
 
 export default function Home({ navigation }) {
 
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
-
+  const {diary, setDiary} = useContext(DiaryContext)
   React.useEffect(() => {
     getDb();
   }, []);
@@ -20,6 +22,9 @@ export default function Home({ navigation }) {
     console.log("UUID: " + uid)
     let user = await getDoc(doc(db, "users", uid));
     console.log("User: " + user)
+    let newDiary = await getDiary()
+    console.log(newDiary);
+    setDiary(newDiary);
     setType(user.data().signinType || "Email");
     if (user.data().signinType == "Email") {
       setName(`${user.data()?.firstName} ${user.data()?.lastName}`);

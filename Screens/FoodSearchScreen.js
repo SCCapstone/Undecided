@@ -4,6 +4,7 @@ import { View, Text, Button,TextInput, StyleSheet, FlatList, ScrollView, } from 
 import fetch from 'node-fetch';
 import SearchResult from '../components/SearchResult';
 
+
 const FoodSearchScreen = ({route}) => {
     const [results, setResults ] = useState([])
     const query = useRef("")

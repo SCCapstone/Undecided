@@ -2,9 +2,10 @@ import DiaryEntry from "./DiaryEntry";
 
 export default class Diary {
     diary;
-    constructor(){
+    uuid;
+    constructor(uuid){
         this.diary = [];
-        c = 0;
+        this.uuid = uuid;
         console.log("new diary")
     }
 
@@ -23,5 +24,9 @@ export default class Diary {
 
         return this.diary[index];
 
+    }
+
+    setDiary(newDiary){
+        this.diary = newDiary;
     }
 }

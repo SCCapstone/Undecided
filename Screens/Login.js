@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 15,
     borderRadius: 120,
-    backgroundColor: COLORS.cream,
+    backgroundColor: COLORS.wood,
   },
   login: {
     width: 200,

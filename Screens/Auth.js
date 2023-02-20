@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     position: "relative",
     alignItems: "center",
     marginHorizontal: -17,
-    backgroundColor: COLORS.blue,
+    backgroundColor: COLORS.gray,
   },
   inpt: {
     width: "85%",

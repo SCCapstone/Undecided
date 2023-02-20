@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDatabase } from "firebase/database";
 
 const database = getDatabase();
+import { COLORS } from '../constants/colors.js'
 
 export default function Signup({ navigation: { navigate } }) {
   const [firstName, setFirstName] = React.useState("");
@@ -95,6 +96,7 @@ export default function Signup({ navigation: { navigate } }) {
       </View>
       <View style={styles.row}>
         <PaperSelect
+          textInputBackgroundColor={COLORS.wood}
           label = "Activity Level"
           value={activity.value}
           onSelection={({ text, selectedList }) => {
@@ -108,6 +110,7 @@ export default function Signup({ navigation: { navigate } }) {
           containerStyle={{ width: "48%", marginBottom: 0, marginRight: 15 }}
         />
         <PaperSelect
+          textInputBackgroundColor={COLORS.wood}
           label = "Goal"
           value={goal.value}
           onSelection={({ text, selectedList }) => {
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 15,
     borderRadius: 120,
-    backgroundColor: "white",
+    backgroundColor: COLORS.wood,
   },
   fullWidth: {
     width: "90%",

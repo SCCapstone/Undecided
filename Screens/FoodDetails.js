@@ -4,6 +4,7 @@ import { TextInput } from 'react-native-paper';
 import { getNutrientValue, getNutrientUnit, jsonToFoodObject } from '../util';
 import { DiaryContext } from '../Contexts/DiaryContext';
 import { StackActions, useNavigation} from '@react-navigation/native';
+import { COLORS } from '../constants/colors.js'
 
 
 
@@ -29,10 +30,10 @@ const FoodDetails = ({route}) => {
       
     }
     return(
-     <ScrollView style={{ backgroundColor: "#fe7b5f"}}>
-        <Text style={{ backgroundColor: "#fe7b5f", textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.description}</Text>
+     <ScrollView style={{ backgroundColor: COLORS.green}}>
+        <Text style={{ backgroundColor: COLORS.green, textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.description}</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
-        <View style={{backgroundColor: "#fe7b5f",height:'100%',width:'100%'}}>
+        <View style={{backgroundColor: COLORS.green,height:'100%',width:'100%'}}>
         <View style={styles.flexrow}>
             <Text style={styles.textLeft}>Number of Servings</Text>
             <TextInput  style={styles.textInputRight}  maxLength={2} placeholder={String(servings)} keyboardType='numeric' onChangeText={text => UpdateServings(text)}></TextInput>
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       marginTop: 8,
-      backgroundColor: "#fe7b5f"
+      backgroundColor: COLORS.green
      
     },
  
@@ -91,7 +92,8 @@ const styles = StyleSheet.create({
      marginRight: '5%',
      fontSize: 20
   },
-  textInputRight:{
+  textInputRight: {
+    backgroundColor: COLORS.cream,
     marginRight: '5%',
  },
 
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
       paddingBottom: 20
   },
   tab:{
-    backgroundColor: "#58C5CC",
+    backgroundColor: COLORS.blue,
     borderRadius: 100,
     marginTop:30,
     height: 30,

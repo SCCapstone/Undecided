@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { COLORS } from '../constants/colors.js'
 
 export default function Auth(props) {
   const [active, setActive] = React.useState("signin");
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     alignItems: "center",
-    backgroundColor: "#FE7B5F",
+    backgroundColor: COLORS.green,
     justifyContent: "center",
   },
   locator: {
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     position: "relative",
     alignItems: "center",
     marginHorizontal: -15,
-    backgroundColor: "gray",
+    backgroundColor: "#ABAD9A",
   },
   activeOption: {
     zIndex: 5,
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     position: "relative",
     alignItems: "center",
     marginHorizontal: -17,
-    backgroundColor: "#FBF174",
+    backgroundColor: COLORS.gray,
   },
   inpt: {
     width: "85%",
@@ -80,10 +81,3 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-
-//Colors:
-// yellow: "#FBF174"
-// orange: "#FE7B5F"
-// white
-// blue: "#58C5CC"
-// green: "#89E894"

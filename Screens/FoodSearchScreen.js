@@ -60,7 +60,7 @@ const FoodSearchScreen = ({route}) => {
 
 const styles = StyleSheet.create({
   default:{
-    backgroundColor: COLORS.backgroundColor,
+    backgroundColor: COLORS.green,
     width: '100%',
     height: '100%'
   },

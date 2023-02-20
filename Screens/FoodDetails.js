@@ -30,10 +30,10 @@ const FoodDetails = ({route}) => {
       
     }
     return(
-     <ScrollView style={{ backgroundColor: COLORS.backgroundColor}}>
-        <Text style={{ backgroundColor: COLORS.backgroundColor, textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.description}</Text>
+     <ScrollView style={{ backgroundColor: COLORS.green}}>
+        <Text style={{ backgroundColor: COLORS.green, textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.description}</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
-        <View style={{backgroundColor: COLORS.backgroundColor,height:'100%',width:'100%'}}>
+        <View style={{backgroundColor: COLORS.green,height:'100%',width:'100%'}}>
         <View style={styles.flexrow}>
             <Text style={styles.textLeft}>Number of Servings</Text>
             <TextInput  style={styles.textInputRight}  maxLength={2} placeholder={String(servings)} keyboardType='numeric' onChangeText={text => UpdateServings(text)}></TextInput>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       marginTop: 8,
-      backgroundColor: COLORS.backgroundColor
+      backgroundColor: COLORS.green
      
     },
  

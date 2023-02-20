@@ -90,7 +90,7 @@ const DiaryScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     default:{
-      backgroundColor: COLORS.backgroundColor,
+      backgroundColor: COLORS.green,
       width: '100%',
       height: '100%'
     },
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         marginTop:20
     },
     mealLabel:{
-        backgroundColor: COLORS.backgroundColor,
+        backgroundColor: COLORS.green,
         textAlign:"center",
         fontWeight:'bold',
         fontSize:20,

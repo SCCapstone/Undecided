@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 20,
-        color: 'white',
         textAlignVertical: 'center',
         textTransform: 'uppercase',
         margin: 'auto'

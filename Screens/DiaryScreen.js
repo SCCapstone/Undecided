@@ -1,9 +1,10 @@
 import React, {useState, useRef, useContext} from 'react';
 import { DiaryContext } from '../Contexts/DiaryContext';
-import { View, Text, Button,ScrollView,StyleSheet} from 'react-native';
+import { View, Text, Button,ScrollView,StyleSheet, Pressable} from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import DiaryTile from '../components/DiaryTile'
 import { COLORS } from '../constants/colors.js'
+import { AuthError } from 'expo-auth-session';
 
 
 
@@ -20,9 +21,6 @@ const DiaryScreen = ({navigation}) => {
         newDate.setDate(newDate.getDate() + 1)
         setSelectedDate(newDate.toDateString())
         selectedDate.current = newDate
-
-        
-        
 
     }
     const DecrementDate = () =>{
@@ -44,9 +42,11 @@ const DiaryScreen = ({navigation}) => {
                 <Text style={styles.dateText}>{'   >'}</Text>
             </TouchableOpacity>
         </View>
-        <Text style={{ backgroundColor: COLORS.backgroundColor, textAlign:"center", fontWeight:'bold', fontSize:20}}>Breakfast</Text>
+        <Text style={styles.mealLabel}>Breakfast</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
-            <Button color={COLORS.blue} title='add breakfast' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getBreakfast()}) }></Button>
+        <Pressable style={styles.button} title='breakfast' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getBreakfast()}) }>
+            <Text style={styles.buttonText}>Add Breakfast</Text>
+        </Pressable>
         <ScrollView> 
         {entry.getBreakfast().map((food) => (
                  <DiaryTile
@@ -56,9 +56,11 @@ const DiaryScreen = ({navigation}) => {
                  ></DiaryTile>
              ))}
          </ScrollView>
-         <Text style={{ backgroundColor: COLORS.backgroundColor, textAlign:"center", fontWeight:'bold', fontSize:20, marginTop:20}}>lunch</Text>
+         <Text style={styles.mealLabel}>Lunch</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
-        <Button color={COLORS.blue} title='add lunch' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getLunch()}) }></Button>
+        <Pressable style={styles.button} title='lunch' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getLunch()}) }>
+            <Text style={styles.buttonText}>Add Lunch</Text>
+        </Pressable>
         <ScrollView> 
         {entry.getLunch().map((food) => (
                  <DiaryTile
@@ -68,9 +70,11 @@ const DiaryScreen = ({navigation}) => {
                  ></DiaryTile>
              ))}
          </ScrollView>
-         <Text style={{ backgroundColor: COLORS.backgroundColor, textAlign:"center", fontWeight:'bold', fontSize:20, marginTop:20}}>Dinner</Text>
+         <Text style={styles.mealLabel}>Dinner</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
-        <Button color={COLORS.blue} title='add dinner' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getDinner()}) }></Button>
+        <Pressable style={styles.button} title='dinner' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getDinner()}) }>
+            <Text style={styles.buttonText}>Add Dinner</Text>
+        </Pressable>
         <ScrollView> 
         {entry.getDinner().map((food) => (
                  <DiaryTile
@@ -97,7 +101,25 @@ const styles = StyleSheet.create({
       
     },
     button: {
-        backgroundColor: COLORS.blue,
+        backgroundColor: COLORS.wood,
+        borderRadius: 10,
+        height: 50,
+        width: '75%',
+        alignSelf: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        margin: 20,
+        justifyContent: 'center',
+        elevation:10,
+        shadowColor: 'black',
+        
+    },
+    buttonText: {
+        fontSize: 20,
+        color: 'white',
+        textAlignVertical: 'center',
+        textTransform: 'uppercase',
+        margin: 'auto'
     },
     dateContainter:{
         alignSelf: 'center',
@@ -113,6 +135,12 @@ const styles = StyleSheet.create({
         fontWeight:'bold', 
         fontSize:20,
         marginTop:20
+    },
+    mealLabel:{
+        backgroundColor: COLORS.backgroundColor,
+        textAlign:"center",
+        fontWeight:'bold',
+        fontSize:20,
     }
 
   })

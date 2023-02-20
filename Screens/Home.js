@@ -3,7 +3,7 @@ import { db } from "../firebase";
 import * as AuthSession from "expo-auth-session";
 import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Text, View, StyleSheet,Button } from "react-native";
+import { Text, View, StyleSheet,Button,Pressable } from "react-native";
 import { COLORS } from '../constants/colors.js'
 
 
@@ -48,23 +48,17 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
         <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
-        <Button
-          color={COLORS.blue}
-          title='diary screen'
-          onPress={() => navigation.navigate('Diary')}
-        />
+        <Pressable style={styles.button} onPress={() => navigation.navigate('Diary')}>
+          <Text style={styles.buttonText}>Diary Screen</Text>
+        </Pressable>
         <View style={styles.space} />
-        <Button
-          color={COLORS.blue}
-          title='User Settings'
-          onPress={() => navigation.navigate('UserSettings')}
-        />
+        <Pressable style={styles.button} onPress={() => navigation.navigate('Diary')}>
+          <Text style={styles.buttonText}>Settings</Text>
+        </Pressable>
         <View style={styles.space} /> 
-        <Button
-          color={COLORS.blue}
-          title="Logout"
-          onPress={log}
-        />
+        <Pressable style={styles.button} onPress={log}>
+          <Text style={styles.buttonText}>Logout</Text>
+        </Pressable>
     </View>
   );
 }
@@ -97,4 +91,17 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
+  button: {
+    backgroundColor: COLORS.wood,
+    width: 100,
+    height: 50,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 10,
+    shadowColor: "black",
+  },
+  buttonText: {
+    fontSize: 15,
+  }
 });

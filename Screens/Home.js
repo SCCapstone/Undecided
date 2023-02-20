@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
           <Text style={styles.buttonText}>Diary Screen</Text>
         </Pressable>
         <View style={styles.space} />
-        <Pressable style={styles.button} onPress={() => navigation.navigate('Diary')}>
+        <Pressable style={styles.button} onPress={() => navigation.navigate('UserSettings')}>
           <Text style={styles.buttonText}>Settings</Text>
         </Pressable>
         <View style={styles.space} /> 

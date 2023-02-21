@@ -51,6 +51,7 @@ export default function Signup({ navigation: { navigate } }) {
   ];
 
   const dietaryRestriction = [
+    { _id: "NO_RESTRICTION", value: "No Dietary Restrictions" },
     { _id: "LACTOSE_INTOLERANCE", value: "Lactose Intolerance" },
     { _id: "GLUTEN_INTOLERANCE", value: "Gluten Intolerance" },
     { _id: "VEGETARIAN", value: "Vegetarian" },
@@ -148,6 +149,7 @@ export default function Signup({ navigation: { navigate } }) {
         </View>
       <View style={styles.row}>
         <PaperSelect
+          textInputBackgroundColor={COLORS.wood}
           label = "Dietary Restrictions"
           value={dietary.value}
           onSelection={({ text, selectedList }) => {

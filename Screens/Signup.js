@@ -20,28 +20,44 @@ export default function Signup({ navigation: { navigate } }) {
   const [phone, setPhone] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [age, setAge] = React.useState("");
+
   const [activity, setActivity] = React.useState({
     value: "",
     selectedList: [],
   });
+
   const [goal, setGoal] = React.useState({
     value: "",
     selectedList: [],
   });
 
+  const [dietary, setDietary] = React.useState({
+    value: "",
+    selectedList: [],
+  });
+
   const activities = [
-    { _id: "1", value: "1" },
-    { _id: "2", value: "2" },
-    { _id: "3", value: "3" },
-    { _id: "4", value: "4" },
-    { _id: "5", value: "5" },
+    { _id: "SEDENTARY", value: "Sedentary" },
+    { _id: "LIGHT", value: "Light" },
+    { _id: "MODERATE", value: "Moderate" },
+    { _id: "HIGH", value: "High" },
   ];
 
   const goals = [
-    { _id: "1", value: "Calories" },
-    { _id: "2", value: "Weight Gain" },
-    { _id: "3", value: "Weight Loss" },
-    { _id: "4", value: "Muscle Gain" },
+    { _id: "CALORIES", value: "Calories" },
+    { _id: "WEIGHT_GAIN", value: "Weight Gain" },
+    { _id: "WEIGHT_LOSS", value: "Weight Loss" },
+    { _id: "MUSCLE_GAIN", value: "Muscle Gain" },
+  ];
+
+  const dietaryRestriction = [
+    { _id: "LACTOSE_INTOLERANCE", value: "Lactose Intolerance" },
+    { _id: "GLUTEN_INTOLERANCE", value: "Gluten Intolerance" },
+    { _id: "VEGETARIAN", value: "Vegetarian" },
+    { _id: "KETO", value: "Keto" },
+    { _id: "DIABETES", value: "Diabetes" },
+    { _id: "DIARY_FREE", value: "Dairy-Free" },
+    { _id: "LOW_CARB", value: "Low Carb" },
   ];
 
   const SignupHandle = async () => {
@@ -50,8 +66,9 @@ export default function Signup({ navigation: { navigate } }) {
       lastName !== "" &&
       height !== "" &&
       weight !== "" &&
-      activity !== "" &&
-      goal !== "" &&
+      activity.value !== "" &&
+      goal.value !== "" &&
+      dietary.value !== "" &&
       age !== "" &&
       phone !== "" &&
       email !== "" &&
@@ -66,8 +83,9 @@ export default function Signup({ navigation: { navigate } }) {
             lastName,
             height,
             weight,
-            activity,
-            goal,
+            activity: activity.value,
+            goal: goal.value,
+            dietary: dietary.value,
             age,
             phone,
             email,
@@ -87,12 +105,16 @@ export default function Signup({ navigation: { navigate } }) {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <Input val={firstName} label = "First" change={setFirstName} />
-        <Input val={lastName} label = "Last" change={setLastName} />
+        <Input val={firstName} label = "First Name" change={setFirstName} />
+        <Input val={lastName} label = "Last Name" change={setLastName} />
       </View>
       <View style={styles.row}>
         <Input val={height} label = "Height (cm)" change={setHeight} />
-        <Input val={weight} label = "Weight  (kg)" change={setWeight} />
+        <Input val={weight} label = "Weight (kg)" change={setWeight} />
+      </View>
+      <View style={styles.row}>
+        <Input val={age} label = "Age" change={setAge} />
+        <Input val={phone} label = "Phone #" change={setPhone} />
       </View>
       <View style={styles.row}>
         <PaperSelect
@@ -123,11 +145,28 @@ export default function Signup({ navigation: { navigate } }) {
           containerStyle={{ width: "48%", marginBottom: 0 }}
           textInputStyle={{ ...styles.inpt, width: "100%" }}
         />
-      </View>
+        </View>
       <View style={styles.row}>
-        <Input val={age} label = "Age" change={setAge} />
-        <Input val={phone} label = "Phone #" change={setPhone} />
+        <PaperSelect
+          label = "Dietary Restrictions"
+          value={dietary.value}
+          onSelection={({ text, selectedList }) => {
+            setDietary((prev) => ({
+              ...prev,
+              value: text,
+              selectedList: [...selectedList],
+            }));
+          }}
+          arrayList={dietaryRestriction}
+          outlineColor="gray"
+          textInputMode="outlined"
+          multiEnable={true}
+          selectedArrayList={dietary.selectedList}
+          containerStyle={{ width: "100%", marginBottom: 0 }}
+          textInputStyle={{ ...styles.inpt, width: "100%" }}
+        />
       </View>
+      
       <Input val={email} label = "Email" full change={setEmail} />
       <Input val={password} label = "Password" full psw change={setPassword} />
       <Button

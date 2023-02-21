@@ -1,7 +1,7 @@
 import React from "react";
 import { auth, db } from "../firebase";
 import { TextInput, Button } from "react-native-paper";
-import { StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View, Alert, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { PaperSelect } from "react-native-paper-select";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
@@ -10,6 +10,7 @@ import { getDatabase } from "firebase/database";
 
 const database = getDatabase();
 import { COLORS } from '../constants/colors.js'
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Signup({ navigation: { navigate } }) {
   const [firstName, setFirstName] = React.useState("");
@@ -102,84 +103,111 @@ export default function Signup({ navigation: { navigate } }) {
         );
     } else alert("please fill all the fields");
   };
+  
+  const [visible, setVisible] = React.useState(false);
+
+  const handlePress = () => {
+    Keyboard.dismiss();
+  };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.row}>
-        <Input val={firstName} label = "First Name" change={setFirstName} />
-        <Input val={lastName} label = "Last Name" change={setLastName} />
-      </View>
-      <View style={styles.row}>
-        <Input val={height} label = "Height (cm)" change={setHeight} />
-        <Input val={weight} label = "Weight (kg)" change={setWeight} />
-      </View>
-      <View style={styles.row}>
-        <Input val={age} label = "Age" change={setAge} />
-        <Input val={phone} label = "Phone #" change={setPhone} />
-      </View>
-      <View style={styles.row}>
-        <PaperSelect
-          textInputBackgroundColor={COLORS.wood}
-          label = "Activity Level"
-          value={activity.value}
-          onSelection={({ text, selectedList }) => {
-            setActivity({ value: text, selectedList });
-          }}
-          outlineColor="gray"
-          arrayList={activities}
-          textInputMode="outlined"
-          selectedArrayList={activity.selectedList}
-          textInputStyle={{ ...styles.inpt, width: "100%" }}
-          containerStyle={{ width: "48%", marginBottom: 0, marginRight: 15 }}
-        />
-        <PaperSelect
-          textInputBackgroundColor={COLORS.wood}
-          label = "Goal"
-          value={goal.value}
-          onSelection={({ text, selectedList }) => {
-            setGoal({ value: text, selectedList });
-          }}
-          arrayList={goals}
-          outlineColor="gray"
-          textInputMode="outlined"
-          selectedArrayList={goal.selectedList}
-          containerStyle={{ width: "48%", marginBottom: 0 }}
-          textInputStyle={{ ...styles.inpt, width: "100%" }}
-        />
+    <TouchableWithoutFeedback onpress={handlePress}>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.row}>
+            <Input val={firstName} label = "First Name" change={setFirstName} />
+            <Input val={lastName} label = "Last Name" change={setLastName} />
+          </View>
+          <View style={styles.row}>
+            <Input val={height} label = "Height (cm)" change={setHeight} />
+            <Input val={weight} label = "Weight (kg)" change={setWeight} />
+          </View>
+          <View style={styles.row}>
+            <Input val={age} label = "Age" change={setAge} />
+            <Input val={phone} label = "Phone #" change={setPhone} />
+          </View>
+          <View style={styles.row}>
+            <PaperSelect
+              textInputBackgroundColor={COLORS.wood}
+              label = "Activity Level"
+              value={activity.value}
+              onSelection={({ text, selectedList }) => {
+                setActivity({ value: text, selectedList });
+              }}
+              outlineColor="gray"
+              arrayList={activities}
+              textInputMode="outlined"
+              selectedArrayList={activity.selectedList}
+              textInputStyle={{ ...styles.inpt, width: "100%" }}
+              containerStyle={{ width: "48%", marginBottom: 0, marginRight: 15 }}
+              hideSearchBox={"True"}
+              dialogStyle = {{backgroundColor: COLORS.wood}}
+            />
+            <PaperSelect
+              textInputBackgroundColor={COLORS.wood}
+              label = "Goal"
+              value={goal.value}
+              onSelection={({ text, selectedList }) => {
+                setGoal({ value: text, selectedList });
+              }}
+              arrayList={goals}
+              outlineColor="gray"
+              textInputMode="outlined"
+              selectedArrayList={goal.selectedList}
+              containerStyle={{ width: "48%", marginBottom: 0 }}
+              textInputStyle={{ ...styles.inpt, width: "100%" }}
+              hideSearchBox={"True"}
+              dialogStyle = {{backgroundColor: COLORS.wood}}
+            />
+            </View>
+          <View style={styles.row}>
+            <PaperSelect
+              textInputBackgroundColor={COLORS.wood}
+              label = "Dietary Restrictions"
+              value={dietary.value}
+              onSelection={({ text, selectedList }) => {
+                setDietary((prev) => ({
+                  ...prev,
+                  value: text,
+                  selectedList: [...selectedList],
+                }));
+              }}
+              arrayList={dietaryRestriction}
+              outlineColor="gray"
+              textInputMode="outlined"
+              multiEnable={true}
+              selectedArrayList={dietary.selectedList}
+              containerStyle={{ width: "100%", marginBottom: 0 }}
+              textInputStyle={{ ...styles.inpt, width: "100%" }}
+              hideSearchBox={"True"}
+              dialogStyle={{ backgroundColor: COLORS.wood }}
+              selectAllEnable = {"False"}
+            />
+          </View>
+          
+          <Input val={email} label = "Email" full change={setEmail} />
+          <TextInput
+            secureTextEntry={visible}
+            mode="outlined"
+            value={password}
+            label="Password"
+            style={styles.password}
+            onChangeText={setPassword}
+            right={
+              <TextInput.Icon icon={visible ? "eye-off": "eye"} onPress={() => setVisible(!visible)} />
+            }
+          />
+          <Button
+            mode="contained"
+            style={styles.login}
+            onPress={SignupHandle}
+            labelStyle={styles.label}
+          >
+            Signup
+          </Button>
         </View>
-      <View style={styles.row}>
-        <PaperSelect
-          textInputBackgroundColor={COLORS.wood}
-          label = "Dietary Restrictions"
-          value={dietary.value}
-          onSelection={({ text, selectedList }) => {
-            setDietary((prev) => ({
-              ...prev,
-              value: text,
-              selectedList: [...selectedList],
-            }));
-          }}
-          arrayList={dietaryRestriction}
-          outlineColor="gray"
-          textInputMode="outlined"
-          multiEnable={true}
-          selectedArrayList={dietary.selectedList}
-          containerStyle={{ width: "100%", marginBottom: 0 }}
-          textInputStyle={{ ...styles.inpt, width: "100%" }}
-        />
-      </View>
-      
-      <Input val={email} label = "Email" full change={setEmail} />
-      <Input val={password} label = "Password" full psw change={setPassword} />
-      <Button
-        mode="contained"
-        style={styles.login}
-        onPress={SignupHandle}
-        labelStyle={styles.label}
-      >
-        Signup
-      </Button>
-    </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
   );
 }
 
@@ -224,5 +252,11 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     paddingVertical: 3,
     backgroundColor: "black",
+  },
+  password: {
+    width: "90%",
+    marginTop: 15,
+    fontSize: 18,
+    backgroundColor: COLORS.wood,
   },
 });

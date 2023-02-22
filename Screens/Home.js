@@ -3,7 +3,8 @@ import { db } from "../firebase";
 import * as AuthSession from "expo-auth-session";
 import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Text, View, StyleSheet,Button } from "react-native";
+import { Text, View, StyleSheet,Button,Pressable } from "react-native";
+import { COLORS } from '../constants/colors.js'
 
 
 export default function Home({ navigation }) {
@@ -47,9 +48,17 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
         <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
-        <Button title='diary screen' onPress={() => navigation.navigate('Diary')}/>
-        <Button title='User Settings' onPress={() => navigation.navigate('UserSettings')}/>
-        <Button title="Logout" onPress={log} />
+        <Pressable style={styles.button} onPress={() => navigation.navigate('Diary')}>
+          <Text style={styles.buttonText}>Diary Screen</Text>
+        </Pressable>
+        <View style={styles.space} />
+        <Pressable style={styles.button} onPress={() => navigation.navigate('UserSettings')}>
+          <Text style={styles.buttonText}>Settings</Text>
+        </Pressable>
+        <View style={styles.space} /> 
+        <Pressable style={styles.button} onPress={log}>
+          <Text style={styles.buttonText}>Logout</Text>
+        </Pressable>
     </View>
   );
 }
@@ -58,23 +67,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    backgroundColor: "#58c5cc",
+    backgroundColor: COLORS.green,
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
     height: "100%",
   },
   Home: {
-    color: "white",
+    color: "#464838",
     fontSize: 22,
     textAlign:  "center",
     marginTop: 50,
   },
   welcomingText: {
-    color: "white",
+    color: "#464838",
     fontSize: 22,
     marginHorizontal: 50,
     marginTop: 20,
+    marginBottom: 20,
     textAlign: "center",
   },
+  space: {
+    width: 20,
+    height: 20,
+  },
+  button: {
+    backgroundColor: COLORS.wood,
+    width: 100,
+    height: 50,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 10,
+    shadowColor: "black",
+  },
+  buttonText: {
+    fontSize: 15,
+  }
 });

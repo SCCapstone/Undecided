@@ -8,6 +8,8 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import axios from "axios"
+import { COLORS } from '../constants/colors.js'
+import logo from '../assets/LifeReact.png'
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -49,6 +51,7 @@ export default function AutoAuth({ navigation: { navigate } }) {
 
   return (
     <View style={styles.container}>
+      <Image source={logo} style={styles.logo} />
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.socialButton}
@@ -82,8 +85,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FE7B5F",
+    //justifyContent: "center",
+    backgroundColor: COLORS.green,
   },
   box: {
     height: 50,
@@ -108,16 +111,16 @@ const styles = StyleSheet.create({
     width: "80%",
     borderWidth: 1,
     shadowRadius: 1,
-    borderRadius: 5,
+    borderRadius: 8,
     marginBottom: 15,
     shadowOpacity: 1,
     alignItems: "center",
     borderStyle: "solid",
     flexDirection: "row",
-    borderColor: "#F4F6F9",
+    borderColor: "black",
     shadowColor: "gainsboro",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "#F1E2CA",
     shadowOffset: { width: 0, height: 0 },
   },
   socialIcon: {
@@ -125,11 +128,8 @@ const styles = StyleSheet.create({
     height: 16,
     marginRight: 30,
   },
+  logo: {
+    marginTop: 70,
+    marginBottom: 70,
+  },
 });
-
-//Colors:
-// yellow: "#FBF174"
-// orange: "#FE7B5F"
-// white
-// blue: "#58C5CC"
-// green: "#89E894"

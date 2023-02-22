@@ -6,5 +6,6 @@ export const AGE = "age"
 export const PASSWORD = "password"
 export const HEIGHT = "height"
 export const WEIGHT = "weight"
-
-
+export const ACTIVITY_LEVEL = "activity"
+export const DIETARY_RESTRICTIONS = "dietary"
+export const GOAL = "goal"

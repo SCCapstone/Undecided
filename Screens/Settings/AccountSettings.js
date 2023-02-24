@@ -15,7 +15,6 @@ export default function AccountSettings({ navigation }) {
         {settingName: "Email", dbField: dbConstants.EMAIL, data: null, key: "3"},
         {settingName: "Password", dbField: dbConstants.PASSWORD, data: null, key: "4"},
         {settingName: "Phone Number", dbField: dbConstants.PHONE, data: null, key: "5"},
-        {settingName: "Age", dbField: dbConstants.AGE, data: null, key: "6"},
     ]);
 
     const [userDocSnap, setUserDocSnap] = useState(null);
@@ -61,7 +60,7 @@ export default function AccountSettings({ navigation }) {
                     <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>
                     )}
                     />)}
-                    <Button title={"Save Changes"} onPress={saveChangesHandler}/>
+                <Button title={"Save Changes"} onPress={saveChangesHandler}/>
             </View>
             
         </TouchableWithoutFeedback>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, setState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, FlatList, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
 import { globalStyles } from "../../styles/global";
 import Setting from "../../components/Setting";
@@ -80,20 +80,22 @@ export default function BiometricsSettings({ navigation }) {
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={globalStyles.container}>
-                {userDocSnap && [
+                {userDocSnap && 
                     <View>
-                        <FlatList 
+                        <FlatList
+                            ListFooterComponent={
+                                <View>
+                                    <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(ActivityLevels)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback}/>
+                                    <Button title={"Save Changes"} onPress={saveChangesHandler}/>
+                                </View>
+                            }
                             data={settings}
                             renderItem={({ item }) => (
                                 <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>
                         )}/>
-                        <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(ActivityLevels)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback}/>
                     </View>
-                ]}
-                <Button title={"Save Changes"} onPress={saveChangesHandler}/>
+                }
             </View>
-            
         </TouchableWithoutFeedback>
     );
-
 }

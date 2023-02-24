@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     editIcon: {
         position: 'absolute',
         zIndex: 1,
-        padding: 5
+        paddingLeft: 5
     },
     settingLabel: {
         flex: 1,

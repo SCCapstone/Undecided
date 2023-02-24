@@ -1,38 +1,65 @@
-import React, { useState } from "react";
-import { View, TextInput, Text, FlatList, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
 import { globalStyles } from "../../styles/global";
-import Setting from "../../components/Setting";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-
+import * as dbConstants from "../../DatabaseConstants";
+import RadioSetting from "../../components/RadioSetting"
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Goals } from "../../constants/Goals";
 
 export default function GoalsSettings({ navigation }) {
     
-    const [settings, setSettings] = React.useState([
-        {settingName: "Calorie Goal", key: "1"},
+    const [radioSettings, setRadioSettings] = React.useState([
+        {settingName: "Goal", dbField: dbConstants.GOAL, data: null, key: "1"},
     ]);
 
-    const changeHandler = val => {
-        //nothing yet
+    const [userDocSnap, setUserDocSnap] = useState(null);
+
+    useEffect(() => {
+        getUserDocSnap();
+    }, []);
+
+    const getUserDocSnap = async () => {
+        const uid = await AsyncStorage.getItem("uid");
+        const docRef = doc(db, "users", uid);
+        const snap = await getDoc(docRef);
+        setUserDocSnap(snap);
+    };
+
+    const saveChangesHandler = async () => {
+        const uid = await AsyncStorage.getItem("uid");
+        const userDocRef = doc(db, "users", uid);
+
+        //save all radio button settings
+        radioSettings.forEach(async element => {
+            if (element.data != null) {
+                console.log(element + " has data (being saved): " + element.data)
+                await updateDoc(userDocRef, {
+                    [element.dbField]: element.data
+                });
+            }
+        });
     }
 
-    const saveChangesHandler = () => {
-        //nothing yet
+    const handleRadioCallback = (item, newData) => {
+        console.log(item.settingName + " is being assigned the value: " + newData + "\nProcessing...")
+        const newRadioSettings = [...radioSettings];
+        const index = newRadioSettings.indexOf(item);
+        const newItem = { ...item };
+        newItem.data = newData;
+        newRadioSettings[index] = newItem;
+        setRadioSettings(newRadioSettings);
     }
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={globalStyles.container}>
-                <FlatList 
-                    data={settings}
-                    renderItem={({ item }) => (
-                    <Setting item={item} handleChange={changeHandler}/>
-                    )}
-                    />
-                    <Button title={"Save Changes"} onPress={saveChangesHandler}/>
+                {userDocSnap && 
+                    <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(Goals)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback}/>
+                }
+                <Button title={"Save Changes"} onPress={saveChangesHandler}/>
             </View>
-            
         </TouchableWithoutFeedback>
     );
 }

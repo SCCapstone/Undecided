@@ -1,3 +1,9 @@
+
+/*
+This setting component is designed to display several choices to the user in the form of radio buttons.
+The user may only select one button.
+For multiple selection, use CheckboxSetting.
+*/
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { globalStyles } from "../styles/global";
@@ -34,23 +40,3 @@ export default function RadioSetting({ item, buttonNameList, initialButtonName, 
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    editIcon: {
-        position: 'absolute',
-        zIndex: 1,
-        padding: 5
-    },
-    settingLabel: {
-        flex: 1,
-        flexDirection: 'row',
-    },
-    inputField: {
-        flex: 1,
-        padding: 5,
-        paddingLeft: 35,
-        backgroundColor: 'white',
-        marginBottom: 10,
-        borderRadius: 4
-    }
-})

@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { getNutrientValue } from '../util'
+import { COLORS } from '../constants/colors.js'
 
 
 const SearchResult = (props) => {
@@ -24,7 +25,7 @@ const SearchResult = (props) => {
 
 const styles = StyleSheet.create({
     tab:{
-        backgroundColor: "#ffffff",
+        backgroundColor: COLORS.cream,
         borderRadius: 100,
         margin: 5,
         

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { View, Text, Button,TextInput, StyleSheet, FlatList, ScrollView, } from 'react-native';
 import fetch from 'node-fetch';
 import SearchResult from '../components/SearchResult';
+import { COLORS } from '../constants/colors.js'
 
 
 const FoodSearchScreen = ({route}) => {
@@ -60,12 +61,12 @@ const FoodSearchScreen = ({route}) => {
 
 const styles = StyleSheet.create({
   default:{
-    backgroundColor: "#fe7b5f",
+    backgroundColor: COLORS.green,
     width: '100%',
     height: '100%'
   },
   input:{
-    backgroundColor: "#c1c1c1",
+    backgroundColor: "#ABAD9A",
     borderRadius : 100,
     margin: 20,
     

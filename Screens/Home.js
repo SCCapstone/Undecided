@@ -4,7 +4,7 @@ import * as AuthSession from "expo-auth-session";
 import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text, View, StyleSheet,Button } from "react-native";
-import { getDiary } from "../App";
+import { getDiary } from "../util";
 import { DiaryContext } from '../Contexts/DiaryContext';
 
 

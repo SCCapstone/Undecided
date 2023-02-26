@@ -90,7 +90,6 @@ const DiaryScreen = ({navigation}) => {
              ))}
          </ScrollView>
          <View style={{height:1, backgroundColor:'black'}}></View>
-         <Button title='save diary' onPress={() => saveDiary(diary)}></Button>
      </ScrollView>
      
     )

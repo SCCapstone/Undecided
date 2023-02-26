@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, ScrollView, FlatList, TouchableOpacity } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { globalStyles } from "../../styles/global";
 
 export default function UserSettings( { navigation }) {

@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text, View, StyleSheet,Button,Pressable } from "react-native";
 import { COLORS } from '../constants/colors.js'
+import { createStackNavigator } from "@react-navigation/stack";
 
 
 export default function Home({ navigation }) {
@@ -12,6 +13,7 @@ export default function Home({ navigation }) {
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
 
+  const HomeStack = createStackNavigator();
   React.useEffect(() => {
     getDb();
   }, []);
@@ -48,13 +50,6 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
         <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
-        <Pressable style={styles.button} onPress={() => navigation.navigate('Diary')}>
-          <Text style={styles.buttonText}>Diary Screen</Text>
-        </Pressable>
-        <View style={styles.space} />
-        <Pressable style={styles.button} onPress={() => navigation.navigate('UserSettings')}>
-          <Text style={styles.buttonText}>Settings</Text>
-        </Pressable>
         <View style={styles.space} /> 
         <Pressable style={styles.button} onPress={log}>
           <Text style={styles.buttonText}>Logout</Text>

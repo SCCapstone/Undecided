@@ -26,7 +26,7 @@ const StackNavigator = () => {
             <Stack.Screen name="FoodSearch" component={FoodSearchScreen} options={{ title: "Food Search" }}/>
             <Stack.Screen name="FoodDetails" component={FoodDetails} options={{ title: "Nutritional Information" }} />
             <Stack.Screen name="EntryDetails" component={EntryDetails} options={{ title: "Nutritional Information" }} />
-            <Stack.Screen name="Auth" component={Auth} options={{ title: "Life React" }}/>
+            <Stack.Screen name="Auth" component={Auth} options={options}/>
             <Stack.Screen name="UserSettings" component={UserSettings} options={{ title: "Settings" }}/>
             <Stack.Screen name="BiometricsSettings" component={BiometricsSettings} options={{ title: "Settings" }}/>
             <Stack.Screen name="DietaryRestrictionsSettings" component={DietaryRestrictionsSettings} options={{ title: "Settings" }}/>

@@ -42,7 +42,7 @@ export function getNutrientValue(foods , nutrientName) {
       const uuid = await getUUID()
       const value = await AsyncStorage.getItem(uuid + "Diary");
       if(value !== null) {
-        console.log("Diary value:" + value)
+        console.log("Getting diary for:" + uuid)
         return  buildDiary(JSON.parse(value));
       }
       console.log("no diary found")
@@ -59,7 +59,6 @@ export function getNutrientValue(foods , nutrientName) {
     for(var i =0; i<JSONdiary.diary.length;i++){
       newDiary.diary.push(buildEntry(JSONdiary.diary[i]))
     }
-    console.log(newDiary)
     return newDiary
   }
 
@@ -83,17 +82,14 @@ export function getNutrientValue(foods , nutrientName) {
     let dinner = []
     const newEntry = new DiaryEntry(date)
     for(var i = 0; i<entry.breakfast.length;i++){
-      console.log(i)
       breakfast.push(Object.assign(new Food(),entry.breakfast[i]))
     }
   
     for(var i = 0; i<entry.lunch.length;i++){
-      console.log(i)
       lunch.push(Object.assign(new Food(),entry.lunch[i]))
     }
   
     for(var i = 0; i<entry.dinner.length;i++){
-      console.log(i)
       dinner.push(Object.assign(new Food(),entry.dinner[i]))
     }
   
@@ -107,8 +103,6 @@ export function getNutrientValue(foods , nutrientName) {
     try {
       const uuid = await getUUID()
       const jsonValue = JSON.stringify(diary)
-      console.log(jsonValue)
-      console.log(uuid)
       await AsyncStorage.setItem(uuid + "Diary", jsonValue)
     } catch (e) {
       // saving error

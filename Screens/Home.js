@@ -7,6 +7,8 @@ import { getDiary } from "../util";
 import { DiaryContext } from '../Contexts/DiaryContext';
 import { Text, View, StyleSheet,Button,Pressable } from "react-native";
 import { COLORS } from '../constants/colors.js'
+import { StackActions, useNavigation} from '@react-navigation/native';
+
 
 
 
@@ -37,8 +39,8 @@ export default function Home({ navigation }) {
 
   const log = async () => {
     if (type == "Email") {
-      AsyncStorage.removeItem("uid");
-      navigation.navigate('Auth');
+      await AsyncStorage.removeItem("uid");
+      navigation.dispatch(StackActions.pop())
     } else {
       AsyncStorage.removeItem("uid");
       let token = await AsyncStorage.getItem("token");
@@ -46,7 +48,8 @@ export default function Home({ navigation }) {
         { token },
         { revocationEndpoint: "https://oauth2.googleapis.com/revoke" }
       );
-      navigation.navigate('Auth');
+      navigation.dispatch(StackActions.pop())
+
     }
   };
 

@@ -33,15 +33,14 @@ export default function Login({ navigation: { navigate } }) {
   };
 
   return (
-    <ScrollView contentContainerStyle={{height: 0.6 * screenHeight, width: screenWidth}}>
+    <><ScrollView contentContainerStyle={{ height: 0.6 * screenHeight, width: screenWidth }}>
       <View style={styles.container}>
         <TextInput
           value={email}
           label="Email"
           mode="outlined"
           style={styles.inpt}
-          onChangeText={setEmail}
-        />
+          onChangeText={setEmail} />
         <TextInput
           secureTextEntry={visible}
           mode="outlined"
@@ -49,10 +48,10 @@ export default function Login({ navigation: { navigate } }) {
           label="Password"
           style={styles.inpt}
           onChangeText={setPassword}
-          right={
-            <TextInput.Icon icon={visible ? "eye-off": "eye"} onPress={() => setVisible(!visible)} />
-          }
-        />
+          right={<TextInput.Icon icon={visible ? "eye-off" : "eye"} onPress={() => setVisible(!visible)} />} />
+      </View>
+    </ScrollView>
+      <View>
         <Button
           mode="contained"
           style={styles.login}
@@ -61,8 +60,7 @@ export default function Login({ navigation: { navigate } }) {
         >
           Login
         </Button>
-        </View>
-      </ScrollView>
+      </View></>
   );
 }
 const styles = StyleSheet.create({
@@ -82,10 +80,11 @@ const styles = StyleSheet.create({
   },
   login: {
     width: 200,
-    marginTop: 120,
+    marginTop: 15,
     borderRadius: 100,
     paddingVertical: 3,
     backgroundColor: "black",
+    marginBottom: 50,
   },
   label: {
     fontSize: 20,

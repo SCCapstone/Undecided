@@ -25,7 +25,7 @@ const FoodDetails = ({route}) => {
     const UpdateDiary = () =>{
 
       meal.push(jsonToFoodObject(food,servings))
-      navigation.dispatch(StackActions.popToTop(3))
+      navigation.dispatch(StackActions.pop(3))
       navigation.navigate("Diary")
       
     }

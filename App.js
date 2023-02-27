@@ -1,19 +1,10 @@
 
 import { Provider } from "react-native-paper";
-import StackNavigator from './StackNavigator';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import UserSettings from "./Screens/Settings/UserSettings";
 import Auth from "./Screens/Auth";
-import DiaryScreen from "./Screens/DiaryScreen";
-import Home from "./Screens/Home";
-import AuthAuth from "./Screens/AutoAuth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DiaryContext } from "./Contexts/DiaryContext";
 import { useState } from "react";
-import Diary from "./Classes/Diary"
-import SettingStackScreen from "./components/SettingStackScreen";
 import Login from "./Screens/Login";
 import Signup from "./Screens/Signup";
 import HomeTabScreen from "./components/HomeStackScreen";
@@ -24,12 +15,11 @@ if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
 
 const options = { headerShown: false };
 
 export default function App() {
-  const [diary, setDiary] = useState(new Diary())
+  const [diary, setDiary] = useState([])
   return (
     <Provider>
       <DiaryContext.Provider value={{diary, setDiary}}>
@@ -55,3 +45,10 @@ export function getNutrientValue(foods , nutrientName) {
   }
   return nutrientValue    
 }
+
+
+
+
+
+
+

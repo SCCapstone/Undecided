@@ -3,6 +3,7 @@ import { DiaryContext } from '../Contexts/DiaryContext';
 import { View, Text, Button,ScrollView,StyleSheet, Pressable} from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import DiaryTile from '../components/DiaryTile'
+import {saveDiary} from '../util'
 import { COLORS } from '../constants/colors.js'
 
 
@@ -13,19 +14,24 @@ const DiaryScreen = ({navigation}) => {
     const selectedDate = useRef(new Date())
     const [selectedDateString, setSelectedDate] = useState(selectedDate.current.toDateString())
     const entry = diary.getEntry(selectedDateString)
+    saveDiary(diary)
+ 
 
     const IncrementDate = () =>{
         const newDate = selectedDate.current
         newDate.setDate(newDate.getDate() + 1)
         setSelectedDate(newDate.toDateString())
         selectedDate.current = newDate
+        saveDiary(diary)
 
     }
+    
     const DecrementDate = () =>{
         const newDate = selectedDate.current
         newDate.setDate(newDate.getDate() - 1)
         setSelectedDate(newDate.toDateString())
         selectedDate.current = newDate
+        saveDiary(diary)
         
     }
     
@@ -82,7 +88,9 @@ const DiaryScreen = ({navigation}) => {
                  ></DiaryTile>
              ))}
          </ScrollView>
+         <View style={{height:1, backgroundColor:'black'}}></View>
      </ScrollView>
+     
     )
 }
 

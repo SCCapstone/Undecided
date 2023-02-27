@@ -4,7 +4,7 @@ export default class DiaryEntry {
     lunch;
     dinner;
 
-    constructor(date){
+    constructor(date = ""){
         this.date = date;
         this.breakfast = [];
         this.lunch = [];

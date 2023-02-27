@@ -5,6 +5,7 @@ import fetch from 'node-fetch';
 import SearchResult from '../components/SearchResult';
 import { COLORS } from '../constants/colors.js'
 
+
 const FoodSearchScreen = ({route}) => {
     const [results, setResults ] = useState([])
     const query = useRef("")

@@ -1,19 +1,23 @@
-import React from "react";
+import React, {useContext} from "react";
 import { db } from "../firebase";
 import * as AuthSession from "expo-auth-session";
 import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getDiary } from "../util";
+import { DiaryContext } from '../Contexts/DiaryContext';
 import { Text, View, StyleSheet,Button,Pressable } from "react-native";
 import { COLORS } from '../constants/colors.js'
 import { createStackNavigator } from "@react-navigation/stack";
+import { StackActions} from '@react-navigation/native';
+
+
 
 
 export default function Home({ navigation }) {
 
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
-
-  const HomeStack = createStackNavigator();
+  const {diary, setDiary} = useContext(DiaryContext)
   React.useEffect(() => {
     getDb();
   }, []);
@@ -23,6 +27,9 @@ export default function Home({ navigation }) {
     console.log("UUID: " + uid)
     let user = await getDoc(doc(db, "users", uid));
     console.log("User: " + user)
+    let newDiary = await getDiary()
+    console.log(newDiary);
+    setDiary(newDiary);
     setType(user.data().signinType || "Email");
     if (user.data().signinType == "Email") {
       setName(`${user.data()?.firstName} ${user.data()?.lastName}`);
@@ -33,8 +40,9 @@ export default function Home({ navigation }) {
 
   const log = async () => {
     if (type == "Email") {
-      AsyncStorage.removeItem("uid");
-      navigation.navigate('Auth');
+      await AsyncStorage.removeItem("uid");
+      navigation.dispatch(StackActions.pop())
+      navigation.navigate("Auth")
     } else {
       AsyncStorage.removeItem("uid");
       let token = await AsyncStorage.getItem("token");
@@ -42,7 +50,8 @@ export default function Home({ navigation }) {
         { token },
         { revocationEndpoint: "https://oauth2.googleapis.com/revoke" }
       );
-      navigation.navigate('Auth');
+      navigation.dispatch(StackActions.pop())
+
     }
   };
 

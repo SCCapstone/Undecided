@@ -41,6 +41,7 @@ export default function Home({ navigation }) {
     if (type == "Email") {
       await AsyncStorage.removeItem("uid");
       navigation.dispatch(StackActions.pop())
+      navigation.navigate("Auth")
     } else {
       AsyncStorage.removeItem("uid");
       let token = await AsyncStorage.getItem("token");

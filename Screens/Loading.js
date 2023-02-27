@@ -9,6 +9,7 @@ const Loading = ({ navigation: { navigate } }) => {
   
     const getUser = async () => {
       let uid = await AsyncStorage.getItem("uid");
+      console.log("loading screen id:" + uid)
       if (uid !== null) navigate('Home');
       else navigate('Auth');
     };

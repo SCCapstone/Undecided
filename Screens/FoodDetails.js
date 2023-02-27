@@ -8,8 +8,7 @@ import { COLORS } from '../constants/colors.js'
 
 
 
-const FoodDetails = ({route}) => {
-  const navigation = useNavigation();
+const FoodDetails = ({route, navigation}) => {
     const {food, meal} = route.params
     const [servings, setServings] = useState(1);
     const {diary, setDiary} = useContext(DiaryContext)
@@ -23,11 +22,12 @@ const FoodDetails = ({route}) => {
     }
 
     const UpdateDiary = () =>{
-
       meal.push(jsonToFoodObject(food,servings))
-      navigation.dispatch(StackActions.popToTop(3))
-      navigation.navigate("Diary")
-      
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Diary' }],
+      });
+      //navigation.navigate("Diary")
     }
     return(
      <ScrollView style={{ backgroundColor: COLORS.green}}>

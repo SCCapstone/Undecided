@@ -1,4 +1,8 @@
 import Food from './Classes/Food'
+import Diary from './Classes/Diary'
+import DiaryEntry from './Classes/DiaryEntry';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export function getNutrientValue(foods , nutrientName) {
     let nutrientValue = 0
     let nutrient = foods.foodNutrients.find(item => item.nutrientName == nutrientName)
@@ -31,4 +35,76 @@ export function getNutrientValue(foods , nutrientName) {
     
     return food;
 
+  }
+
+  export async function getDiary () {
+    try {
+      const uuid = await getUUID()
+      const value = await AsyncStorage.getItem(uuid + "Diary");
+      if(value !== null) {
+        console.log("Getting diary for:" + uuid)
+        return  buildDiary(JSON.parse(value));
+      }
+      console.log("no diary found")
+      return new Diary("Diary uuid" + uuid)
+    } catch(e) {
+  
+    }
+   
+  }
+
+  export function buildDiary(JSONdiary){
+    let uuid = JSONdiary.uuid
+    let newDiary = new Diary(uuid)
+    for(var i =0; i<JSONdiary.diary.length;i++){
+      newDiary.diary.push(buildEntry(JSONdiary.diary[i]))
+    }
+    return newDiary
+  }
+
+  export async function getUUID () {
+    try {
+      const uid = await AsyncStorage.getItem("uid");
+      if(uid !== null) {
+        console.log("found:" + uid);
+        return uid;
+      }
+    } catch(e) {
+      console.log(e)
+    }
+   
+  }
+
+  function buildEntry(entry){
+    let date = entry.date
+    let breakfast = []
+    let lunch = []
+    let dinner = []
+    const newEntry = new DiaryEntry(date)
+    for(var i = 0; i<entry.breakfast.length;i++){
+      breakfast.push(Object.assign(new Food(),entry.breakfast[i]))
+    }
+  
+    for(var i = 0; i<entry.lunch.length;i++){
+      lunch.push(Object.assign(new Food(),entry.lunch[i]))
+    }
+  
+    for(var i = 0; i<entry.dinner.length;i++){
+      dinner.push(Object.assign(new Food(),entry.dinner[i]))
+    }
+  
+    newEntry.breakfast = breakfast
+    newEntry.lunch = lunch
+    newEntry.dinner = dinner
+    return newEntry
+  }
+
+  export async function saveDiary(diary) {
+    try {
+      const uuid = await getUUID()
+      const jsonValue = JSON.stringify(diary)
+      await AsyncStorage.setItem(uuid + "Diary", jsonValue)
+    } catch (e) {
+      // saving error
+    }
   }

@@ -1,4 +1,4 @@
 import { createContext } from "react";
 import Diary from "../Classes/Diary";
 
-export const DiaryContext = createContext(new Diary())
+export const DiaryContext = createContext()

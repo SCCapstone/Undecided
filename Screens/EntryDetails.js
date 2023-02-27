@@ -19,16 +19,20 @@ const FoodDetails = ({route}) => {
 
     const UpdateFood = () =>{
       food.setServings(servings);
-      navigation.dispatch(StackActions.pop(2))
-      navigation.navigate("Diary")
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Diary' }],
+      });
     }
     const RemoveFood = () =>{
     
       let index = meal.indexOf(food)
       meal.splice(index,1)
       console.log(meal)
-      navigation.dispatch(StackActions.pop(2))
-      navigation.navigate("Diary")
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Diary' }],
+      });
     }
   
     return(

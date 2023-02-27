@@ -5,11 +5,11 @@ import FoodDetails from "../Screens/FoodDetails";
 import EntryDetails from "../Screens/EntryDetails";
 
 const DiaryStack = createStackNavigator();
-
+const options = { headerShown: false };
 function DiaryStackScreen() {
   return (
-    <DiaryStack.Navigator>
-      <DiaryStack.Screen name="Diary" component={DiaryScreen} />
+    <DiaryStack.Navigator  independent={true}>
+      <DiaryStack.Screen name="Diary" component={DiaryScreen} options={options}/>
       <DiaryStack.Screen name="FoodSearch" component={FoodSearchScreen} />
       <DiaryStack.Screen name="FoodDetails" component={FoodDetails} />
       <DiaryStack.Screen name="EntryDetails" component={EntryDetails} />

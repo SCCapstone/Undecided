@@ -18,12 +18,13 @@ export default function DietaryRestrictionsSettings({ navigation }) {
         const dietaryRestrictionsArray = Object.values(DietaryRestrictions);
         const currentRestrictions = userDocSnap.get(dbConstants.DIETARY_RESTRICTIONS)
         const objectArray = [];
-
-        for (var i = 0; i < dietaryRestrictionsArray.length; i++) {
-            const settingName = dietaryRestrictionsArray[i]
-            const key = (i+1).toString();
-            const object = {settingName: settingName, isChecked: currentRestrictions.includes(settingName), key: key}
-            objectArray.push(object)
+        if (currentRestrictions != null) {
+            for (var i = 0; i < dietaryRestrictionsArray.length; i++) {
+                const settingName = dietaryRestrictionsArray[i]
+                const key = (i+1).toString();
+                const object = {settingName: settingName, isChecked: currentRestrictions.includes(settingName), key: key}
+                objectArray.push(object)
+            }
         }
 
         return objectArray;

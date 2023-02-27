@@ -6,12 +6,12 @@ import GoalsSettings from "../Screens/Settings/GoalsSettings";
 import DietaryRestrictionsSettings from "../Screens/Settings/DietaryRestrictionsSettings";
 
 
-
+const options = { headerShown: false };
 const SettingsStack = createStackNavigator();
 function SettingStackScreen() {
   return (
     <SettingsStack.Navigator>
-      <SettingsStack.Screen name="UserSettings" component={UserSettings} />
+      <SettingsStack.Screen name="UserSettings" component={UserSettings} options={options} />
       <SettingsStack.Screen name="AccountSettings" component={AccountSettings} />
       <SettingsStack.Screen name="BiometricsSettings" component={BiometricsSettings} />
       <SettingsStack.Screen name="GoalsSettings" component={GoalsSettings} />

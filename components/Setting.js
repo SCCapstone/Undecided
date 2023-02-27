@@ -15,7 +15,7 @@ export default function Setting({ item, initialData, parentCallback }) {
     }
 
     return (
-        <View>
+        <View styles={styles.container}>
             <View>
                 <Text style={globalStyles.text}>{item.settingName}</Text>
             </View>
@@ -54,5 +54,5 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginBottom: 10,
         borderRadius: 4
-    }
+    },
 })

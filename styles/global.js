@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { COLORS} from "../constants/colors";
 
 export const globalStyles = StyleSheet.create({
     container: {
@@ -35,5 +36,21 @@ export const globalStyles = StyleSheet.create({
         paddingLeft: 0,
         backgroundColor: '#fff',
         color: '#424242',
+    },
+    coloredContainer: {
+        flex: 1,
+        padding: 48,
+        backgroundColor: COLORS.green,
+    },
+    whiteItem: {
+        flexDirection: 'row',
+        padding: 16,
+        marginTop: 16,
+        borderColor: "#bbb",
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderRadius: 15,
+        backgroundColor: "white"
     }
+
 })

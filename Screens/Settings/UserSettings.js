@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, ScrollView, FlatList, TouchableOpacity } from "react-native";
+import {  View, Text, FlatList, TouchableOpacity } from "react-native";
 import { globalStyles } from "../../styles/global";
 
 export default function UserSettings( { navigation }) {
@@ -11,12 +11,12 @@ export default function UserSettings( { navigation }) {
     ])
 
     return (
-        <View style={globalStyles.container}>
+        <View style={globalStyles.coloredContainer}>
             <FlatList 
                 data={settingTypes}
                 renderItem={ ({ item }) => (
                     <TouchableOpacity onPress={() => navigation.navigate(item.screen)}>
-                        <View style={globalStyles.item}>
+                        <View style={globalStyles.whiteItem}>
                             <Text style={globalStyles.text}>{item.type}</Text>
                         </View>
                     </TouchableOpacity>

@@ -7,7 +7,8 @@ import { getDiary } from "../util";
 import { DiaryContext } from '../Contexts/DiaryContext';
 import { Text, View, StyleSheet,Button,Pressable } from "react-native";
 import { COLORS } from '../constants/colors.js'
-import { StackActions, useNavigation} from '@react-navigation/native';
+import { createStackNavigator } from "@react-navigation/stack";
+import { StackActions} from '@react-navigation/native';
 
 
 
@@ -58,13 +59,6 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
         <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
-        <Pressable style={styles.button} onPress={() => navigation.navigate('Diary')}>
-          <Text style={styles.buttonText}>Diary Screen</Text>
-        </Pressable>
-        <View style={styles.space} />
-        <Pressable style={styles.button} onPress={() => navigation.navigate('UserSettings')}>
-          <Text style={styles.buttonText}>Settings</Text>
-        </Pressable>
         <View style={styles.space} /> 
         <Pressable style={styles.button} onPress={log}>
           <Text style={styles.buttonText}>Logout</Text>

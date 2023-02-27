@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native';
 import DiaryTile from '../components/DiaryTile'
 import {saveDiary} from '../util'
 import { COLORS } from '../constants/colors.js'
-import { AuthError } from 'expo-auth-session';
+
 
 
 
@@ -17,7 +17,6 @@ const DiaryScreen = ({navigation}) => {
     saveDiary(diary)
  
 
-    
     const IncrementDate = () =>{
         const newDate = selectedDate.current
         newDate.setDate(newDate.getDate() + 1)

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   locator: {
-    marginTop: 20,
+    marginTop: 40,
     alignItems: "center",
     flexDirection: "row",
   },

@@ -9,7 +9,6 @@ import { setDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import axios from "axios"
 import { COLORS } from '../constants/colors.js'
-import logo from '../assets/LifeReact.png'
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -51,7 +50,6 @@ export default function AutoAuth({ navigation: { navigate } }) {
 
   return (
     <View style={styles.container}>
-      <Image source={logo} style={styles.logo} />
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.socialButton}

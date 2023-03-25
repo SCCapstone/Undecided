@@ -88,7 +88,7 @@ const DiaryScreen = ({navigation}) => {
                  ></DiaryTile>
              ))}
          </ScrollView>
-         <View style={{height:1, backgroundColor:'black'}}></View>
+
      </ScrollView>
      
     )
@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         elevation:10,
         shadowColor: 'black',
+        marginBottom: 5
         
     },
     buttonText: {

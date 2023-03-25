@@ -88,7 +88,20 @@ const DiaryScreen = ({navigation}) => {
                  ></DiaryTile>
              ))}
          </ScrollView>
-         <View style={{height:1, backgroundColor:'black'}}></View>
+         <Text style={styles.mealLabel}>Snacks</Text>
+        <View style={{height:1, backgroundColor:'black'}}></View>
+        <Pressable style={styles.button} title='snacks' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getSnacks()}) }>
+            <Text style={styles.buttonText}>Add Snack</Text>
+        </Pressable>
+        <ScrollView> 
+        {entry.getSnacks().map((food) => (
+                 <DiaryTile
+                 key={food.getName} 
+                 foodItem = {food}
+                 meal = {entry.getSnacks()}
+                 ></DiaryTile>
+             ))}
+         </ScrollView>
      </ScrollView>
      
     )

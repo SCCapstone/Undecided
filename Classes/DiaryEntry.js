@@ -3,12 +3,14 @@ export default class DiaryEntry {
     breakfast;
     lunch;
     dinner;
+    snacks;
 
     constructor(date = ""){
         this.date = date;
         this.breakfast = [];
         this.lunch = [];
         this.dinner = [];
+        this.snacks = [];
         console.log("new entry" +" "  + date)
     }
 
@@ -23,7 +25,9 @@ export default class DiaryEntry {
     getDinner(){
         return this.dinner;
     }
-
+    getSnacks(){
+        return this.snacks;
+    }
     addBreakfast(food){
         this.breakfast.push(food);
     }
@@ -39,7 +43,9 @@ export default class DiaryEntry {
         this.dinner.push(food);
     }
 
-   
+    addSnack(food){
+        this.snacks.push(food);
+    }
 
     getDate(){
         return this.date;

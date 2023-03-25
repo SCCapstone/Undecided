@@ -88,6 +88,7 @@ const DiaryScreen = ({navigation}) => {
                  ></DiaryTile>
              ))}
          </ScrollView>
+
          <Text style={styles.mealLabel}>Snacks</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
         <Pressable style={styles.button} title='snacks' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getSnacks()}) }>
@@ -131,6 +132,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         elevation:10,
         shadowColor: 'black',
+        marginBottom: 5
         
     },
     buttonText: {

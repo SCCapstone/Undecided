@@ -18,6 +18,7 @@ export default function Signup({ navigation: { navigate } }) {
   const [lastName, setLastName] = React.useState("");
   const [height, setHeight] = React.useState("");
   const [weight, setWeight] = React.useState("");
+  const [calorieGoal, setCalorieGoal] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [age, setAge] = React.useState("");
@@ -64,44 +65,49 @@ export default function Signup({ navigation: { navigate } }) {
 
   const SignupHandle = async () => {
     if (
-      firstName !== "" &&
-      lastName !== "" &&
-      height !== "" &&
-      weight !== "" &&
-      activity.value !== "" &&
-      goal.value !== "" &&
-      dietary.value !== "" &&
-      age !== "" &&
-      phone !== "" &&
-      email !== "" &&
-      password !== ""
+      firstName.trim() === "" ||
+      lastName.trim() === "" ||
+      isNaN(parseInt(height)) ||
+      isNaN(parseInt(weight)) ||
+      isNaN(parseInt(calorieGoal)) ||
+      activity.value.trim() === "" ||
+      goal.value.trim() === "" ||
+      dietary.value.trim() === "" ||
+      isNaN(parseInt(age)) ||
+      phone.trim() === "" ||
+      email.trim() === "" ||
+      password.trim() === ""
     ) {
-      await createUserWithEmailAndPassword(auth, email, password)
-        .then(async (user) => {
-          console.log('setdoc')
-          await setDoc(doc(db, "users", user.user.uid), {
-            signinType: "Email",
-            firstName,
-            lastName,
-            height,
-            weight,
-            activity: activity.value,
-            goal: goal.value,
-            dietary: dietary.value,
-            age,
-            phone,
-            email,
-            password,
-          })
-          console.log("successfully set doc")
-          await AsyncStorage.setItem("uid", user.user.uid);
-          console.log("successfully set uid")
-          navigate("Home");
+      alert("Please enter valid information for all fields");
+      return;
+    }
+
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then(async (user) => {
+        console.log('setdoc')
+        await setDoc(doc(db, "users", user.user.uid), {
+          signinType: "Email",
+          firstName,
+          lastName,
+          height,
+          weight,
+          calorieGoal,
+          activity: activity.value,
+          goal: goal.value,
+          dietary: dietary.value,
+          age,
+          phone,
+          email,
+          password,
         })
-        .catch((error) =>
-          Alert.alert("Oops!", error.message, [{ text: "Ok" }])
-        );
-    } else alert("please fill all the fields");
+        console.log("successfully set doc")
+        await AsyncStorage.setItem("uid", user.user.uid);
+        console.log("successfully set uid")
+        navigate("Home");
+      })
+      .catch((error) =>
+        Alert.alert("Oops!", error.message, [{ text: "Ok" }])
+      );
   };
   
   const [visible, setVisible] = React.useState(false);
@@ -119,12 +125,12 @@ export default function Signup({ navigation: { navigate } }) {
             <Input val={lastName} label = "Last Name" change={setLastName} />
           </View>
           <View style={styles.row}>
-            <Input val={height} label = "Height (cm)" change={setHeight} />
-            <Input val={weight} label = "Weight (kg)" change={setWeight} />
-          </View>
-          <View style={styles.row}>
             <Input val={age} label = "Age" change={setAge} />
             <Input val={phone} label = "Phone #" change={setPhone} />
+          </View>
+          <View style={styles.row}>
+            <Input val={height} label = "Height (cm)" change={setHeight} />
+            <Input val={weight} label = "Weight (kg)" change={setWeight} />
           </View>
           <View style={styles.row}>
             <PaperSelect
@@ -184,7 +190,7 @@ export default function Signup({ navigation: { navigate } }) {
               selectAllEnable = {"False"}
             />
           </View>
-          
+          <Input val={calorieGoal} label = "Calorie Goal" full change={setCalorieGoal} />
           <Input val={email} label = "Email" full change={setEmail} />
           <TextInput
             secureTextEntry={visible}

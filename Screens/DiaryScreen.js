@@ -11,26 +11,25 @@ import { COLORS } from '../constants/colors.js'
 
 const DiaryScreen = ({navigation}) => {
     const {diary} = useContext(DiaryContext)
-    const selectedDate = useRef(new Date())
-    const [selectedDateString, setSelectedDate] = useState(selectedDate.current.toDateString())
+    const [selectedDateString, setSelectedDate] = useState(diary.selectedDate.toDateString())
     const entry = diary.getEntry(selectedDateString)
     saveDiary(diary)
  
 
     const IncrementDate = () =>{
-        const newDate = selectedDate.current
+        const newDate = diary.selectedDate
         newDate.setDate(newDate.getDate() + 1)
         setSelectedDate(newDate.toDateString())
-        selectedDate.current = newDate
+        diary.selectedDate = newDate
         saveDiary(diary)
 
     }
     
     const DecrementDate = () =>{
-        const newDate = selectedDate.current
+        const newDate = diary.selectedDate
         newDate.setDate(newDate.getDate() - 1)
         setSelectedDate(newDate.toDateString())
-        selectedDate.current = newDate
+        diary.selectedDate = newDate
         saveDiary(diary)
         
     }

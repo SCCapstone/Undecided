@@ -16,6 +16,7 @@ export default function Home({ navigation }) {
   const [type, setType] = React.useState("Email");
   const {diary, setDiary} = useContext(DiaryContext)
   const [calorieGoal, setCalorieGoal] = React.useState("");
+  const [goal, setGoal] = React.useState("");
   React.useEffect(() => {
     getDb();
   }, []);
@@ -32,6 +33,7 @@ export default function Home({ navigation }) {
     if (user.data().signinType == "Email") {
       setName(`${user.data()?.firstName} ${user.data()?.lastName}`);
       setCalorieGoal(`${user.data()?.calorieGoal}`);
+      setGoal(`${user.data()?.goal}`);
     } else {
       setName(user.data().name);
     }
@@ -57,6 +59,9 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
+        <View style={styles.goalContainer}>
+          <Text style={styles.goalText}>Goal: {goal}</Text>
+        </View>
         <View style={styles.calorieGoalContainer}>
           <Text style={styles.calorieGoalText}>Calorie Goal</Text>
           <View style={styles.calorieGoalNumberContainer}>
@@ -134,16 +139,31 @@ const styles = StyleSheet.create({
   },
   logOutButton: {
     backgroundColor: COLORS.wood,
-    width: 100,
-    height: 50,
+    paddingVertical: 20,
+    paddingHorizontal: 30,
+    width: 220,
+    marginTop: 20,
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    elevation: 10,
-    shadowColor: "black",
-    marginTop: 150,
   },
   logOutButtonText: {
     fontSize: 15,
+  },
+  goalContainer: {
+    backgroundColor: COLORS.wood,
+    paddingVertical: 20,
+    paddingHorizontal: 30,
+    width: 220,
+    marginTop: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  goalText: {
+    fontSize: 18,
+    color: COLORS.primary,
+    fontWeight: "bold",
+    textAlign: "start",
   },
 });

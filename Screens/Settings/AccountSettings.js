@@ -52,16 +52,14 @@ export default function AccountSettings({ navigation }) {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <View style={globalStyles.container}>
-                {userDocSnap && (<FlatList
-                    ListFooterComponent={<Button title={"Save Changes"} onPress={saveChangesHandler}/>} 
-                    data={settings}
-                    renderItem={({ item }) => (
-                    <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>
-                    )}
-                    />)}
-            </View>
-        </TouchableWithoutFeedback>
+        <View style={globalStyles.container}>
+            {userDocSnap && (<FlatList
+                ListFooterComponent={<Button title={"Save Changes"} onPress={saveChangesHandler}/>} 
+                data={settings}
+                renderItem={({ item }) => (
+                <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>
+                )}
+                />)}
+        </View>
     );
 }

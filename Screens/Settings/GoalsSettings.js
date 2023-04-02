@@ -76,24 +76,20 @@ export default function GoalsSettings({ navigation }) {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <View style={globalStyles.container}>
-                {userDocSnap && 
-                        <View>
-                            <FlatList
-                                ListFooterComponent={
-                                    <View>
-                                        <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(Goals)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback}/>
-                                        <Button title={"Save Changes"} onPress={saveChangesHandler}/>
-                                    </View>
-                                }
-                                data={settings}
-                                renderItem={({ item }) => (
-                                    <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>
-                            )}/>
-                        </View>
-                    }
-            </View>
-        </TouchableWithoutFeedback>
+        <View style={globalStyles.container}>
+            {userDocSnap && 
+                    <FlatList
+                        ListFooterComponent={
+                            <View>
+                                <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(Goals)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback}/>
+                                <Button title={"Save Changes"} onPress={saveChangesHandler}/>
+                            </View>
+                        }
+                        data={settings}
+                        renderItem={({ item }) => (
+                            <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>
+                    )}/>
+            }
+        </View>
     );
 }

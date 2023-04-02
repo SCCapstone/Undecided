@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
+import { ScrollView, View, FlatList, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
 import { globalStyles } from "../../styles/global";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -76,16 +76,14 @@ export default function DietaryRestrictionsSettings({ navigation }) {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <View style={globalStyles.container}>
-                {userDocSnap && (<FlatList 
-                    ListFooterComponent={<Button title={"Save Changes"} onPress={saveChangesHandler}/>}
-                    data={checkboxSettings}
-                    renderItem={({ item }) => (
-                        <CheckboxSetting item={item} isInitiallyChecked={userDocSnap.get(dbConstants.DIETARY_RESTRICTIONS).includes(item.settingName)} parentCallback = {handleCheckboxCallback}/>
-                    )}
-                    />)}
-            </View>
-        </TouchableWithoutFeedback>
+        <View style={globalStyles.container}>
+            {userDocSnap && (<FlatList 
+                ListFooterComponent={<Button title={"Save Changes"} onPress={saveChangesHandler}/>}
+                data={checkboxSettings}
+                renderItem={({ item }) => (
+                    <CheckboxSetting item={item} isInitiallyChecked={userDocSnap.get(dbConstants.DIETARY_RESTRICTIONS).includes(item.settingName)} parentCallback = {handleCheckboxCallback}/>
+                )}
+                />)}
+        </View>
     );
 }

@@ -11,26 +11,25 @@ import { COLORS } from '../constants/colors.js'
 
 const DiaryScreen = ({navigation}) => {
     const {diary} = useContext(DiaryContext)
-    const selectedDate = useRef(new Date())
-    const [selectedDateString, setSelectedDate] = useState(selectedDate.current.toDateString())
+    const [selectedDateString, setSelectedDate] = useState(diary.selectedDate.toDateString())
     const entry = diary.getEntry(selectedDateString)
     saveDiary(diary)
  
 
     const IncrementDate = () =>{
-        const newDate = selectedDate.current
+        const newDate = diary.selectedDate
         newDate.setDate(newDate.getDate() + 1)
         setSelectedDate(newDate.toDateString())
-        selectedDate.current = newDate
+        diary.selectedDate = newDate
         saveDiary(diary)
 
     }
     
     const DecrementDate = () =>{
-        const newDate = selectedDate.current
+        const newDate = diary.selectedDate
         newDate.setDate(newDate.getDate() - 1)
         setSelectedDate(newDate.toDateString())
-        selectedDate.current = newDate
+        diary.selectedDate = newDate
         saveDiary(diary)
         
     }
@@ -88,7 +87,21 @@ const DiaryScreen = ({navigation}) => {
                  ></DiaryTile>
              ))}
          </ScrollView>
-         <View style={{height:1, backgroundColor:'black'}}></View>
+
+         <Text style={styles.mealLabel}>Snacks</Text>
+        <View style={{height:1, backgroundColor:'black'}}></View>
+        <Pressable style={styles.button} title='snacks' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getSnacks()}) }>
+            <Text style={styles.buttonText}>Add Snack</Text>
+        </Pressable>
+        <ScrollView> 
+        {entry.getSnacks().map((food) => (
+                 <DiaryTile
+                 key={food.getName} 
+                 foodItem = {food}
+                 meal = {entry.getSnacks()}
+                 ></DiaryTile>
+             ))}
+         </ScrollView>
      </ScrollView>
      
     )
@@ -118,6 +131,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         elevation:10,
         shadowColor: 'black',
+        marginBottom: 5
         
     },
     buttonText: {

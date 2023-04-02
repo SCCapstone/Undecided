@@ -8,18 +8,20 @@ import { DiaryContext } from '../Contexts/DiaryContext';
 import { Text, View, StyleSheet,Button,Pressable } from "react-native";
 import { COLORS } from '../constants/colors.js'
 import { createStackNavigator } from "@react-navigation/stack";
-import { StackActions} from '@react-navigation/native';
+import { StackActions, useFocusEffect} from '@react-navigation/native';
 
 export default function Home({ navigation }) {
 
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
   const {diary, setDiary} = useContext(DiaryContext)
+
   const [calorieGoal, setCalorieGoal] = React.useState("");
   const [goal, setGoal] = React.useState("");
-  React.useEffect(() => {
+
+  useFocusEffect(React.useCallback(() => {
     getDb();
-  }, []);
+  }, []));
 
   const getDb = async () => {
     let uid = await AsyncStorage.getItem("uid");
@@ -32,10 +34,17 @@ export default function Home({ navigation }) {
     setType(user.data().signinType || "Email");
     if (user.data().signinType == "Email") {
       setName(`${user.data()?.firstName} ${user.data()?.lastName}`);
+
       setCalorieGoal(`${user.data()?.calorieGoal}`);
       setGoal(`${user.data()?.goal}`);
+
+      //TODO: remove log
+      console.log("set user name in if")
+
     } else {
       setName(user.data().name);
+      //TODO: remove log
+      console.log("set user name in else")
     }
   };
 

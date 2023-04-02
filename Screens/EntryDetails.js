@@ -37,7 +37,7 @@ const FoodDetails = ({route}) => {
   
     return(
      <ScrollView style={{ backgroundColor: "#fe7b5f"}}>
-        <Text style={{ backgroundColor: "#fe7b5f", textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.description}</Text>
+        <Text style={{ backgroundColor: "#fe7b5f", textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.getName()}</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
         <View style={{backgroundColor: "#fe7b5f",height:'100%',width:'100%'}}>
         <View style={styles.flexrow}>
@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
   flexrow:{
     
       flexDirection: 'row',
-      paddingTop:20,
-      paddingBottom: 20,
+      paddingTop:10,
+      paddingBottom: 10,
       justifyContent: 'space-between'
   },
   tab:{

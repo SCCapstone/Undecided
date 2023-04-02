@@ -3,7 +3,9 @@ import DiaryEntry from "./DiaryEntry";
 export default class Diary {
     diary;
     uuid;
+    selectedDate;
     constructor(uuid){
+        this.selectedDate = new Date()
         this.diary = [];
         this.uuid = uuid;
         console.log("new diary")

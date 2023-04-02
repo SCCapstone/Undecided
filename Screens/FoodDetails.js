@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
   flexrow:{
     
       flexDirection: 'row',
-      paddingTop:20,
-      paddingBottom: 20
+      paddingTop:10,
+      paddingBottom: 10
   },
   tab:{
     backgroundColor: COLORS.blue,

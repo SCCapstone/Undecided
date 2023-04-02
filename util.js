@@ -80,6 +80,7 @@ export function getNutrientValue(foods , nutrientName) {
     let breakfast = []
     let lunch = []
     let dinner = []
+    let snacks = []
     const newEntry = new DiaryEntry(date)
     for(var i = 0; i<entry.breakfast.length;i++){
       breakfast.push(Object.assign(new Food(),entry.breakfast[i]))
@@ -92,10 +93,16 @@ export function getNutrientValue(foods , nutrientName) {
     for(var i = 0; i<entry.dinner.length;i++){
       dinner.push(Object.assign(new Food(),entry.dinner[i]))
     }
+
+    for(var i = 0; i<entry.snacks.length;i++){
+      snacks.push(Object.assign(new Food(),entry.snacks[i]))
+    }
   
     newEntry.breakfast = breakfast
     newEntry.lunch = lunch
     newEntry.dinner = dinner
+    newEntry.snacks = snacks
+    console.log('snacks' + snacks)
     return newEntry
   }
 

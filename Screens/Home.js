@@ -8,19 +8,20 @@ import { DiaryContext } from '../Contexts/DiaryContext';
 import { Text, View, StyleSheet,Button,Pressable } from "react-native";
 import { COLORS } from '../constants/colors.js'
 import { createStackNavigator } from "@react-navigation/stack";
-import { StackActions} from '@react-navigation/native';
-
-
-
+import { StackActions, useFocusEffect} from '@react-navigation/native';
 
 export default function Home({ navigation }) {
 
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
   const {diary, setDiary} = useContext(DiaryContext)
-  React.useEffect(() => {
+
+  const [calorieGoal, setCalorieGoal] = React.useState("");
+  const [goal, setGoal] = React.useState("");
+
+  useFocusEffect(React.useCallback(() => {
     getDb();
-  }, []);
+  }, []));
 
   const getDb = async () => {
     let uid = await AsyncStorage.getItem("uid");
@@ -33,8 +34,17 @@ export default function Home({ navigation }) {
     setType(user.data().signinType || "Email");
     if (user.data().signinType == "Email") {
       setName(`${user.data()?.firstName} ${user.data()?.lastName}`);
+
+      setCalorieGoal(`${user.data()?.calorieGoal}`);
+      setGoal(`${user.data()?.goal}`);
+
+      //TODO: remove log
+      console.log("set user name in if")
+
     } else {
       setName(user.data().name);
+      //TODO: remove log
+      console.log("set user name in else")
     }
   };
 
@@ -51,18 +61,29 @@ export default function Home({ navigation }) {
         { revocationEndpoint: "https://oauth2.googleapis.com/revoke" }
       );
       navigation.dispatch(StackActions.pop())
-
     }
   };
 
   return (
     <View style={styles.container}>
-        <Text style={styles.Home}>Home</Text>
+      <View style={styles.headerContainer}>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
-        <View style={styles.space} /> 
-        <Pressable style={styles.button} onPress={log}>
+        <View style={styles.goalContainer}>
+          <Text style={styles.goalText}>Goal: {goal}</Text>
+        </View>
+        <View style={styles.calorieGoalContainer}>
+          <Text style={styles.calorieGoalText}>Calorie Goal</Text>
+          <View style={styles.calorieGoalNumberContainer}>
+            <Text style={styles.calorieGoalNumber}>{calorieGoal}</Text>
+          </View>
+        </View>
+        <View style={styles.space}></View>
+      </View>
+      <View style={styles.logOutContainer}>
+        <Pressable style={styles.logOutButton} onPress={log}>
           <Text style={styles.buttonText}>Logout</Text>
         </Pressable>
+      </View>
     </View>
   );
 }
@@ -73,39 +94,85 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: COLORS.green,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    paddingTop: 50,
     width: "100%",
     height: "100%",
+  },
+  headerContainer: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    marginBottom: 50,
   },
   Home: {
     color: "#464838",
     fontSize: 22,
     textAlign:  "center",
-    marginTop: 50,
+    //marginTop: 50,
   },
   welcomingText: {
     color: "#464838",
     fontSize: 22,
     marginHorizontal: 50,
-    marginTop: 20,
+    //marginTop: 20,
     marginBottom: 20,
     textAlign: "center",
   },
   space: {
-    width: 20,
+    width: 50,
     height: 20,
   },
-  button: {
+  calorieGoalContainer: {
     backgroundColor: COLORS.wood,
-    width: 100,
-    height: 50,
+    paddingVertical: 20,
+    paddingHorizontal: 30,
+    width: 220,
+    marginTop: 20,
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    elevation: 10,
-    shadowColor: "black",
   },
-  buttonText: {
+  calorieGoalText: {
+    fontSize: 20,
+    color: COLORS.primary,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  calorieGoalNumber: {
+    fontSize: 50,
+    color: COLORS.primary,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  logOutButton: {
+    backgroundColor: COLORS.wood,
+    paddingVertical: 20,
+    paddingHorizontal: 30,
+    width: 220,
+    marginTop: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  logOutButtonText: {
     fontSize: 15,
-  }
+  },
+  goalContainer: {
+    backgroundColor: COLORS.wood,
+    paddingVertical: 20,
+    paddingHorizontal: 30,
+    width: 220,
+    marginTop: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  goalText: {
+    fontSize: 18,
+    color: COLORS.primary,
+    fontWeight: "bold",
+    textAlign: "start",
+  },
 });

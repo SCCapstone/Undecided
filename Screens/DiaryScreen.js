@@ -34,6 +34,7 @@ const DiaryScreen = ({navigation}) => {
         
     }
     
+
     return(
      <ScrollView style={styles.default}>
         <View style={styles.dateContainter}>
@@ -45,6 +46,13 @@ const DiaryScreen = ({navigation}) => {
                 <Text style={styles.dateText}>{'   >'}</Text>
             </TouchableOpacity>
         </View>
+        <View style={{paddingBottom:10, flex:1, flexDirection:'row', justifyContent:'center'}}>
+            <Text style={styles.dateText}>{diary.calorieGoal - (entry.getCalorieTotal())} Calories Remaining</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("NutritionalOverview", {food: entry.getNutrientTotal()}) }>
+                <Text style={{fontSize:25, color:COLORS.cream, paddingLeft:5}}>...</Text>
+            </TouchableOpacity>
+        </View>
+        
         <Text style={styles.mealLabel}>Breakfast</Text>
         <View style={{height:1, backgroundColor:'black'}}></View>
         <Pressable style={styles.button} title='breakfast' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getBreakfast()}) }>
@@ -146,7 +154,8 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     dateText:{
-        fontSize:20
+        fontSize:20,
+        alignSelf:'center'
     },
     meal:{
         backgroundColor: "#fe7b5f", 

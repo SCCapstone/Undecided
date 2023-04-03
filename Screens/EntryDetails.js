@@ -2,6 +2,8 @@ import React,{useState} from 'react';
 import { View, Text, StyleSheet,Button, TouchableOpacity, ScrollView} from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { StackActions, useNavigation} from '@react-navigation/native';
+import { COLORS } from '../constants/colors.js'
+
 
 
 
@@ -36,10 +38,10 @@ const FoodDetails = ({route}) => {
     }
   
     return(
-     <ScrollView style={{ backgroundColor: "#fe7b5f"}}>
-        <Text style={{ backgroundColor: "#fe7b5f", textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.getName()}</Text>
-        <View style={{height:1, backgroundColor:'black'}}></View>
-        <View style={{backgroundColor: "#fe7b5f",height:'100%',width:'100%'}}>
+      <ScrollView style={{ backgroundColor: COLORS.green}}>
+      <Text style={{ backgroundColor: COLORS.green, textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.description}</Text>
+      <View style={{height:1, backgroundColor:'black'}}></View>
+      <View style={{backgroundColor: COLORS.green,height:'100%',width:'100%'}}>
         <View style={styles.flexrow}>
             <Text style={styles.textLeft}>Number of Servings</Text>
             <TextInput  style={styles.textInputRight}  maxLength={2} placeholder={String(servings)} keyboardType='numeric' onChangeText={text => UpdateServings(text)}></TextInput>
@@ -96,43 +98,44 @@ const FoodDetails = ({route}) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      marginTop: 8,
-      backgroundColor: "#fe7b5f"
-     
-    },
- 
-  textRight:{
-     marginRight: '5%',
-     fontSize: 20
-  },
-  textInputRight:{
-    marginRight: '5%',
- },
-
-  textLeft:{
-      flex:1,
-      paddingLeft: "5%",
-      fontWeight:"bold",
-      fontSize: 20
+  container: {
+    flex: 1,
+    marginTop: 8,
+    backgroundColor: COLORS.green
+   
   },
 
-  flexrow:{
-    
-      flexDirection: 'row',
-      paddingTop:10,
-      paddingBottom: 10,
-      justifyContent: 'space-between'
-  },
-  tab:{
-    backgroundColor: "#58C5CC",
-    borderRadius: 100,
-    marginTop:30,
-    height: 30,
-    width: '40%',
-    
-    
+textRight:{
+   marginRight: '5%',
+   fontSize: 20
+},
+textInputRight: {
+  backgroundColor: COLORS.cream,
+  marginRight: '5%',
+},
+
+textLeft:{
+    flex:1,
+    paddingLeft: "5%",
+    fontWeight:"bold",
+    fontSize: 20
+},
+
+flexrow:{
+  
+    flexDirection: 'row',
+    paddingTop:10,
+    paddingBottom: 10
+},
+tab:{
+  backgroundColor: COLORS.blue,
+  borderRadius: 100,
+  marginTop:30,
+  height: 30,
+  width: '50%',
+  alignSelf:'center'
+  
+  
 }
     
   });

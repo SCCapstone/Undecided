@@ -4,11 +4,11 @@ export default class Diary {
     diary;
     uuid;
     selectedDate;
+    calorieGoal;
     constructor(uuid){
         this.selectedDate = new Date()
         this.diary = [];
         this.uuid = uuid;
-        console.log("new diary")
     }
 
     getEntry(date){

@@ -9,6 +9,7 @@ import { Text, View, StyleSheet,Button,Pressable } from "react-native";
 import { COLORS } from '../constants/colors.js'
 import { createStackNavigator } from "@react-navigation/stack";
 import { StackActions, useFocusEffect} from '@react-navigation/native';
+import CalorieTracker from "../components/CalorieGoal";
 
 
 
@@ -71,7 +72,7 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
         <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
-        <Text style={styles.Home}>{calorieGoal - caloriesConsumed} calories remaining</Text>
+        <CalorieTracker calorieGoal={calorieGoal} caloriesRemaining={calorieGoal - caloriesConsumed} goal={goal} />
         <View style={styles.space} /> 
         <Pressable style={styles.button} onPress={log}>
           <Text style={styles.buttonText}>Logout</Text>

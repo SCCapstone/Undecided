@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useContext } from 'react';
 import { DiaryContext } from '../Contexts/DiaryContext';
+import { COLORS } from '../constants/colors';
+import { Pressable } from 'react-native';
 
-const CalorieTracker = ({ calorieGoal }) => {
+const CalorieTracker = ({ calorieGoal, caloriesRemaining, navigate }) => {
   const [calorieCount, setCalorieCount] = useState(0);
 
   const diary = useContext(DiaryContext);
@@ -11,25 +13,15 @@ const CalorieTracker = ({ calorieGoal }) => {
   console.log(diary.diary)
   
 
-  const incrementCalories = () => {
-    setCalorieCount(calorieCount + 1);
-  };
-
-  const decrementCalories = () => {
-    setCalorieCount(calorieCount - 1);
-  };
-
-  const percentage = Math.round((calorieCount / calorieGoal) * 100);
+  const percentage = Math.round(100- ((caloriesRemaining / calorieGoal) * 100));
 
   return (
-    <View style={styles.container}>
+    <Pressable onPress={navigate} style={styles.container}>
       <Text style={styles.heading}>Calorie Tracker</Text>
       <Text>Calorie goal: {calorieGoal}</Text>
-      <Text>Calories consumed: {calorieCount}</Text>
+      <Text>Calories remaining: {caloriesRemaining}</Text>
       <Text>Percentage of goal: {percentage}%</Text>
-      <Button title="+" onPress={incrementCalories} />
-      <Button title="-" onPress={decrementCalories} />
-    </View>
+    </Pressable>
   );
 };
 
@@ -38,8 +30,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
-    height: '10%',
+    backgroundColor: COLORS.wood,
+    height: 20,
     width: '50%',
     marginBottom: 20,
     borderRadius: 10,

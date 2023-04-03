@@ -13,6 +13,7 @@ import DietaryRestrictionsSettings from './Screens/Settings/DietaryRestrictionsS
 import GoalsSettings from './Screens/Settings/GoalsSettings';
 import AccountSettings from './Screens/Settings/AccountSettings';
 import EntryDetails from './Screens/EntryDetails'
+import Overview from './Screens/MacroNutrients'
 
 
 const Stack = createNativeStackNavigator();
@@ -23,6 +24,7 @@ const StackNavigator = () => {
             <Stack.Screen name="Loading" component={Loading} options={options} />
             <Stack.Screen name="Home" component={HomeScreen} options={options}/>
             <Stack.Screen name="Diary" component={DiaryScreen}/>
+            <Stack.Screen name="NutritionalOverview" component={Overview}/>
             <Stack.Screen name="FoodSearch" component={FoodSearchScreen} options={{ title: "Food Search" }}/>
             <Stack.Screen name="FoodDetails" component={FoodDetails} options={{ title: "Nutritional Information" }} />
             <Stack.Screen name="EntryDetails" component={EntryDetails} options={{ title: "Nutritional Information" }} />
@@ -32,6 +34,8 @@ const StackNavigator = () => {
             <Stack.Screen name="DietaryRestrictionsSettings" component={DietaryRestrictionsSettings} options={{ title: "Settings" }}/>
             <Stack.Screen name="GoalsSettings" component={GoalsSettings} options={{ title: "Settings" }}/>
             <Stack.Screen name="AccountSettings" component={AccountSettings} options={{ title: "Settings" }}/>
+
+
         </Stack.Navigator>
     )
 }

@@ -28,7 +28,6 @@ export default class Food {
         this.servings = servings;
         this.servingSize = servingSize;
         this.servingSizeUnit = servingSizeUnit;
-        console.log(this);
     }
     
     getName(){

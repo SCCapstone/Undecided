@@ -23,7 +23,7 @@ export function getNutrientValue(foods , nutrientName) {
   }
 
   export function jsonToFoodObject(jFood,servings){
-    console.log(servings + "servings");
+
     const cal = getNutrientValue(jFood, 'Energy');
     const carbs = getNutrientValue(jFood, 'Carbohydrate, by difference');
     const protein = getNutrientValue(jFood, 'Protein');
@@ -102,7 +102,6 @@ export function getNutrientValue(foods , nutrientName) {
     newEntry.lunch = lunch
     newEntry.dinner = dinner
     newEntry.snacks = snacks
-    console.log('snacks' + snacks)
     return newEntry
   }
 

@@ -17,6 +17,9 @@ export default function Home({ navigation }) {
 
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
+  const [calorieGoal, setCalorieGoal] = React.useState("2000");
+  const [caloriesConsumed, setCaloriesConsumed] = React.useState("0");
+  const [goal, setGoal] = React.useState("");
   const {diary, setDiary} = useContext(DiaryContext)
   useFocusEffect(React.useCallback(() => {
     getDb();
@@ -28,11 +31,13 @@ export default function Home({ navigation }) {
     let user = await getDoc(doc(db, "users", uid));
     console.log("User: " + user)
     let newDiary = await getDiary()
-    console.log(newDiary);
-    setDiary(newDiary);
+    
     setType(user.data().signinType || "Email");
     if (user.data().signinType == "Email") {
       setName(`${user.data()?.firstName} ${user.data()?.lastName}`);
+      setCalorieGoal(`${user.data()?.calorieGoal}`);
+      setGoal(`${user.data()?.goal}`);
+      newDiary.calorieGoal = `${user.data()?.calorieGoal}`
       //TODO: remove log
       console.log("set user name in if")
     } else {
@@ -40,6 +45,9 @@ export default function Home({ navigation }) {
       //TODO: remove log
       console.log("set user name in else")
     }
+    setDiary(newDiary);
+       //TODO: remove log
+    setCaloriesConsumed(newDiary.getEntry(new Date().toDateString()).getCalorieTotal())
   };
 
   const log = async () => {
@@ -63,6 +71,7 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
         <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
+        <Text style={styles.Home}>{calorieGoal - caloriesConsumed} calories remaining</Text>
         <View style={styles.space} /> 
         <Pressable style={styles.button} onPress={log}>
           <Text style={styles.buttonText}>Logout</Text>

@@ -15,7 +15,7 @@ export default class Food {
     servingSize;
     servingSizeUnit;
 
-    constructor(name="", brandName="", calories="", carbs="", protein="", fat="", sugar="", sodium="", fibre,servings="", servingSize="", servingSizeUnit="" ){
+    constructor(name="", brandName="Unbranded", calories="", carbs="", protein="", fat="", sugar="", sodium="", fibre,servings="", servingSize="", servingSizeUnit="" ){
         this.name = name;
         this.brandName = brandName;
         this.calories =  Math.ceil((servingSize/100) * calories)

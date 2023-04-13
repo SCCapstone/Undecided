@@ -54,9 +54,9 @@ const DiaryScreen = ({navigation}) => {
         </View>
         
         <Text style={styles.mealLabel}>Breakfast</Text>
-        <View style={{height:1, backgroundColor:'black'}}></View>
+        <View style={styles.line}></View>
         <Pressable style={styles.button} title='breakfast' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getBreakfast()}) }>
-            <Text style={styles.buttonText}>Add Breakfast</Text>
+            <Text style={styles.buttonText}>Add</Text>
         </Pressable>
         <ScrollView> 
         {entry.getBreakfast().map((food) => (
@@ -68,9 +68,9 @@ const DiaryScreen = ({navigation}) => {
              ))}
          </ScrollView>
          <Text style={styles.mealLabel}>Lunch</Text>
-        <View style={{height:1, backgroundColor:'black'}}></View>
+        <View style={styles.line}></View>
         <Pressable style={styles.button} title='lunch' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getLunch()}) }>
-            <Text style={styles.buttonText}>Add Lunch</Text>
+            <Text style={styles.buttonText}>Add</Text>
         </Pressable>
         <ScrollView> 
         {entry.getLunch().map((food) => (
@@ -82,9 +82,9 @@ const DiaryScreen = ({navigation}) => {
              ))}
          </ScrollView>
          <Text style={styles.mealLabel}>Dinner</Text>
-        <View style={{height:1, backgroundColor:'black'}}></View>
+        <View style={styles.line}></View>
         <Pressable style={styles.button} title='dinner' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getDinner()}) }>
-            <Text style={styles.buttonText}>Add Dinner</Text>
+            <Text style={styles.buttonText}>Add</Text>
         </Pressable>
         <ScrollView> 
         {entry.getDinner().map((food) => (
@@ -97,9 +97,9 @@ const DiaryScreen = ({navigation}) => {
          </ScrollView>
 
          <Text style={styles.mealLabel}>Snacks</Text>
-        <View style={{height:1, backgroundColor:'black'}}></View>
+        <View style={styles.line}></View>
         <Pressable style={styles.button} title='snacks' onPress={() => navigation.navigate("FoodSearch", {meal: entry.getSnacks()}) }>
-            <Text style={styles.buttonText}>Add Snack</Text>
+            <Text style={styles.buttonText}>Add</Text>
         </Pressable>
         <ScrollView> 
         {entry.getSnacks().map((food) => (
@@ -145,7 +145,6 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 20,
         textAlignVertical: 'center',
-        textTransform: 'uppercase',
         margin: 'auto'
     },
     dateContainter:{
@@ -169,6 +168,13 @@ const styles = StyleSheet.create({
         textAlign:"center",
         fontWeight:'bold',
         fontSize:20,
+        
+    },
+    line:{
+        height: 2,
+        backgroundColor:"black",
+        paddingTop:2,
+        paddingBottom:2
     }
 
   })

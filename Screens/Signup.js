@@ -19,7 +19,6 @@ export default function Signup({ navigation: { navigate } }) {
   const [height, setHeight] = React.useState("");
   const [weight, setWeight] = React.useState("");
   const [calorieGoal, setCalorieGoal] = React.useState("");
-  //const [phone, setPhone] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [age, setAge] = React.useState("");
 
@@ -74,7 +73,6 @@ export default function Signup({ navigation: { navigate } }) {
       goal.value.trim() === "" ||
       dietary.value.trim() === "" ||
       isNaN(parseInt(age)) ||
-      //phone.trim() === "" ||
       email.trim() === "" ||
       password.trim() === ""
     ) {
@@ -96,7 +94,6 @@ export default function Signup({ navigation: { navigate } }) {
           goal: goal.value,
           dietary: dietary.value,
           age,
-          //phone,
           email,
           password,
         })

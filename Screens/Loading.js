@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, ActivityIndicator } from "react-native";
+import { globalStyles } from "../styles/global";
 
 const Loading = ({ navigation: { navigate } }) => {
     useEffect(() => {

@@ -19,7 +19,7 @@ export default function Signup({ navigation: { navigate } }) {
   const [height, setHeight] = React.useState("");
   const [weight, setWeight] = React.useState("");
   const [calorieGoal, setCalorieGoal] = React.useState("");
-  const [phone, setPhone] = React.useState("");
+  //const [phone, setPhone] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [age, setAge] = React.useState("");
 
@@ -74,7 +74,7 @@ export default function Signup({ navigation: { navigate } }) {
       goal.value.trim() === "" ||
       dietary.value.trim() === "" ||
       isNaN(parseInt(age)) ||
-      phone.trim() === "" ||
+      //phone.trim() === "" ||
       email.trim() === "" ||
       password.trim() === ""
     ) {
@@ -96,7 +96,7 @@ export default function Signup({ navigation: { navigate } }) {
           goal: goal.value,
           dietary: dietary.value,
           age,
-          phone,
+          //phone,
           email,
           password,
         })
@@ -125,12 +125,12 @@ export default function Signup({ navigation: { navigate } }) {
             <Input val={lastName} label = "Last Name" change={setLastName} />
           </View>
           <View style={styles.row}>
-            <Input val={age} label = "Age" change={setAge} />
-            <Input val={phone} label = "Phone #" change={setPhone} />
-          </View>
-          <View style={styles.row}>
             <Input val={height} label = "Height (cm)" change={setHeight} />
             <Input val={weight} label = "Weight (kg)" change={setWeight} />
+          </View>
+          <View style={styles.row}>
+            <Input val={age} label = "Age" change={setAge} />
+            <Input val={calorieGoal} label = "Calorie Goal" change={setCalorieGoal} />
           </View>
           <View style={styles.row}>
             <PaperSelect
@@ -190,7 +190,6 @@ export default function Signup({ navigation: { navigate } }) {
               selectAllEnable = {"False"}
             />
           </View>
-          <Input val={calorieGoal} label = "Calorie Goal" full change={setCalorieGoal} />
           <Input val={email} label = "Email" full change={setEmail} />
           <TextInput
             secureTextEntry={visible}

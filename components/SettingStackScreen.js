@@ -12,10 +12,10 @@ function SettingStackScreen() {
   return (
     <SettingsStack.Navigator>
       <SettingsStack.Screen name="UserSettings" component={UserSettings} options={options} />
-      <SettingsStack.Screen name="AccountSettings" component={AccountSettings} />
-      <SettingsStack.Screen name="BiometricsSettings" component={BiometricsSettings} />
-      <SettingsStack.Screen name="GoalsSettings" component={GoalsSettings} />
-      <SettingsStack.Screen name="DietaryRestrictionsSettings" component={DietaryRestrictionsSettings} />
+      <SettingsStack.Screen name="AccountSettings" component={AccountSettings} options={{title: "Account"}}/>
+      <SettingsStack.Screen name="BiometricsSettings" component={BiometricsSettings} options={{title: "Biometrics"}}/>
+      <SettingsStack.Screen name="GoalsSettings" component={GoalsSettings} options={{title: "Goals"}}/>
+      <SettingsStack.Screen name="DietaryRestrictionsSettings" component={DietaryRestrictionsSettings} options={{title: "Restrictions"}} />
     </SettingsStack.Navigator>
   );
 }

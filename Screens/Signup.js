@@ -53,7 +53,6 @@ export default function Signup({ navigation: { navigate } }) {
   ];
 
   const dietaryRestriction = [
-    { _id: "NO_RESTRICTION", value: "No Dietary Restrictions" },
     { _id: "LACTOSE_INTOLERANCE", value: "Lactose Intolerance" },
     { _id: "GLUTEN_INTOLERANCE", value: "Gluten Intolerance" },
     { _id: "VEGETARIAN", value: "Vegetarian" },
@@ -72,7 +71,6 @@ export default function Signup({ navigation: { navigate } }) {
       isNaN(parseInt(calorieGoal)) ||
       activity.value.trim() === "" ||
       goal.value.trim() === "" ||
-      dietary.value.trim() === "" ||
       isNaN(parseInt(age)) ||
       phone.trim() === "" ||
       email.trim() === "" ||
@@ -169,7 +167,7 @@ export default function Signup({ navigation: { navigate } }) {
           <View style={styles.row}>
             <PaperSelect
               textInputBackgroundColor={COLORS.wood}
-              label = "Dietary Restrictions"
+              label = "Dietary Restrictions (if any)"
               value={dietary.value}
               onSelection={({ text, selectedList }) => {
                 setDietary((prev) => ({

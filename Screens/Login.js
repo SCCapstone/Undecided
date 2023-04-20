@@ -31,6 +31,7 @@ export default function Login({ navigation: { navigate } }) {
       })
       .catch(({ message }) => Alert.alert("Oops!", message, [{ text: "Ok" }]));
   };
+  
 
   return (
     <><ScrollView contentContainerStyle={{ height: 0.6 * screenHeight, width: screenWidth }}>
@@ -63,6 +64,7 @@ export default function Login({ navigation: { navigate } }) {
       </View></>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

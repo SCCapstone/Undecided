@@ -1,24 +1,47 @@
 import React, { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator, Text, Image, StyleSheet } from "react-native";
+import { globalStyles } from "../styles/global";
 
 const Loading = ({ navigation: { navigate } }) => {
-    useEffect(() => {
-      getUser();
-    });
-  
-    const getUser = async () => {
-      let uid = await AsyncStorage.getItem("uid");
-      console.log("loading screen id:" + uid)
-      if (uid !== null) navigate('Home');
-      else navigate('Auth');
-    };
-  
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size={70} />
-      </View>
-    );
+  useEffect(() => {
+    getUser();
+  });
+
+  const getUser = async () => {
+    let uid = await AsyncStorage.getItem("uid");
+    console.log("loading screen id:" + uid)
+    if (uid !== null) navigate('Home');
+    else navigate('Auth');
   };
 
-export default Loading
+  return (
+    <View style={styles.container}>
+      <Image source={require('../assets/newSplash.png')} style={styles.logo} />
+      <Text style={styles.title}>Loading</Text>
+      <ActivityIndicator size="large" color="#007AFF" />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: '#F5FCFF'
+  },
+  logo: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: '100%',
+    height: '100%',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+});
+
+export default Loading;

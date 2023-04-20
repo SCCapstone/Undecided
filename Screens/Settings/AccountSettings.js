@@ -15,7 +15,6 @@ export default function AccountSettings({ navigation }) {
         {settingName: "Last Name", dbField: dbConstants.LAST_NAME, data: null, key: "2"},
         {settingName: "Email", dbField: dbConstants.EMAIL, data: null, key: "3"},
         {settingName: "Password", dbField: dbConstants.PASSWORD, data: null, key: "4"},
-        {settingName: "Phone Number", dbField: dbConstants.PHONE, data: null, key: "5"},
     ]);
 
     const [userDocSnap, setUserDocSnap] = useState(null);

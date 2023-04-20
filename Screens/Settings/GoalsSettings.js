@@ -25,6 +25,16 @@ export default function GoalsSettings({ navigation }) {
         getUserDocSnap();
     }, []);
 
+    //observes settings for changes, calls saveChangesHandler() when it detects a change (i.e., a value was updated)
+    useEffect(() => {
+        saveChangesHandler();
+    }, [settings]);
+
+    //observes radioSettings for changes, calls saveChangesHandler() when it detects a change (i.e., a value was updated)
+    useEffect(() => {
+        saveChangesHandler();
+    }, [radioSettings]);
+
     const getUserDocSnap = async () => {
         const uid = await AsyncStorage.getItem("uid");
         const docRef = doc(db, "users", uid);
@@ -48,7 +58,6 @@ export default function GoalsSettings({ navigation }) {
         //save all radio button settings
         radioSettings.forEach(async element => {
             if (element.data != null) {
-                console.log(element + " has data (being saved): " + element.data)
                 await updateDoc(userDocRef, {
                     [element.dbField]: element.data
                 });
@@ -57,7 +66,6 @@ export default function GoalsSettings({ navigation }) {
     }
 
     const handleRadioCallback = (item, newData) => {
-        console.log(item.settingName + " is being assigned the value: " + newData + "\nProcessing...")
         const newRadioSettings = [...radioSettings];
         const index = newRadioSettings.indexOf(item);
         const newItem = { ...item };
@@ -66,13 +74,14 @@ export default function GoalsSettings({ navigation }) {
         setRadioSettings(newRadioSettings);
     }
 
-    const handleCallback = (item, newData) => {
+    const handleCallback = async (item, newData) => {
         const newSettings = [...settings];
         const index = newSettings.indexOf(item);
         const newItem = { ...item };
         newItem.data = newData;
         newSettings[index] = newItem;
         setSettings(newSettings);
+        console.log(newSettings[index].data)
     }
 
     return (
@@ -82,7 +91,6 @@ export default function GoalsSettings({ navigation }) {
                         ListFooterComponent={
                             <View>
                                 <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(Goals)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback}/>
-                                <Button title={"Save Changes"} onPress={saveChangesHandler}/>
                             </View>
                         }
                         data={settings}

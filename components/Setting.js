@@ -11,7 +11,10 @@ export default function Setting({ item, initialData, parentCallback }) {
 
     const changeHandler = (val) => {
         setDataField(val);
-        parentCallback(item, val)
+    }
+
+    const endEditingHandler = (val) => {
+        parentCallback(item, val.nativeEvent.text)
     }
 
     return (
@@ -24,6 +27,7 @@ export default function Setting({ item, initialData, parentCallback }) {
                 <TextInput
                     style={styles.inputField}
                     onChangeText={changeHandler}
+                    onEndEditing={endEditingHandler}
                     value={dataField}
                     editable={true}
                 />

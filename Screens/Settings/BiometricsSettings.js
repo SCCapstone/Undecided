@@ -27,6 +27,16 @@ export default function BiometricsSettings({ navigation }) {
         getUserDocSnap();
     }, []);
 
+    //observes settings for changes, calls saveChangesHandler() when it detects a change (i.e., a value was updated)
+    useEffect(() => {
+        saveChangesHandler();
+    }, [settings]);
+
+    //observes radioSettings for changes, calls saveChangesHandler() when it detects a change (i.e., a value was updated)
+    useEffect(() => {
+        saveChangesHandler();
+    }, [radioSettings]);
+
     const getUserDocSnap = async () => {
         const uid = await AsyncStorage.getItem("uid");
         const docRef = doc(db, "users", uid);
@@ -84,7 +94,6 @@ export default function BiometricsSettings({ navigation }) {
                     ListFooterComponent={
                         <View>
                             <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(ActivityLevels)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback}/>
-                            <Button title={"Save Changes"} onPress={saveChangesHandler}/>
                         </View>
                     }
                     data={settings}

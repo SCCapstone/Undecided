@@ -40,6 +40,10 @@ export default function AccountSettings({ navigation }) {
         const uid = await AsyncStorage.getItem("uid");
         const userDocRef = doc(db, "users", uid);
 
+        if (settings[2].data != null && !/^\S+@\S+\.\S+$/.test(settings[2].data)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
 
         settings.forEach(async element => {
             if (element.data != null) {

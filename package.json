@@ -34,13 +34,25 @@
     "react-native-paper": "^5.0.0-rc.9",
     "react-native-paper-select": "^0.3.8",
     "react-native-safe-area-context": "^4.4.1",
-    "react-native-screens": "~3.15.0"
+    "react-native-screens": "~3.15.0",
+    "react-test-renderer": "^18.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js"
+  ]
   },
   "private": true
 }

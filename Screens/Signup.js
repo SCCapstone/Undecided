@@ -12,7 +12,7 @@ const database = getDatabase();
 import { COLORS } from '../constants/colors.js'
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Signup({ navigation: { navigate } }) {
+export default function Signup({ navigation}) {
   const [firstName, setFirstName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -21,7 +21,12 @@ export default function Signup({ navigation: { navigate } }) {
   const [calorieGoal, setCalorieGoal] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [age, setAge] = React.useState("");
-
+  const nav = (name) =>{
+    navigation.reset({
+      index: 0,
+      routes: [{ name: name }],
+    });
+  }
   const [activity, setActivity] = React.useState({
     value: "",
     selectedList: [],
@@ -98,7 +103,7 @@ export default function Signup({ navigation: { navigate } }) {
         console.log("successfully set doc")
         await AsyncStorage.setItem("uid", user.user.uid);
         console.log("successfully set uid")
-        navigate("Home");
+        nav("Home");
       })
       .catch((error) =>
         Alert.alert("Oops!", error.message, [{ text: "Ok" }])

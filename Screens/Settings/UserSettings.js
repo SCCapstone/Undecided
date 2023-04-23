@@ -3,7 +3,9 @@ import {  Pressable, View, Text, FlatList, TouchableOpacity, StyleSheet } from "
 import { globalStyles } from "../../styles/global";
 import { COLORS } from '../../constants/colors';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StackActions } from '@react-navigation/native';
+import { StackActions, useFocusEffect } from '@react-navigation/native';
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 export default function UserSettings( { navigation }) {
     const [settingTypes, setSettingTypes] = useState([
@@ -12,27 +14,33 @@ export default function UserSettings( { navigation }) {
         {type: 'Goals', screen: 'GoalsSettings', key: '3'},
         {type: 'Account', screen: 'AccountSettings', key: '4'}
     ])
+  
+    useFocusEffect(React.useCallback(() => {
+      getDb();
+    }, []));
+  
     const [type, setType] = React.useState("Email");
     const getDb = async () => {
-        let uid = await AsyncStorage.getItem("uid");
-        console.log("UUID: " + uid)
-        let user = await getDoc(doc(db, "users", uid));
-        console.log("User: " + user)
-        
-        setType(user.data().signinType || "Email");
-      };
+      let uid = await AsyncStorage.getItem("uid");
+      console.log("UUID: " + uid)
+      let user = await getDoc(doc(db, "users", uid));
+      console.log("User: " + user)
+      
+      setType(user.data().signinType || "Email");
+    };
+  
     const log = async () => {
-        if (type == "Email") {
-          await AsyncStorage.removeItem("uid");
-          navigation.navigate("Auth", {initial: false})
-        } else {
-          AsyncStorage.removeItem("uid");
-          let token = await AsyncStorage.getItem("token");
-          AuthSession.revokeAsync(
-            { token },
-            { revocationEndpoint: "https://oauth2.googleapis.com/revoke" }
-          );
-        }
+      if (type == "Email") {
+        await AsyncStorage.removeItem("uid");
+        navigation.navigate("Auth");
+      } else {
+        AsyncStorage.removeItem("uid");
+        let token = await AsyncStorage.getItem("token");
+        AuthSession.revokeAsync(
+          { token },
+          { revocationEndpoint: "https://oauth2.googleapis.com/revoke" }
+        );
+      }
     };
     
     return (
@@ -48,7 +56,7 @@ export default function UserSettings( { navigation }) {
                 )}
             />
         <Pressable style={styles.button} onPress={log}>
-          <Text style={styles.buttonText}>Logout</Text>
+          <Text style={globalStyles.text}>Logout</Text>
         </Pressable>
         </View>
     )

@@ -7,14 +7,19 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLORS } from "../constants/colors"
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Login({ navigation: { navigate } }) {
+export default function Login({ navigation }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [visible, setVisible] = React.useState(false);
 
   const screenHeight = Dimensions.get('window').height;
   const screenWidth = Dimensions.get('window').width;
-
+  const nav = (name) =>{
+    navigation.reset({
+      index: 0,
+      routes: [{ name: name }],
+    });
+  }
   const LoginHandle = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
@@ -24,7 +29,7 @@ export default function Login({ navigation: { navigate } }) {
             onPress: async () => {
               await AsyncStorage.setItem("uid", user.user.uid);
               console.log(user.user.uid);
-              navigate("Home");
+              nav("Home");
             },
           },
         ]);
@@ -61,6 +66,11 @@ export default function Login({ navigation: { navigate } }) {
         >
           Login
         </Button>
+        <Button
+        style={styles.login}
+        onPress={() => navigate("RecoverPassword")}>
+          Forgot Password?
+        </Button>
       </View></>
   );
 }
@@ -82,11 +92,11 @@ const styles = StyleSheet.create({
   },
   login: {
     width: 200,
-    marginTop: 15,
+    marginTop: 10,
     borderRadius: 100,
     paddingVertical: 3,
     backgroundColor: "black",
-    marginBottom: 50,
+    marginBottom: 20,
   },
   label: {
     fontSize: 20,

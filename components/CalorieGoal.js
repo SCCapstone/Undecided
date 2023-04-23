@@ -10,7 +10,7 @@ const CalorieTracker = ({ calorieGoal, caloriesRemaining, navigate }) => {
 
   const diary = useContext(DiaryContext);
 
-  console.log(diary.diary)
+  console.log('Diary' + diary.diary)
   
 
   const percentage = Math.round(100- ((caloriesRemaining / calorieGoal) * 100));

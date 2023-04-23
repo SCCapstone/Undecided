@@ -13,7 +13,7 @@ import CalorieTracker from "../components/CalorieGoal";
 
 
 export default function Home({ navigation }) {
-
+  let uid
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
   const [calorieGoal, setCalorieGoal] = React.useState("2000");
@@ -25,28 +25,52 @@ export default function Home({ navigation }) {
   }, []));
 
   const getDb = async () => {
-    let uid = await AsyncStorage.getItem("uid");
-    console.log("UUID: " + uid)
-    let user = await getDoc(doc(db, "users", uid));
-    console.log("User: " + user)
+    uid = await AsyncStorage.getItem("uid");
     let newDiary = await getDiary()
-    
-    setType(user.data().signinType || "Email");
-    if (user.data().signinType == "Email") {
-      setName(`${user.data()?.firstName} ${user.data()?.lastName}`);
-      setCalorieGoal(`${user.data()?.calorieGoal}`);
-      setGoal(`${user.data()?.goal}`);
-      newDiary.calorieGoal = `${user.data()?.calorieGoal}`
-      //TODO: remove log
-      console.log("set user name in if")
-    } else {
-      setName(user.data().name);
-      //TODO: remove log
-      console.log("set user name in else")
-    }
     setDiary(newDiary);
-       //TODO: remove log
+    setCalorieGoal(2000)
     setCaloriesConsumed(newDiary.getEntry(new Date().toDateString()).getCalorieTotal())
+    console.log("UUID: " + uid)
+    try{
+      let user = await getDoc(doc(db, "users", uid));
+      setType(user.data().signinType || "Email");
+      if (user.data().signinType == "Email") {
+        setName(`${user.data()?.firstName} ${user.data()?.lastName}`);
+        setCalorieGoal(`${user.data()?.calorieGoal}`);
+        setGoal(`${user.data()?.goal}`);
+        newDiary.calorieGoal = `${user.data()?.calorieGoal}`
+        //TODO: remove log
+        console.log("set user name in if")
+      } else {
+        setName(user.data().name);
+        //TODO: remove log
+        console.log("set user name in else")
+      }
+    }catch(e){
+      console.log(e)
+    }
+  
+  };
+  const nav = (name) =>{
+    navigation.reset({
+      index: 0,
+      routes: [{ name: name }],
+    });
+  }
+  const log = async () => {
+    if (type == "Email") {
+      await AsyncStorage.removeItem("uid");
+      nav("Auth")
+    } else {
+      AsyncStorage.removeItem("uid");
+      let token = await AsyncStorage.getItem("token");
+      AuthSession.revokeAsync(
+        { token },
+        { revocationEndpoint: "https://oauth2.googleapis.com/revoke" }
+      );
+      nav("Auth")
+
+    }
   };
 
   return (

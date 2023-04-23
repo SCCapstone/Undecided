@@ -9,6 +9,20 @@
     "web": "expo start --web",
     "test": "jest"
   },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ],
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js"
+  ]
+  },
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.17.3",
     "@react-native-masked-view/masked-view": "0.2.7",
@@ -39,20 +53,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
-  },
-  "jest": {
-    "preset": "jest-expo",
-    "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
-    ],
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/coverage/**",
-      "!**/node_modules/**",
-      "!**/babel.config.js",
-      "!**/jest.setup.js"
-  ]
   },
   "private": true
 }

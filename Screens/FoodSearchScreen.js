@@ -55,11 +55,7 @@ const Search = ({foods}) =>{
           onEndEditing={() => getUSDA(query.current)}
           style={styles.input}
          ></TextInput>
-<Search foods = {results}></Search>
-       
-        
-   
- 
+         <Search foods = {results}></Search>
      </View>
     )
  

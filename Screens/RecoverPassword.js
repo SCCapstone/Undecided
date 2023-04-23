@@ -16,16 +16,14 @@ export default function RecoverPassword({ navigation }) {
     const pressHandler = () => {
         sendPasswordResetEmail(auth, providedEmail, null)
             .then(() => {
-                alert("Sending you to login");
-                navigation.goBack();
-                // Alert.alert("Success", "A link to reset your password has been sent to the email you provided.", [
-                //     {
-                //       text: "Ok",
-                //       onPress: () => {
-                //         navigation.navigate("Login");
-                //       },
-                //     },
-                //   ]);
+                Alert.alert("Success", "A link to reset your password has been sent to the email you provided.", [
+                    {
+                      text: "Ok",
+                      onPress: () => {
+                        navigation.goBack()
+                      },
+                    },
+                  ]);
             })
             .catch(function (e) {
                 alert("There was a problem attempting to reset your password.")

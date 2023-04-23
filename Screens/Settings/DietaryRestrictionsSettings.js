@@ -42,6 +42,11 @@ export default function DietaryRestrictionsSettings({ navigation }) {
         }
     }, [userDocSnap]);
 
+    //observes settings for changes, calls saveChangesHandler() when it detects a change (i.e., a value was updated)
+    useEffect(() => {
+        saveChangesHandler();
+    }, [checkboxSettings]);
+
     const getUserDocSnap = async () => {
         const uid = await AsyncStorage.getItem("uid");
         const docRef = doc(db, "users", uid);
@@ -50,6 +55,7 @@ export default function DietaryRestrictionsSettings({ navigation }) {
     };
 
     const saveChangesHandler = async () => {
+        if (checkboxSettings == null) return;
         const uid = await AsyncStorage.getItem("uid");
         const userDocRef = doc(db, "users", uid);
 
@@ -78,7 +84,6 @@ export default function DietaryRestrictionsSettings({ navigation }) {
     return (
         <View style={globalStyles.container}>
             {userDocSnap && (<FlatList 
-                ListFooterComponent={<Button title={"Save Changes"} onPress={saveChangesHandler}/>}
                 data={checkboxSettings}
                 renderItem={({ item }) => (
                     <CheckboxSetting item={item} isInitiallyChecked={userDocSnap.get(dbConstants.DIETARY_RESTRICTIONS).includes(item.settingName)} parentCallback = {handleCheckboxCallback}/>

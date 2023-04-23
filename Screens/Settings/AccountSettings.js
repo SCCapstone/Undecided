@@ -29,6 +29,10 @@ export default function AccountSettings({ navigation }) {
         getUserDocSnap();
     }, [settings]);
 
+    useEffect(() => {
+        saveChangesHandler();
+    }, [settings]);
+
     const getUserDocSnap = async () => {
         const uid = await AsyncStorage.getItem("uid");
         const docRef = doc(db, "users", uid);
@@ -41,8 +45,22 @@ export default function AccountSettings({ navigation }) {
         const userDocRef = doc(db, "users", uid);
 
         if (settings[2].data != null && !/^\S+@\S+\.\S+$/.test(settings[2].data)) {
-            alert("Please enter a valid email address.");
+            alert("Changes to your email were not saved. Please enter a valid email address.");
             return;
+        }
+
+        if (settings[3].data != null && settings[3].data.length < 6) {
+            alert("Changes to your password were not saved. Please enter at least six characters.")
+            return;
+        }
+        
+        if (settings[2].data != null && settings[3].data != null) {
+            await handleEmailChange(settings[2].data);
+            await handlePasswordChange(settings[3].data);
+        } else if (settings[2].data != null) {
+            await handleEmailChange(settings[2].data);
+        } else if (settings[3].data != null) {
+            await handlePasswordChange(settings[3].data);
         }
 
         settings.forEach(async element => {
@@ -57,14 +75,6 @@ export default function AccountSettings({ navigation }) {
         });
 
         //handle email and password sequentially
-        if (settings[2].data != null && settings[3].data != null) {
-            await handleEmailChange(settings[2].data).then(settings[2].data = null);
-            await handlePasswordChange(settings[3].data).then(settings[3].data = null);
-        } else if (settings[2].data != null) {
-            await handleEmailChange(settings[2].data).then(settings[2].data = null);
-        } else if (settings[3].data != null) {
-            await handlePasswordChange(settings[3].data).then(settings[3].data = null);
-        }
     }
 
     const handleEmailChange = async (newEmail) => {
@@ -117,7 +127,6 @@ export default function AccountSettings({ navigation }) {
     return (
         <View style={globalStyles.container}>
             {userDocSnap && (<FlatList
-                ListFooterComponent={<Button title={"Save Changes"} onPress={saveChangesHandler}/>} 
                 data={settings}
                 renderItem={({ item }) => (
                 <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>

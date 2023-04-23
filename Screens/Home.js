@@ -81,9 +81,6 @@ export default function Home({ navigation }) {
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
         <CalorieTracker calorieGoal={calorieGoal} caloriesRemaining={calorieGoal - caloriesConsumed} goal={goal} />
         <View style={styles.space} /> 
-        <Pressable style={styles.button} onPress={log}>
-          <Text style={styles.buttonText}>Logout</Text>
-        </Pressable>
     </View>
   );
 }

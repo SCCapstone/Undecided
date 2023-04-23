@@ -13,14 +13,6 @@ export default function UserSettings( { navigation }) {
         {type: 'Account', screen: 'AccountSettings', key: '4'}
     ])
     const [type, setType] = React.useState("Email");
-    const getDb = async () => {
-        let uid = await AsyncStorage.getItem("uid");
-        console.log("UUID: " + uid)
-        let user = await getDoc(doc(db, "users", uid));
-        console.log("User: " + user)
-        
-        setType(user.data().signinType || "Email");
-      };
     const log = async () => {
         if (type == "Email") {
           await AsyncStorage.removeItem("uid");

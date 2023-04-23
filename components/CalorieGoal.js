@@ -5,7 +5,7 @@ import { DiaryContext } from '../Contexts/DiaryContext';
 import { COLORS } from '../constants/colors';
 import { Pressable } from 'react-native';
 
-const CalorieTracker = ({ calorieGoal, caloriesRemaining, navigate, currentWeight }) => {
+const CalorieTracker = ({ calorieGoal, caloriesRemaining, navigate }) => {
   const [calorieCount, setCalorieCount] = useState(0);
 
   const diary = useContext(DiaryContext);
@@ -21,7 +21,6 @@ const CalorieTracker = ({ calorieGoal, caloriesRemaining, navigate, currentWeigh
       <Text>Calorie goal: {calorieGoal}</Text>
       <Text>Calories remaining: {caloriesRemaining}</Text>
       <Text>Percentage of goal: {percentage}%</Text>
-      <Text>Current Weight: {currentWeight} Kg</Text>
     </Pressable>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useState } from 'react';
-import { View, Text, Button,TextInput, StyleSheet, FlatList, ScrollView, } from 'react-native';
+import { View, Text, Button,TextInput, StyleSheet, FlatList, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import fetch from 'node-fetch';
 import SearchResult from '../components/SearchResult';
 import { COLORS } from '../constants/colors.js'
@@ -45,22 +45,20 @@ const Search = ({foods}) =>{
       ))}
   </ScrollView>
 }
-    return(
-     <View style={styles.default}>
-        <TextInput  
-          textAlign = 'center'
-          placeholder='Search'
-          maxLength = {47}
-          onChangeText={text => query.current = text}
-          onEndEditing={() => getUSDA(query.current)}
-          style={styles.input}
-         ></TextInput>
-<Search foods = {results}></Search>
-       
-        
-   
- 
-     </View>
+  return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.default}>
+          <TextInput  
+            textAlign = 'center'
+            placeholder='Search'
+            maxLength = {47}
+            onChangeText={text => query.current = text}
+            onEndEditing={() => getUSDA(query.current)}
+            style={styles.input}
+          ></TextInput>
+          <Search foods = {results}></Search>
+        </View>
+    </TouchableWithoutFeedback>
     )
  
 

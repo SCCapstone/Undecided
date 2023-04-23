@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, FlatList, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
 import { globalStyles } from "../../styles/global";
-import Setting from "../../components/Setting";
+import NumericSetting from "../../components/NumericSetting";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import * as dbConstants from "../../DatabaseConstants";
@@ -13,8 +13,8 @@ import {COLORS} from '../../constants/colors'
 export default function BiometricsSettings({ navigation }) {
     
     const [settings, setSettings] = React.useState([
-        {settingName: "Height", dbField: dbConstants.HEIGHT, data: null, key: "1"},
-        {settingName: "Weight", dbField: dbConstants.WEIGHT, data: null, key: "2"},
+        {settingName: "Height (cm)", dbField: dbConstants.HEIGHT, data: null, key: "1"},
+        {settingName: "Weight (kg)", dbField: dbConstants.WEIGHT, data: null, key: "2"},
         {settingName: "Age", dbField: dbConstants.AGE, data: null, key: "3"},
     ]);
 
@@ -89,19 +89,21 @@ export default function BiometricsSettings({ navigation }) {
     }
 
     return (
-        <View style={globalStyles.coloredContainer}>
-            {userDocSnap && 
-                <FlatList
-                    ListFooterComponent={
-                        <View >
-                            <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(ActivityLevels)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback} />
-                        </View>
-                    }
-                    data={settings}
-                    renderItem={({ item }) => (
-                        <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback} style={{backgroundColor: COLORS.wood}}/>
-                )}/>
-            }
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={globalStyles.coloredContainer}>
+                {userDocSnap && 
+                    <FlatList
+                        ListFooterComponent={
+                            <View >
+                                <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(ActivityLevels)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback} />
+                            </View>
+                        }
+                        data={settings}
+                        renderItem={({ item }) => (
+                            <NumericSetting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback} />
+                    )}/>
+                }
+            </View>
+        </TouchableWithoutFeedback>
     );
 }

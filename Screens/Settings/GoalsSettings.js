@@ -5,7 +5,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import * as dbConstants from "../../DatabaseConstants";
 import RadioSetting from "../../components/RadioSetting"
-import Setting from "../../components/Setting";
+import NumericSetting from "../../components/NumericSetting";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Goals } from "../../constants/Goals";
 
@@ -85,19 +85,21 @@ export default function GoalsSettings({ navigation }) {
     }
 
     return (
-        <View style={globalStyles.coloredContainer}>
-            {userDocSnap && 
-                    <FlatList
-                        ListFooterComponent={
-                            <View>
-                                <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(Goals)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback}/>
-                            </View>
-                        }
-                        data={settings}
-                        renderItem={({ item }) => (
-                            <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>
-                    )}/>
-            }
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={globalStyles.coloredContainer}>
+                {userDocSnap && 
+                        <FlatList
+                            ListFooterComponent={
+                                <View>
+                                    <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(Goals)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback}/>
+                                </View>
+                            }
+                            data={settings}
+                            renderItem={({ item }) => (
+                                <NumericSetting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>
+                        )}/>
+                }
+            </View>
+        </TouchableWithoutFeedback>
     );
 }

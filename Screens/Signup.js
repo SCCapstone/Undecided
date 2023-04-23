@@ -107,12 +107,8 @@ export default function Signup({ navigation: { navigate } }) {
   
   const [visible, setVisible] = React.useState(false);
 
-  const handlePress = () => {
-    Keyboard.dismiss();
-  };
-
   return (
-    <TouchableWithoutFeedback onpress={handlePress}>
+    <TouchableWithoutFeedback onpress={Keyboard.dismiss}>
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.row}>

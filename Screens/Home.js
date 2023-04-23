@@ -16,7 +16,7 @@ export default function Home({ navigation }) {
   let uid
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
-  const [calorieGoal, setCalorieGoal] = React.useState("2000");
+  const [calorieGoal, setCalorieGoal] = React.useState(2000);
   const [caloriesConsumed, setCaloriesConsumed] = React.useState("0");
   const [goal, setGoal] = React.useState("");
   const {diary, setDiary} = useContext(DiaryContext)
@@ -49,6 +49,7 @@ export default function Home({ navigation }) {
     }catch(e){
       console.log(e)
     }
+    setDiary(newDiary);
   
   };
   const nav = (name) =>{

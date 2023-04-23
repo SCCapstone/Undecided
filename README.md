@@ -82,8 +82,8 @@ npm run test
 
 # Authors
 
-Peyton Tucker (pmtucker@email.sc.edu)
-Brent Hopkins (brentph@email.sc.edu)
-Caleb Corpening (corpenic@email.sc.edu)
-Mostafa Mohammed Ali (mostafa@email.sc.edu)
-Brian White (briandw@email.sc.edu)
+- Peyton Tucker (pmtucker@email.sc.edu)
+- Brent Hopkins (brentph@email.sc.edu)
+- Caleb Corpening (corpenic@email.sc.edu)
+- Mostafa Mohammed Ali (mostafa@email.sc.edu)
+- Brian White (briandw@email.sc.edu)

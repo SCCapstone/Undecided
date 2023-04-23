@@ -41,27 +41,31 @@ export default function AccountSettings({ navigation }) {
     };
 
     const saveChangesHandler = async () => {
-        const uid = await AsyncStorage.getItem("uid");
-        const userDocRef = doc(db, "users", uid);
 
         if (settings[2].data != null && !/^\S+@\S+\.\S+$/.test(settings[2].data)) {
-            alert("Changes to your email were not saved. Please enter a valid email address.");
-            return;
-        }
+                alert("Changes to your email were not saved. Please enter a valid email address.");
+                return;
+            }
 
-        if (settings[3].data != null && settings[3].data.length < 6) {
-            alert("Changes to your password were not saved. Please enter at least six characters.")
-            return;
-        }
-        
-        if (settings[2].data != null && settings[3].data != null) {
-            await handleEmailChange(settings[2].data);
-            await handlePasswordChange(settings[3].data);
-        } else if (settings[2].data != null) {
-            await handleEmailChange(settings[2].data);
-        } else if (settings[3].data != null) {
-            await handlePasswordChange(settings[3].data);
-        }
+            if (settings[3].data != null && settings[3].data.length < 6) {
+                alert("Changes to your password were not saved. Please enter at least six characters.")
+                return;
+            }
+
+            
+            //handle email and password sequentially
+            if (settings[2].data != null) {
+                await handleEmailChange(settings[2].data).then(saveSettingsToFirestore());
+            } else if (settings[3].data != null) {
+                await handlePasswordChange(settings[3].data).then(saveSettingsToFirestore());
+            } else {
+                saveSettingsToFirestore();
+            }
+    }
+
+    const saveSettingsToFirestore = async () => {
+        const uid = await AsyncStorage.getItem("uid");
+        const userDocRef = doc(db, "users", uid);
 
         settings.forEach(async element => {
             if (element.data != null) {
@@ -73,8 +77,6 @@ export default function AccountSettings({ navigation }) {
                 element.data = null;
             }
         });
-
-        //handle email and password sequentially
     }
 
     const handleEmailChange = async (newEmail) => {
@@ -101,18 +103,18 @@ export default function AccountSettings({ navigation }) {
         const email = userDocSnap.get(dbConstants.EMAIL)
         const password = userDocSnap.get(dbConstants.PASSWORD)
 
-            const credential = EmailAuthProvider.credential(email, password)
-            console.log("Obtained credential: " + credential)
+        const credential = EmailAuthProvider.credential(email, password)
+        console.log("Obtained credential: " + credential)
 
-            signInWithEmailAndPassword(auth, email, password).then( (user) => {
-                console.log("signed in successfully")
-                reauthenticateWithCredential(auth.currentUser, credential).then(() => {
-                //update email
-                console.log("attempting password update to " + newPassword)
-                updatePassword(auth.currentUser, newPassword).catch((error) => {
-                    console.log("Password update failed after reauthentication attempt.")
-                })}
-            )})
+        signInWithEmailAndPassword(auth, email, password).then( (user) => {
+            console.log("signed in successfully")
+            reauthenticateWithCredential(auth.currentUser, credential).then(() => {
+            //update email
+            console.log("attempting password update to " + newPassword)
+            updatePassword(auth.currentUser, newPassword).catch((error) => {
+                console.log("Password update failed after reauthentication attempt.")
+            })}
+        )})
     }
 
     const handleCallback = (item, newData) => {

@@ -22,7 +22,7 @@ const Loading = ({ navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/Splash.png')} style={styles.logo} />
+      <Image source={require('../assets/splash.png')} style={styles.logo} />
       <Text style={styles.title}>Loading</Text>
       <ActivityIndicator size="large" color="#007AFF" />
     </View>

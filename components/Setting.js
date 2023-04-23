@@ -4,6 +4,7 @@ import { globalStyles } from "../styles/global";
 import { MaterialIcons } from '@expo/vector-icons';
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import {COLORS} from '../constants/colors'
 
 export default function Setting({ item, initialData, parentCallback }) {
     
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 5,
         paddingLeft: 35,
-        backgroundColor: 'white',
+        backgroundColor: COLORS.wood,
         marginBottom: 10,
         borderRadius: 4
     },

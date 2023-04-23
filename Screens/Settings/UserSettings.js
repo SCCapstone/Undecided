@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import {  View, Text, FlatList, TouchableOpacity } from "react-native";
+import {  View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import { globalStyles } from "../../styles/global";
-
+import { COLORS } from '../../constants/colors';
 export default function UserSettings( { navigation }) {
     const [settingTypes, setSettingTypes] = useState([
         {type: 'Biometrics', screen: 'BiometricsSettings', key: '1'},
@@ -16,7 +16,7 @@ export default function UserSettings( { navigation }) {
                 data={settingTypes}
                 renderItem={ ({ item }) => (
                     <TouchableOpacity onPress={() => navigation.navigate(item.screen)}>
-                        <View style={globalStyles.whiteItem}>
+                        <View style={globalStyles.coloredItem}>
                             <Text style={globalStyles.text}>{item.type}</Text>
                         </View>
                     </TouchableOpacity>

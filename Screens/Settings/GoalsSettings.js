@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableWithoutFeedback, Keyboard, Button, FlatList } from "react-native";
+import { View, TouchableWithoutFeedback, Keyboard, Button, FlatList, StyleSheet } from "react-native";
 import { globalStyles } from "../../styles/global";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -85,7 +85,7 @@ export default function GoalsSettings({ navigation }) {
     }
 
     return (
-        <View style={globalStyles.container}>
+        <View style={globalStyles.coloredContainer}>
             {userDocSnap && 
                     <FlatList
                         ListFooterComponent={

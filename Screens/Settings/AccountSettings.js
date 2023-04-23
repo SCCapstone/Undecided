@@ -125,7 +125,7 @@ export default function AccountSettings({ navigation }) {
     }
 
     return (
-        <View style={globalStyles.container}>
+        <View style={globalStyles.coloredContainer}>
             {userDocSnap && (<FlatList
                 data={settings}
                 renderItem={({ item }) => (

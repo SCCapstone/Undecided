@@ -8,6 +8,7 @@ import * as dbConstants from "../../DatabaseConstants";
 import RadioSetting from "../../components/RadioSetting"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActivityLevels } from "../../constants/ActivityLevels";
+import {COLORS} from '../../constants/colors'
 
 export default function BiometricsSettings({ navigation }) {
     
@@ -88,17 +89,17 @@ export default function BiometricsSettings({ navigation }) {
     }
 
     return (
-        <View style={globalStyles.container}>
+        <View style={globalStyles.coloredContainer}>
             {userDocSnap && 
                 <FlatList
                     ListFooterComponent={
-                        <View>
-                            <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(ActivityLevels)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback}/>
+                        <View >
+                            <RadioSetting item={radioSettings[0]} buttonNameList={Object.values(ActivityLevels)} initialButtonName={userDocSnap.get(radioSettings[0].dbField)} parentCallback = {handleRadioCallback} />
                         </View>
                     }
                     data={settings}
                     renderItem={({ item }) => (
-                        <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>
+                        <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback} style={{backgroundColor: COLORS.wood}}/>
                 )}/>
             }
         </View>

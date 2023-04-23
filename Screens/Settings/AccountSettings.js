@@ -125,13 +125,15 @@ export default function AccountSettings({ navigation }) {
     }
 
     return (
-        <View style={globalStyles.container}>
-            {userDocSnap && (<FlatList
-                data={settings}
-                renderItem={({ item }) => (
-                <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>
-                )}
-                />)}
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={globalStyles.coloredContainer}>
+                {userDocSnap && (<FlatList
+                    data={settings}
+                    renderItem={({ item }) => (
+                    <Setting item={item} initialData={userDocSnap.get(item.dbField)} parentCallback = {handleCallback}/>
+                    )}
+                    />)}
+            </View>
+        </TouchableWithoutFeedback>
     );
 }

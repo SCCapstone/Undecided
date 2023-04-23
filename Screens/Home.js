@@ -1,14 +1,12 @@
 import React, {useContext} from "react";
 import { db } from "../firebase";
-import * as AuthSession from "expo-auth-session";
 import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDiary } from "../util";
 import { DiaryContext } from '../Contexts/DiaryContext';
 import { Text, View, StyleSheet,Button,Pressable } from "react-native";
 import { COLORS } from '../constants/colors.js'
-import { createStackNavigator } from "@react-navigation/stack";
-import { StackActions, useFocusEffect} from '@react-navigation/native';
+import { useFocusEffect} from '@react-navigation/native';
 import CalorieTracker from "../components/CalorieGoal";
 
 
@@ -18,7 +16,7 @@ export default function Home({ navigation }) {
   let uid
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
-  const [calorieGoal, setCalorieGoal] = React.useState("2000");
+  const [calorieGoal, setCalorieGoal] = React.useState(2000);
   const [caloriesConsumed, setCaloriesConsumed] = React.useState("0");
   const [goal, setGoal] = React.useState("");
   const {diary, setDiary} = useContext(DiaryContext)
@@ -51,6 +49,7 @@ export default function Home({ navigation }) {
     }catch(e){
       console.log(e)
     }
+    setDiary(newDiary);
   
   };
   const nav = (name) =>{
@@ -80,7 +79,7 @@ export default function Home({ navigation }) {
         <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
         <CalorieTracker calorieGoal={calorieGoal} caloriesRemaining={calorieGoal - caloriesConsumed} goal={goal} />
-        <View style={styles.space} /> 
+        <View style={styles.space} />
     </View>
   );
 }
@@ -112,18 +111,5 @@ const styles = StyleSheet.create({
   space: {
     width: 20,
     height: 20,
-  },
-  button: {
-    backgroundColor: COLORS.wood,
-    width: 100,
-    height: 50,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    elevation: 10,
-    shadowColor: "black",
-  },
-  buttonText: {
-    fontSize: 15,
   }
 });

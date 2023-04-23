@@ -82,8 +82,8 @@ export default function DietaryRestrictionsSettings({ navigation }) {
     }
 
     return (
-        <View style={globalStyles.container}>
-            {userDocSnap && (<FlatList 
+        <View style={globalStyles.coloredContainer}>
+            {userDocSnap && (<FlatList
                 data={checkboxSettings}
                 renderItem={({ item }) => (
                     <CheckboxSetting item={item} isInitiallyChecked={userDocSnap.get(dbConstants.DIETARY_RESTRICTIONS).includes(item.settingName)} parentCallback = {handleCheckboxCallback}/>

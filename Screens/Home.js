@@ -21,6 +21,7 @@ export default function Home({ navigation }) {
   const [calorieGoal, setCalorieGoal] = React.useState("2000");
   const [caloriesConsumed, setCaloriesConsumed] = React.useState("0");
   const [goal, setGoal] = React.useState("");
+  const [currentWeight, setWeight] = React.useState("0")
   const {diary, setDiary} = useContext(DiaryContext)
   useFocusEffect(React.useCallback(() => {
     getDb();
@@ -37,6 +38,7 @@ export default function Home({ navigation }) {
     if (user.data().signinType == "Email") {
       setName(`${user.data()?.firstName} ${user.data()?.lastName}`);
       setCalorieGoal(`${user.data()?.calorieGoal}`);
+      setWeight(`${user.data()?.weight}`);
       setGoal(`${user.data()?.goal}`);
       newDiary.calorieGoal = `${user.data()?.calorieGoal}`
       //TODO: remove log
@@ -72,11 +74,8 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
         <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
-        <CalorieTracker calorieGoal={calorieGoal} caloriesRemaining={calorieGoal - caloriesConsumed} goal={goal} />
-        <View style={styles.space} /> 
-        <Pressable style={styles.button} onPress={log}>
-          <Text style={styles.buttonText}>Logout</Text>
-        </Pressable>
+        <CalorieTracker calorieGoal={calorieGoal} caloriesRemaining={calorieGoal - caloriesConsumed} goal={goal} currentWeight={currentWeight}/>
+        <View style={styles.space} />
     </View>
   );
 }

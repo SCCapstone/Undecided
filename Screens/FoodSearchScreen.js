@@ -10,6 +10,7 @@ const FoodSearchScreen = ({route}) => {
     const [results, setResults ] = useState([])
     const query = useRef("")
     const {meal} = route.params
+   
 
     const getUSDA = async (data) => {
       let dataNoSpace = data.trim().replace(' ','%20')
@@ -27,7 +28,23 @@ const FoodSearchScreen = ({route}) => {
       }
     };
 
-
+const Search = ({foods}) =>{
+ 
+  if(Object.keys(foods).length === 0){
+  return <Text style={{fontSize:20, textAlign:'center'}}>No results</Text>
+  }
+  return  <ScrollView 
+  testID='foodList'> 
+   {foods.map((food) => (
+     <SearchResult
+     testID='foodItem'
+     key={food.fdcId} 
+     foodItem = {food}
+     meal={meal}
+     ></SearchResult>
+      ))}
+  </ScrollView>
+}
     return(
      <View style={styles.default}>
         <TextInput  
@@ -38,18 +55,8 @@ const FoodSearchScreen = ({route}) => {
           onEndEditing={() => getUSDA(query.current)}
           style={styles.input}
          ></TextInput>
-
-         <ScrollView 
-         testID='foodList'> 
-          {results.map((food) => (
-            <SearchResult
-            testID='foodItem'
-            key={food.fdcId} 
-            foodItem = {food}
-            meal={meal}
-            ></SearchResult>
-             ))}
-         </ScrollView>
+<Search foods = {results}></Search>
+       
         
    
  

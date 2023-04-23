@@ -51,7 +51,7 @@ export default function UserSettings( { navigation }) {
                 )}
             />
         <Pressable style={styles.button} onPress={log}>
-          <Text style={styles.buttonText}>Logout</Text>
+          <Text style={globalStyles.text}>Logout</Text>
         </Pressable>
         </View>
     )

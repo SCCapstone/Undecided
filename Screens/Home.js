@@ -1,14 +1,12 @@
 import React, {useContext} from "react";
 import { db } from "../firebase";
-import * as AuthSession from "expo-auth-session";
 import { doc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDiary } from "../util";
 import { DiaryContext } from '../Contexts/DiaryContext';
 import { Text, View, StyleSheet,Button,Pressable } from "react-native";
 import { COLORS } from '../constants/colors.js'
-import { createStackNavigator } from "@react-navigation/stack";
-import { StackActions, useFocusEffect} from '@react-navigation/native';
+import { useFocusEffect} from '@react-navigation/native';
 import CalorieTracker from "../components/CalorieGoal";
 
 
@@ -53,23 +51,6 @@ export default function Home({ navigation }) {
     setCaloriesConsumed(newDiary.getEntry(new Date().toDateString()).getCalorieTotal())
   };
 
-  const log = async () => {
-    if (type == "Email") {
-      await AsyncStorage.removeItem("uid");
-      navigation.dispatch(StackActions.pop())
-      navigation.navigate("Auth")
-    } else {
-      AsyncStorage.removeItem("uid");
-      let token = await AsyncStorage.getItem("token");
-      AuthSession.revokeAsync(
-        { token },
-        { revocationEndpoint: "https://oauth2.googleapis.com/revoke" }
-      );
-      navigation.dispatch(StackActions.pop())
-
-    }
-  };
-
   return (
     <View style={styles.container}>
         <Text style={styles.Home}>Home</Text>
@@ -107,18 +88,5 @@ const styles = StyleSheet.create({
   space: {
     width: 20,
     height: 20,
-  },
-  button: {
-    backgroundColor: COLORS.wood,
-    width: 100,
-    height: 50,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    elevation: 10,
-    shadowColor: "black",
-  },
-  buttonText: {
-    fontSize: 15,
   }
 });

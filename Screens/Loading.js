@@ -3,16 +3,21 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, ActivityIndicator, Text, Image, StyleSheet } from "react-native";
 import { globalStyles } from "../styles/global";
 
-const Loading = ({ navigation: { navigate } }) => {
+const Loading = ({ navigation}) => {
   useEffect(() => {
     getUser();
   });
-
+  const nav = (name) =>{
+    navigation.reset({
+      index: 0,
+      routes: [{ name: name }],
+    });
+  }
   const getUser = async () => {
     let uid = await AsyncStorage.getItem("uid");
     console.log("loading screen id:" + uid)
-    if (uid !== null) navigate('Home');
-    else navigate('Auth');
+    if (uid !== null) nav('Home');
+    else nav('Auth');
   };
 
   return (

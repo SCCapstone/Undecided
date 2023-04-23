@@ -13,11 +13,18 @@ export default function UserSettings( { navigation }) {
         {type: 'Account', screen: 'AccountSettings', key: '4'}
     ])
     const [type, setType] = React.useState("Email");
+    const getDb = async () => {
+        let uid = await AsyncStorage.getItem("uid");
+        console.log("UUID: " + uid)
+        let user = await getDoc(doc(db, "users", uid));
+        console.log("User: " + user)
+        
+        setType(user.data().signinType || "Email");
+      };
     const log = async () => {
         if (type == "Email") {
           await AsyncStorage.removeItem("uid");
-          navigation.dispatch(StackActions.pop())
-          navigation.navigate("Auth")
+          navigation.navigate("Auth", {initial: false})
         } else {
           AsyncStorage.removeItem("uid");
           let token = await AsyncStorage.getItem("token");
@@ -25,8 +32,6 @@ export default function UserSettings( { navigation }) {
             { token },
             { revocationEndpoint: "https://oauth2.googleapis.com/revoke" }
           );
-          navigation.dispatch(StackActions.pop())
-    
         }
     };
     
@@ -43,7 +48,7 @@ export default function UserSettings( { navigation }) {
                 )}
             />
         <Pressable style={styles.button} onPress={log}>
-          <Text style={globalStyles.text}>Logout</Text>
+          <Text style={styles.buttonText}>Logout</Text>
         </Pressable>
         </View>
     )

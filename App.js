@@ -10,6 +10,7 @@ import Signup from "./Screens/Signup";
 import HomeTabScreen from "./components/HomeStackScreen";
 import Loading from "./Screens/Loading";
 import Overview from './Screens/MacroNutrients'
+import RecoverPassword from "./Screens/RecoverPassword";
 
 //fix for "can't find variable: atob"
 import {decode, encode} from 'base-64'
@@ -33,6 +34,7 @@ export default function App() {
             <Stack.Screen name = "Auth" component = {Auth} options = {options} />
             <Stack.Screen name = "Home" component = {HomeTabScreen} options = {options} />
             <Stack.Screen name="NutritionalOverview" component={Overview} options={{ title: "" }}/>
+            <Stack.Screen name="RecoverPassword" component={RecoverPassword} options={{ title: "Recover Password" }}/>
           </Stack.Navigator>
         </NavigationContainer>
       </DiaryContext.Provider>

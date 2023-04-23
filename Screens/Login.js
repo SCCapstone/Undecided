@@ -60,6 +60,11 @@ export default function Login({ navigation: { navigate } }) {
         >
           Login
         </Button>
+        <Button
+        style={styles.login}
+        onPress={() => navigate("RecoverPassword")}>
+          Forgot Password?
+        </Button>
       </View></>
   );
 }
@@ -80,11 +85,11 @@ const styles = StyleSheet.create({
   },
   login: {
     width: 200,
-    marginTop: 15,
+    marginTop: 10,
     borderRadius: 100,
     paddingVertical: 3,
     backgroundColor: "black",
-    marginBottom: 50,
+    marginBottom: 20,
   },
   label: {
     fontSize: 20,

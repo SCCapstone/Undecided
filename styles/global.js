@@ -51,6 +51,16 @@ export const globalStyles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 15,
         backgroundColor: "white"
-    }
+    },
+    coloredItem:{
+        flexDirection: 'row',
+        padding: 16,
+        marginTop: 16,
+        borderColor: COLORS.gray,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderRadius: 15,
+        backgroundColor: COLORS.wood
+    },
 
 })

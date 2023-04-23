@@ -6,7 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import {COLORS} from '../constants/colors'
 
-export default function Setting({ item, initialData, parentCallback }) {
+export default function NumericSetting({ item, initialData, parentCallback }) {
     
     const [dataField, setDataField] = useState(initialData);
 
@@ -31,6 +31,7 @@ export default function Setting({ item, initialData, parentCallback }) {
                     onEndEditing={endEditingHandler}
                     value={dataField}
                     editable={true}
+                    keyboardType="number-pad"
                 />
             </View>
         </View>

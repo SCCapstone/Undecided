@@ -19,7 +19,7 @@ export default function CheckboxSetting({ item, isInitiallyChecked, parentCallba
     }
 
     return (
-        <View style={globalStyles.item}>
+        <View style={globalStyles.coloredItem}>
             <Checkbox
                 style={styles.checkbox}
                 value={isChecked}

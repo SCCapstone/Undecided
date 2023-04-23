@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { globalStyles } from "../styles/global";
 import RadioButtonRN from 'radio-buttons-react-native';
+import {COLORS} from '../constants/colors'
 
 export default function RadioSetting({ item, buttonNameList, initialButtonName, parentCallback }) {
     
@@ -30,12 +31,16 @@ export default function RadioSetting({ item, buttonNameList, initialButtonName, 
     }
 
     return (
-        <View>
+        <View >
             <Text style={globalStyles.text}>{item.settingName}</Text>
             <RadioButtonRN
                 data={buttonList}
                 selectedBtn={changeHandler}
                 initial={buttonList.findIndex(item => item.label == initialButtonName) + 1}
+                activeColor ={"black"}
+                deactiveColor ={COLORS.gray}
+                boxActiveBgColor={COLORS.wood}
+                boxDeactiveBgColor={COLORS.wood}
             />
         </View>
     );

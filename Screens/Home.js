@@ -93,7 +93,6 @@ export default function Home({ navigation }) {
   // Rendering Home component
   return (
     <View style={styles.container}>
-        <Text style={styles.Home}>Home</Text>
         <Text style={styles.welcomingText}>Welcome {name}!</Text>
         <CalorieTracker calorieGoal={calorieGoal} caloriesRemaining={calorieGoal - caloriesConsumed} goal={goal} />
         <View style={styles.space} />

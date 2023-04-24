@@ -81,8 +81,10 @@ export default function Login({ navigation }) {
           Login
         </Button>
         <Button
-        style={styles.login}
-        onPress={() => navigation.navigate("RecoverPassword")}>
+          mode="contained"
+          labelStyle={styles.forgotPassLabel}
+          style={styles.login}
+          onPress={() => navigation.navigate("RecoverPassword")}>
           Forgot Password?
         </Button>
       </View></>
@@ -115,6 +117,10 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 20,
+    color: "white",
+  },
+  forgotPassLabel: {
+    fontSize: 12,
     color: "white",
   },
 });

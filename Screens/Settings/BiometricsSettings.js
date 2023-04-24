@@ -1,5 +1,7 @@
+//A screen to represent the user's current settings for their biometrics.
+
 import React, { useState, useEffect } from "react";
-import { View, FlatList, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
+import { View, FlatList, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { globalStyles } from "../../styles/global";
 import NumericSetting from "../../components/NumericSetting";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
@@ -8,7 +10,6 @@ import * as dbConstants from "../../DatabaseConstants";
 import RadioSetting from "../../components/RadioSetting"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActivityLevels } from "../../constants/ActivityLevels";
-import {COLORS} from '../../constants/colors'
 
 export default function BiometricsSettings({ navigation }) {
     

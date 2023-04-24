@@ -1,9 +1,11 @@
+//A screen to display the different settings categories the user can choose to navigate to in order to change their settings.
+
 import React, { useState } from "react";
 import {  Pressable, View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import { globalStyles } from "../../styles/global";
 import { COLORS } from '../../constants/colors';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StackActions, useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
@@ -15,20 +17,28 @@ export default function UserSettings( { navigation }) {
         {type: 'Account', screen: 'AccountSettings', key: '4'}
     ])
   
+
+    //Ensure a fresh version of user information is present whenever this screen is brought into focus.
+    //This allows logout to be handled from this screen.
     useFocusEffect(React.useCallback(() => {
       getDb();
     }, []));
   
+
+    //The type of login of the current user.
     const [type, setType] = React.useState("Email");
+
+    //Asynchronous function for getting the database.
     const getDb = async () => {
       let uid = await AsyncStorage.getItem("uid");
-      console.log("UUID: " + uid)
       let user = await getDoc(doc(db, "users", uid));
-      console.log("User: " + user)
-      
       setType(user.data().signinType || "Email");
     };
   
+
+    //Asynchronous function that logs the user out.
+    //If they signed up via email, remove their uid from the session and navigate to the Auth screen (login/signup).
+    //Otherwise, remove their uid from the session and revoke their token.
     const log = async () => {
       if (type == "Email") {
         await AsyncStorage.removeItem("uid");

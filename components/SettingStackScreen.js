@@ -11,7 +11,7 @@ const SettingsStack = createStackNavigator();
 function SettingStackScreen() {
   return (
     <SettingsStack.Navigator>
-      <SettingsStack.Screen name="UserSettings" component={UserSettings} options={options} />
+      <SettingsStack.Screen name="UserSettings" component={UserSettings} options={{headerShown: false, title: "User Settings"} } />
       <SettingsStack.Screen name="AccountSettings" component={AccountSettings} options={{title: "Account"}}/>
       <SettingsStack.Screen name="BiometricsSettings" component={BiometricsSettings} options={{title: "Biometrics"}}/>
       <SettingsStack.Screen name="GoalsSettings" component={GoalsSettings} options={{title: "Goals"}}/>

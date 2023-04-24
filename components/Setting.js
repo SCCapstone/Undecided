@@ -1,19 +1,23 @@
+//This component is used to represent a single text-based setting.
+//The normal keyboard is used to edit the text inside each TextInput.
+
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { globalStyles } from "../styles/global";
 import { MaterialIcons } from '@expo/vector-icons';
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
 import {COLORS} from '../constants/colors'
 
 export default function Setting({ item, initialData, parentCallback }) {
     
+    //This State variable represents the data displayed within this setting.
     const [dataField, setDataField] = useState(initialData);
 
+    //This callback is designed to be triggered after each change of the TextInput of this setting.
     const changeHandler = (val) => {
         setDataField(val);
     }
 
+    //This callback triggers upon the user finishing their edit to this setting.
     const endEditingHandler = (val) => {
         parentCallback(item, val.nativeEvent.text)
     }
@@ -35,11 +39,6 @@ export default function Setting({ item, initialData, parentCallback }) {
             </View>
         </View>
     );
-}
-
-
-const getUserDocRef = async (uid) => {
-    return doc(db, "users", uid);
 }
 
 const styles = StyleSheet.create({

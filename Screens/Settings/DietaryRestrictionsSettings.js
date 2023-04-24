@@ -1,5 +1,7 @@
+//A screen to represent the user's current settings for their dietary restrictions.
+
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, FlatList, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
+import { View, FlatList } from "react-native";
 import { globalStyles } from "../../styles/global";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -10,10 +12,13 @@ import CheckboxSetting from "../../components/CheckboxSetting";
 
 export default function DietaryRestrictionsSettings({ navigation }) {
 
+    //A state variable to hold this screen's list of checkbox settings
     const [checkboxSettings, setCheckboxSettings] = React.useState(null);
 
+    //A state variable to represent this user's document snapshot as it exists in Firebase.
     const [userDocSnap, setUserDocSnap] = useState(null);
 
+    //Utility function to get a list of all of the settings objects from the DietaryRestrictions enum and turn them into an array of objects.
     async function getSettingsObjects() {
         const dietaryRestrictionsArray = Object.values(DietaryRestrictions);
         const currentRestrictions = userDocSnap.get(dbConstants.DIETARY_RESTRICTIONS)
@@ -30,10 +35,13 @@ export default function DietaryRestrictionsSettings({ navigation }) {
         return objectArray;
     }
 
+    //Hook to ensure an up-to-date version of the user's document snapshot is held after each render of this component.
     useEffect(() => {
         getUserDocSnap();
     }, []);
     
+
+    //If the user doc snap is not null, set the checkbox settings after converting them to settings objects.
     useEffect(() => {
         if (userDocSnap != null) {
             getSettingsObjects().then((settings) => {
@@ -47,6 +55,7 @@ export default function DietaryRestrictionsSettings({ navigation }) {
         saveChangesHandler();
     }, [checkboxSettings]);
 
+    //Retrieve the current user's document snapshot from Firebase.
     const getUserDocSnap = async () => {
         const uid = await AsyncStorage.getItem("uid");
         const docRef = doc(db, "users", uid);
@@ -54,24 +63,29 @@ export default function DietaryRestrictionsSettings({ navigation }) {
         setUserDocSnap(snap);
     };
 
+    //Handles saving the settings displayed on this screen to Firebase.
     const saveChangesHandler = async () => {
         if (checkboxSettings == null) return;
         const uid = await AsyncStorage.getItem("uid");
         const userDocRef = doc(db, "users", uid);
 
+        //Filter the checkedBoxes state variable for only boxes that are checked, and put them into an array
         const checkedBoxes = checkboxSettings.filter(box => box.isChecked);
         const checkedBoxesStrings = [];
         checkedBoxes.forEach(box => {
             checkedBoxesStrings.push(box.settingName)
         });
 
+        //Join the string array into one string
         const restrictionsString = checkedBoxesStrings.join(", ");
 
+        //Store the string created above
         await updateDoc(userDocRef, {
             [dbConstants.DIETARY_RESTRICTIONS]: restrictionsString
         });
     }
 
+    //This callback is passed to child setting components to update the settings objects stored in this screen's State.
     const handleCheckboxCallback = (item, newData) => {
         const newCheckboxSettings = [...checkboxSettings];
         const index = newCheckboxSettings.indexOf(item);

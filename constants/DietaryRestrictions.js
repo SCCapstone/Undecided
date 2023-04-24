@@ -1,3 +1,5 @@
+//An enum class to provide a single source of truth for the different DietaryRestrictions the user can choose from.
+
 export const DietaryRestrictions = Object.freeze({
 	LACTOSE_INTOLERANCE: "Lactose Intolerance",
 	GLUTEN_INTOLERANCE: "Gluten Intolerance",

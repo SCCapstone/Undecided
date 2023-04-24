@@ -82,7 +82,7 @@ export default function Login({ navigation }) {
         </Button>
         <Button
         style={styles.login}
-        onPress={() => navigate("RecoverPassword")}>
+        onPress={() => navigation.navigate("RecoverPassword")}>
           Forgot Password?
         </Button>
       </View></>

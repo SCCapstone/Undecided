@@ -10,9 +10,9 @@ function DiaryStackScreen() {
   return (
     <DiaryStack.Navigator  independent={true}>
       <DiaryStack.Screen name="Diary" component={DiaryScreen} options={options}/>
-      <DiaryStack.Screen name="FoodSearch" component={FoodSearchScreen} />
-      <DiaryStack.Screen name="FoodDetails" component={FoodDetails} />
-      <DiaryStack.Screen name="EntryDetails" component={EntryDetails} />
+      <DiaryStack.Screen name="FoodSearch" component={FoodSearchScreen} options={{title: "Food Search"}}/>
+      <DiaryStack.Screen name="FoodDetails" component={FoodDetails} options={{title: "Food Details"}}/>
+      <DiaryStack.Screen name="EntryDetails" component={EntryDetails} options={{title: "Entry Details"}}/>
     </DiaryStack.Navigator>
   );
 }

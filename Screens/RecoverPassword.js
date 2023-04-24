@@ -1,5 +1,6 @@
 import React from "react";
-import {View, StyleSheet, TextInput, Text, Button, Alert } from "react-native";
+import {View, StyleSheet, TextInput, Text, Alert } from "react-native";
+import { Button } from "react-native-paper"
 import { COLORS } from "../constants/colors";
 import { globalStyles } from "../styles/global";
 import { sendPasswordResetEmail } from "firebase/auth";
@@ -40,7 +41,15 @@ export default function RecoverPassword({ navigation }) {
                 onChangeText={emailChangeHandler}
                 value={providedEmail}
             />
-            <Button title={"Change Password"}onPress={pressHandler} />
+            <View style={styles.container}>
+                <Button
+                    labelStyle={styles.label}
+                    mode="contained"
+                    style={styles.login}
+                    onPress={pressHandler}>
+                    Reset Password
+                </Button>
+            </View>
         </View>
     )
 
@@ -55,17 +64,29 @@ const styles = StyleSheet.create({
     inputField: {
         padding: 5,
         paddingLeft: 35,
-        backgroundColor: 'white',
-        margin: 20,
+        backgroundColor: COLORS.wood,
         borderRadius: 4
     },
     text: {
         color: "#464838",
         fontSize: 22,
-        marginHorizontal: 50,
         marginTop: 20,
         marginBottom: 20,
         textAlign: "center",
-        paddingLeft: 12
+        paddingLeft: 12,
+        width: 300
+      },
+      button: {
+        width: 200,
+        borderRadius: 100,
+        backgroundColor: "black",
+      },
+      login: {
+        width: 200,
+        marginTop: 10,
+        borderRadius: 100,
+        paddingVertical: 3,
+        backgroundColor: "black",
+        marginBottom: 20,
       },
 })

@@ -22,7 +22,7 @@ function HomeTabScreen() {
         return <Ionicons name={iconName} size={size} color={color} />;
       }
     })} >
-      <HomeTab.Screen name="Home Screen" component={Home} />
+      <HomeTab.Screen name="Home Screen" component={Home} options={{title: "Home"}} />
       <HomeTab.Screen name="Diary Screen" component={DiaryStackScreen} />
       <HomeTab.Screen name="Settings" component={SettingStackScreen} />
     </HomeTab.Navigator>

@@ -14,23 +14,29 @@ import CalorieTracker from "../components/CalorieGoal";
 
 export default function Home({ navigation }) {
   let uid
+  let cal
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
-  const [calorieGoal, setCalorieGoal] = React.useState(2000);
+  const [calorieGoal, setCalorieGoal] = React.useState("2000");
   const [caloriesConsumed, setCaloriesConsumed] = React.useState("0");
   const [goal, setGoal] = React.useState("");
   const {diary, setDiary} = useContext(DiaryContext)
+
   useFocusEffect(React.useCallback(() => {
-    getDb();
+    loadDiary();
   }, []));
 
+ const loadDiary = async () =>{
+  await getDb()
+  let newDiary = await getDiary()
+  setCaloriesConsumed(newDiary.getEntry(new Date().toDateString()).getCalorieTotal())
+  console.log(calorieGoal)
+  newDiary.calorieGoal = cal
+
+  setDiary(newDiary);
+ }
   const getDb = async () => {
     uid = await AsyncStorage.getItem("uid");
-    let newDiary = await getDiary()
-    setDiary(newDiary);
-    setCalorieGoal(2000)
-    setCaloriesConsumed(newDiary.getEntry(new Date().toDateString()).getCalorieTotal())
-    console.log("UUID: " + uid)
     try{
       let user = await getDoc(doc(db, "users", uid));
       setType(user.data().signinType || "Email");
@@ -38,18 +44,14 @@ export default function Home({ navigation }) {
         setName(`${user.data()?.firstName} ${user.data()?.lastName}`);
         setCalorieGoal(`${user.data()?.calorieGoal}`);
         setGoal(`${user.data()?.goal}`);
-        newDiary.calorieGoal = `${user.data()?.calorieGoal}`
-        //TODO: remove log
-        console.log("set user name in if")
+        cal = `${user.data()?.calorieGoal}`
       } else {
         setName(user.data().name);
-        //TODO: remove log
-        console.log("set user name in else")
       }
     }catch(e){
+      setCalorieGoal(2000)
       console.log(e)
     }
-    setDiary(newDiary);
   
   };
   const nav = (name) =>{

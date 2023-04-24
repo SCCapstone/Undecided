@@ -1,6 +1,6 @@
 /**
  * Signup screen component
- * Allows the user to login using their details
+ * Allows the user to Signup using their details
  */
 import React from "react";
 import { auth, db } from "../firebase";
@@ -131,7 +131,7 @@ export default function Signup({ navigation}) {
   const [visible, setVisible] = React.useState(false);
 
   return (
-    
+
     // Dismiss the keyboard if the user taps outside the text box
     <TouchableWithoutFeedback onpress={Keyboard.dismiss}>
       <ScrollView>

@@ -18,6 +18,8 @@ const Loading = ({ navigation}) => {
       routes: [{ name: name }],
     });
   }
+
+  // Function to get the user ID from async storage and navigate to another screen
   const getUser = async () => {
     let uid = await AsyncStorage.getItem("uid");
     console.log("loading screen id:" + uid)
@@ -25,6 +27,7 @@ const Loading = ({ navigation}) => {
     else nav('Auth');
   };
 
+  // Rendering Loading component
   return (
     <View style={styles.container}>
       <Image source={require('../assets/splash.png')} style={styles.logo} />

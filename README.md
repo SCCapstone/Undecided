@@ -1,6 +1,5 @@
 # # Life React
 
-
 LifeReact is a lifestyle app that allows users to keep track of your calorie intake by providing a persistent, interactive food diary. All nutritional information is pulled directly from the USDA to ensure a high degree of accuracy. Users can also view dynamic updates on their progress towards their calorie goal from the home screen.
 
 ## External Requirements
@@ -15,7 +14,6 @@ In order to build this project you first have to install:
 
 - If you choose to use an emulator, there are many free options to choose from, such as the built-in [Android Emulator](https://developer.android.com/studio/run/emulator) from Android Studio.
 - If you're using macOS, you can download [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) via the Mac App store.
-
 
 ## Setup
 
@@ -61,21 +59,22 @@ eas build
 
 # Testing
 
-Unit tests are located in `/test/unit`.
+Unit tests are located in `/__tests__/unit`.
 
-Behavioral tests are located  in `/test/behavioral`.
+Behavioral tests are located in `/__tests__/behavioral`.
 
 ## Testing Technology
 
-Testing is done using jest and the React Native Testing Library. These are included in the projects dependencies and can be installed with the command 
+Testing is done using jest and the React Native Testing Library. These are included in the projects dependencies and can be installed with the command
+
 ```console
 npm install
 ```
 
-
 ## Running Tests
 
 Tests are ran with the following command .
+
 ```console
 npm run test
 ```

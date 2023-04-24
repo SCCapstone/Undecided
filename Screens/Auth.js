@@ -7,6 +7,7 @@ import { COLORS } from '../constants/colors.js'
 export default function Auth(props) {
   const [active, setActive] = React.useState("signin");
 
+  // Rendering Auth component
   return (
     <View style={styles.container}>
       <View style={styles.locator}>
@@ -29,6 +30,8 @@ export default function Auth(props) {
     </View>
   );
 }
+
+// Defining styles using StyleSheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,

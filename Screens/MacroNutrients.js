@@ -1,16 +1,13 @@
-
 import { View, Text, StyleSheet,ScrollView} from 'react-native';
 import { COLORS } from '../constants/colors.js'
 
-
-
+// Create MacroNutrients component
 const MacroNutrients = ({route}) => {
+
+    // Retrieving food object from the route params
     const {food} = route.params
-   
 
-
-
- 
+    // Rendering MacroNutrients component
     return(
      <ScrollView style={{ backgroundColor: COLORS.green}}>
         <Text style={{ backgroundColor: COLORS.green, textAlign:"center", fontWeight:'bold', fontSize:20}}>Nutrient Overview</Text>
@@ -49,35 +46,32 @@ const MacroNutrients = ({route}) => {
     )
 }
 
+// Defining styles using StyleSheet
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      marginTop: 8,
-      backgroundColor: COLORS.green
+  ontainer: {
+    flex: 1,
+    marginTop: 8,
+    backgroundColor: COLORS.green
      
-    },
- 
+  },
   textRight:{
-     marginRight: '5%',
-     fontSize: 20
+    marginRight: '5%',
+    fontSize: 20
   },
   textInputRight: {
     backgroundColor: COLORS.cream,
     marginRight: '5%',
- },
-
-  textLeft:{
-      flex:1,
-      paddingLeft: "5%",
-      fontWeight:"bold",
-      fontSize: 20
   },
-
+  textLeft:{
+    flex:1,
+    paddingLeft: "5%",
+    fontWeight:"bold",
+    fontSize: 20
+  },
   flexrow:{
-    
-      flexDirection: 'row',
-      paddingTop:10,
-      paddingBottom: 10
+    flexDirection: 'row',
+    paddingTop:10,
+    paddingBottom: 10
   },
   tab:{
     backgroundColor: COLORS.blue,
@@ -86,11 +80,7 @@ const styles = StyleSheet.create({
     height: 30,
     width: '50%',
     alignSelf:'center'
-    
-    
-}
-    
-  });
+  }
+});
 
 export default MacroNutrients
-

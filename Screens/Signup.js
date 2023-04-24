@@ -11,10 +11,10 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDatabase } from "firebase/database";
-
-const database = getDatabase();
 import { COLORS } from '../constants/colors.js'
 import { ScrollView } from "react-native-gesture-handler";
+
+const database = getDatabase();
 
 // Declaring and exporting the Signup function
 export default function Signup({ navigation}) {
@@ -130,8 +130,8 @@ export default function Signup({ navigation}) {
   
   const [visible, setVisible] = React.useState(false);
 
+  // Rendering Signup component
   return (
-
     // Dismiss the keyboard if the user taps outside the text box
     <TouchableWithoutFeedback onpress={Keyboard.dismiss}>
       <ScrollView>
@@ -244,6 +244,7 @@ const Input = ({ val, change, label, psw, full }) => (
   />
 );
 
+// Defining styles using StyleSheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,

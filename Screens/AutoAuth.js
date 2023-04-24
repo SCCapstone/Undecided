@@ -48,6 +48,7 @@ export default function AutoAuth({ navigation: { navigate } }) {
     }
   };
 
+  // Rendering AutoAuth component
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -79,6 +80,7 @@ export default function AutoAuth({ navigation: { navigate } }) {
   );
 }
 
+// Defining styles using StyleSheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,

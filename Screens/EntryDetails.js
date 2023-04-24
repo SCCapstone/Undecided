@@ -4,9 +4,6 @@ import { TextInput } from 'react-native-paper';
 import { StackActions, useNavigation} from '@react-navigation/native';
 import { COLORS } from '../constants/colors.js'
 
-
-
-
 const FoodDetails = ({route}) => {
   const navigation = useNavigation();
     const {food, meal} = route.params
@@ -26,8 +23,8 @@ const FoodDetails = ({route}) => {
         routes: [{ name: 'Diary' }],
       });
     }
+
     const RemoveFood = () =>{
-    
       let index = meal.indexOf(food)
       meal.splice(index,1)
       console.log(meal)
@@ -37,6 +34,7 @@ const FoodDetails = ({route}) => {
       });
     }
   
+    // Rendering EntryDetails component
     return(
       <ScrollView style={{ backgroundColor: COLORS.green}}>
       <Text style={{ backgroundColor: COLORS.green, textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.description}</Text>
@@ -97,48 +95,40 @@ const FoodDetails = ({route}) => {
     )
 }
 
+// Defining styles using StyleSheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 8,
     backgroundColor: COLORS.green
-   
   },
-
-textRight:{
-   marginRight: '5%',
-   fontSize: 20
-},
-textInputRight: {
-  backgroundColor: COLORS.cream,
-  marginRight: '5%',
-},
-
-textLeft:{
+  textRight:{
+    marginRight: '5%',
+    fontSize: 20
+  },
+  textInputRight: {
+    backgroundColor: COLORS.cream,
+    marginRight: '5%',
+  },
+  textLeft:{
     flex:1,
     paddingLeft: "5%",
     fontWeight:"bold",
     fontSize: 20
-},
-
-flexrow:{
-  
+  },
+  flexrow:{
     flexDirection: 'row',
     paddingTop:10,
     paddingBottom: 10
-},
-tab:{
-  backgroundColor: COLORS.blue,
-  borderRadius: 100,
-  marginTop:30,
-  height: 30,
-  width: '50%',
-  alignSelf:'center'
-  
-  
-}
-    
-  });
+  },
+  tab:{
+    backgroundColor: COLORS.blue,
+    borderRadius: 100,
+    marginTop:30,
+    height: 30,
+    width: '50%',
+    alignSelf:'center'
+  }  
+});
 
 export default FoodDetails
-

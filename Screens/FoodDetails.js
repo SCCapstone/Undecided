@@ -6,8 +6,6 @@ import { DiaryContext } from '../Contexts/DiaryContext';
 import { StackActions, useNavigation} from '@react-navigation/native';
 import { COLORS } from '../constants/colors.js'
 
-
-
 const FoodDetails = ({route, navigation}) => {
     const {food, meal} = route.params
     const [servings, setServings] = useState(1);
@@ -27,8 +25,9 @@ const FoodDetails = ({route, navigation}) => {
         index: 0,
         routes: [{ name: 'Diary' }],
       });
-      //navigation.navigate("Diary")
     }
+
+    // Rendering FoodDetails component
     return(
      <ScrollView style={{ backgroundColor: COLORS.green}}>
         <Text style={{ backgroundColor: COLORS.green, textAlign:"center", fontWeight:'bold', fontSize:20}}>{food.description}</Text>
@@ -80,35 +79,31 @@ const FoodDetails = ({route, navigation}) => {
     )
 }
 
+// Defining styles using StyleSheet
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      marginTop: 8,
-      backgroundColor: COLORS.green
-     
-    },
- 
+  container: {
+    flex: 1,
+    marginTop: 8,
+    backgroundColor: COLORS.green
+  },
   textRight:{
-     marginRight: '5%',
-     fontSize: 20
+    marginRight: '5%',
+    fontSize: 20
   },
   textInputRight: {
     backgroundColor: COLORS.cream,
     marginRight: '5%',
- },
-
-  textLeft:{
-      flex:1,
-      paddingLeft: "5%",
-      fontWeight:"bold",
-      fontSize: 20
   },
-
-  flexrow:{
-    
-      flexDirection: 'row',
-      paddingTop:10,
-      paddingBottom: 10
+  textLeft:{
+    flex:1,
+    paddingLeft: "5%",
+    fontWeight:"bold",
+    fontSize: 20
+  },
+  flexrow:{    
+    flexDirection: 'row',
+    paddingTop:10,
+    paddingBottom: 10
   },
   tab:{
     backgroundColor: COLORS.blue,
@@ -117,11 +112,8 @@ const styles = StyleSheet.create({
     height: 30,
     width: '50%',
     alignSelf:'center'
-    
-    
-}
-    
-  });
+  }  
+});
 
 export default FoodDetails
 

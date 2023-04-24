@@ -5,13 +5,11 @@ import fetch from 'node-fetch';
 import SearchResult from '../components/SearchResult';
 import { COLORS } from '../constants/colors.js'
 
-
 const FoodSearchScreen = ({route}) => {
     const [results, setResults ] = useState([])
     const query = useRef("")
     const {meal} = route.params
    
-
     const getUSDA = async (data) => {
       let dataNoSpace = data.trim().replace(' ','%20')
       if(dataNoSpace != ''){
@@ -60,10 +58,9 @@ const Search = ({foods}) =>{
         </View>
     </TouchableWithoutFeedback>
     )
- 
-
 }
 
+// Defining styles using StyleSheet
 const styles = StyleSheet.create({
   default:{
     backgroundColor: COLORS.green,
@@ -77,7 +74,5 @@ const styles = StyleSheet.create({
     
   }
 })
-
-
 
 export default FoodSearchScreen

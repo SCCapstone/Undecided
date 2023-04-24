@@ -1,4 +1,4 @@
-# # Life React
+# Life React
 
 LifeReact is a lifestyle app that allows users to keep track of your calorie intake by providing a persistent, interactive food diary. All nutritional information is pulled directly from the USDA to ensure a high degree of accuracy. Users can also view dynamic updates on their progress towards their calorie goal from the home screen.
 

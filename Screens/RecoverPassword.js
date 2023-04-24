@@ -1,3 +1,4 @@
+// Screen that prompts the user to enter their email and reset their password
 import React from "react";
 import {View, StyleSheet, TextInput, Text, Button, Alert } from "react-native";
 import { COLORS } from "../constants/colors";
@@ -7,8 +8,10 @@ import { auth } from "../firebase";
 
 export default function RecoverPassword({ navigation }) {
 
+    // Initialize state for user's email
     const [providedEmail, setProvidedEmail] = React.useState(null);
 
+    // This function is called when the user enters their email
     const emailChangeHandler = (val) => {
         setProvidedEmail(val);
     }
@@ -30,7 +33,7 @@ export default function RecoverPassword({ navigation }) {
             });
     }
 
-
+    // Rendering RecoverPassword component
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Please enter your email.</Text>
@@ -43,9 +46,9 @@ export default function RecoverPassword({ navigation }) {
             <Button title={"Change Password"}onPress={pressHandler} />
         </View>
     )
-
 }
 
+// Defining styles using StyleSheet
 const styles = StyleSheet.create({
     container: {
         backgroundColor: COLORS.green,

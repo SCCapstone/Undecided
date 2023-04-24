@@ -20,6 +20,9 @@ export default function AccountSettings({ navigation }) {
         {settingName: "Password", dbField: dbConstants.PASSWORD, data: null, key: "4"},
     ]);
 
+    const [prevPassword, setPrevPassword] = React.useState(null)
+    const [prevEmail, setPrevEmail] = React.useState(null)
+
     //A state variable to represent this user's document snapshot as it exists in Firebase.
     const [userDocSnap, setUserDocSnap] = useState(null);
 
@@ -100,12 +103,20 @@ export default function AccountSettings({ navigation }) {
     //Handles change of user email.
     const handleEmailChange = async (newEmail) => {
         //Get the user's current email and password.
-        const email = userDocSnap.get(dbConstants.EMAIL)
-        const password = userDocSnap.get(dbConstants.PASSWORD)
+        let email = prevEmail
+        let password = prevPassword
+        if (prevEmail == null) {
+            email = userDocSnap.get(dbConstants.EMAIL)
+        }
+        if (prevPassword == null) {
+            password = userDocSnap.get(dbConstants.PASSWORD)
+        }
 
         //Create a credential object with the user's email and password.
         const credential = EmailAuthProvider.credential(email, password)
         console.log("Obtained credential: " + credential)
+
+        console.log("user's email is " + email + " and password is " + password)
 
         //Sign the user in with their email and password to ensure they are recently signed in.
         signInWithEmailAndPassword(auth, email, password).then( (user) => {
@@ -117,6 +128,8 @@ export default function AccountSettings({ navigation }) {
             console.log("attempting email update to " + newEmail)
             updateEmail(auth.currentUser, newEmail).catch((error) => {
                 console.log("Email update failed after reauthentication attempt.")
+            }).then(() => {
+                setPrevEmail(newEmail);
             })}
         )})
     }
@@ -124,8 +137,16 @@ export default function AccountSettings({ navigation }) {
     //Handles change of user password.
     const handlePasswordChange = async (newPassword) => {
         //Get the user's current email and password.
-        const email = userDocSnap.get(dbConstants.EMAIL)
-        const password = userDocSnap.get(dbConstants.PASSWORD)
+        let email = prevEmail
+        let password = prevPassword
+        if (prevEmail == null) {
+            email = userDocSnap.get(dbConstants.EMAIL)
+        }
+        if (prevPassword == null) {
+            password = userDocSnap.get(dbConstants.PASSWORD)
+        }
+
+        console.log("user's email is " + email + " and password is " + password)
 
         //Create a credential object with the user's email and password.
         const credential = EmailAuthProvider.credential(email, password)
@@ -140,6 +161,8 @@ export default function AccountSettings({ navigation }) {
             console.log("attempting password update to " + newPassword)
             updatePassword(auth.currentUser, newPassword).catch((error) => {
                 console.log("Password update failed after reauthentication attempt.")
+            }).then(() => {
+                setPrevPassword(newPassword);
             })}
         )})
     }

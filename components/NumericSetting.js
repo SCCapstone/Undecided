@@ -1,5 +1,5 @@
 //This component is used to represent a single text-based setting.
-//The normal keyboard is used to edit the text inside each TextInput.
+//The numeric keyboard is used to edit the text inside each TextInput.
 
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
@@ -7,7 +7,7 @@ import { globalStyles } from "../styles/global";
 import { MaterialIcons } from '@expo/vector-icons';
 import {COLORS} from '../constants/colors'
 
-export default function Setting({ item, initialData, parentCallback }) {
+export default function NumericSetting({ item, initialData, parentCallback }) {
     
     //This State variable represents the data displayed within this setting.
     const [dataField, setDataField] = useState(initialData);
@@ -35,6 +35,7 @@ export default function Setting({ item, initialData, parentCallback }) {
                     onEndEditing={endEditingHandler}
                     value={dataField}
                     editable={true}
+                    keyboardType="number-pad"
                 />
             </View>
         </View>

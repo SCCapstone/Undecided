@@ -1,3 +1,9 @@
+/**
+ * Login screen component
+ * Allows the user to login using email and password
+ * Uses Firebase authentication for user verfication AsyncStorage to store the user's UID after logging in
+ * Uses React Native Paper Library and the StyleSheet API
+ */
 import React from "react";
 import { auth } from "../firebase";
 import { TextInput, Button } from "react-native-paper";
@@ -7,14 +13,27 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLORS } from "../constants/colors"
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Login({ navigation: { navigate } }) {
+// Declaring and exporting the Login function
+export default function Login({ navigation }) {
+
+  // Define initialize the state variables
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [visible, setVisible] = React.useState(false);
 
+  // Find the screen dimensions
   const screenHeight = Dimensions.get('window').height;
   const screenWidth = Dimensions.get('window').width;
 
+  // A function to navigate to another screen
+  const nav = (name) =>{
+    navigation.reset({
+      index: 0,
+      routes: [{ name: name }],
+    });
+  }
+
+  // Function to handle Login
   const LoginHandle = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
@@ -24,7 +43,7 @@ export default function Login({ navigation: { navigate } }) {
             onPress: async () => {
               await AsyncStorage.setItem("uid", user.user.uid);
               console.log(user.user.uid);
-              navigate("Home");
+              nav("Home");
             },
           },
         ]);
@@ -32,7 +51,7 @@ export default function Login({ navigation: { navigate } }) {
       .catch(({ message }) => Alert.alert("Oops!", message, [{ text: "Ok" }]));
   };
   
-
+  // Rendering Login component
   return (
     <><ScrollView contentContainerStyle={{ height: 0.6 * screenHeight, width: screenWidth }}>
       <View style={styles.container}>
@@ -61,10 +80,16 @@ export default function Login({ navigation: { navigate } }) {
         >
           Login
         </Button>
+        <Button
+        style={styles.login}
+        onPress={() => navigation.navigate("RecoverPassword")}>
+          Forgot Password?
+        </Button>
       </View></>
   );
 }
 
+// Defining styles using StyleSheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -82,11 +107,11 @@ const styles = StyleSheet.create({
   },
   login: {
     width: 200,
-    marginTop: 15,
+    marginTop: 10,
     borderRadius: 100,
     paddingVertical: 3,
     backgroundColor: "black",
-    marginBottom: 50,
+    marginBottom: 20,
   },
   label: {
     fontSize: 20,

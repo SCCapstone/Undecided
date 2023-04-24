@@ -61,7 +61,7 @@ const DiaryScreen = ({navigation}) => {
         <ScrollView> 
         {entry.getBreakfast().map((food) => (
                  <DiaryTile
-                 key={food.getName} 
+                 key={food.getName()} 
                  foodItem = {food}
                  meal = {entry.getBreakfast()}
                  ></DiaryTile>
@@ -75,7 +75,7 @@ const DiaryScreen = ({navigation}) => {
         <ScrollView> 
         {entry.getLunch().map((food) => (
                  <DiaryTile
-                 key={food.getName} 
+                 key={food.getName()} 
                  foodItem = {food}
                  meal = {entry.getLunch()}
                  ></DiaryTile>
@@ -89,7 +89,7 @@ const DiaryScreen = ({navigation}) => {
         <ScrollView> 
         {entry.getDinner().map((food) => (
                  <DiaryTile
-                 key={food.getName} 
+                 key={food.getName()} 
                  foodItem = {food}
                  meal = {entry.getDinner()}
                  ></DiaryTile>
@@ -104,7 +104,7 @@ const DiaryScreen = ({navigation}) => {
         <ScrollView> 
         {entry.getSnacks().map((food) => (
                  <DiaryTile
-                 key={food.getName} 
+                 key={food.getName()} 
                  foodItem = {food}
                  meal = {entry.getSnacks()}
                  ></DiaryTile>

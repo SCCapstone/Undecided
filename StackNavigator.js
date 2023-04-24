@@ -14,6 +14,7 @@ import GoalsSettings from './Screens/Settings/GoalsSettings';
 import AccountSettings from './Screens/Settings/AccountSettings';
 import EntryDetails from './Screens/EntryDetails'
 import Overview from './Screens/MacroNutrients'
+import RecoverPassword from './Screens/RecoverPassword';
 
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +35,7 @@ const StackNavigator = () => {
             <Stack.Screen name="DietaryRestrictionsSettings" component={DietaryRestrictionsSettings} options={{ title: "Settings" }}/>
             <Stack.Screen name="GoalsSettings" component={GoalsSettings} options={{ title: "Settings" }}/>
             <Stack.Screen name="AccountSettings" component={AccountSettings} options={{ title: "Settings" }}/>
+            <Stack.Screen name="RecoverPassword" component={RecoverPassword} options={{ title: "Recover Password" }}/>
 
 
         </Stack.Navigator>

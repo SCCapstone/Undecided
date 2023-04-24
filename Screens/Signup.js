@@ -1,3 +1,7 @@
+/**
+ * Signup screen component
+ * Allows the user to Signup using their details
+ */
 import React from "react";
 import { auth, db } from "../firebase";
 import { TextInput, Button } from "react-native-paper";
@@ -12,7 +16,10 @@ const database = getDatabase();
 import { COLORS } from '../constants/colors.js'
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Signup({ navigation: { navigate } }) {
+// Declaring and exporting the Signup function
+export default function Signup({ navigation}) {
+
+  // Define initialize the state variables
   const [firstName, setFirstName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -22,6 +29,15 @@ export default function Signup({ navigation: { navigate } }) {
   const [email, setEmail] = React.useState("");
   const [age, setAge] = React.useState("");
 
+  // A function to navigate to another screen
+  const nav = (name) =>{
+    navigation.reset({
+      index: 0,
+      routes: [{ name: name }],
+    });
+  }
+
+  // Define state variables for user's activity level, goal and dietary restrictions
   const [activity, setActivity] = React.useState({
     value: "",
     selectedList: [],
@@ -37,6 +53,7 @@ export default function Signup({ navigation: { navigate } }) {
     selectedList: [],
   });
 
+  // Define activity, goal and dietary restriction options for the PaperSelect component
   const activities = [
     { _id: "SEDENTARY", value: "Sedentary" },
     { _id: "LIGHT", value: "Light" },
@@ -61,6 +78,7 @@ export default function Signup({ navigation: { navigate } }) {
     { _id: "LOW_CARB", value: "Low Carb" },
   ];
 
+  // Function to handle Signup
   const SignupHandle = async () => {
     if (
       firstName.trim() === "" ||
@@ -78,8 +96,11 @@ export default function Signup({ navigation: { navigate } }) {
       return;
     }
 
+    // createUserWithEmailAndPassword is a method provided by Firebase Authentication
     await createUserWithEmailAndPassword(auth, email, password)
       .then(async (user) => {
+
+        // Once the user is successfully created, setDoc method is used to create a document in Firestore database
         console.log('setdoc')
         await setDoc(doc(db, "users", user.user.uid), {
           signinType: "Email",
@@ -96,9 +117,11 @@ export default function Signup({ navigation: { navigate } }) {
           password,
         })
         console.log("successfully set doc")
+
+        // Set the user's UID in AsyncStorage
         await AsyncStorage.setItem("uid", user.user.uid);
         console.log("successfully set uid")
-        navigate("Home");
+        nav("Home");
       })
       .catch((error) =>
         Alert.alert("Oops!", error.message, [{ text: "Ok" }])
@@ -107,12 +130,10 @@ export default function Signup({ navigation: { navigate } }) {
   
   const [visible, setVisible] = React.useState(false);
 
-  const handlePress = () => {
-    Keyboard.dismiss();
-  };
-
   return (
-    <TouchableWithoutFeedback onpress={handlePress}>
+
+    // Dismiss the keyboard if the user taps outside the text box
+    <TouchableWithoutFeedback onpress={Keyboard.dismiss}>
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.row}>

@@ -16,9 +16,11 @@ const CalorieTracker = ({ calorieGoal, caloriesRemaining, navigate }) => {
 
 
   if(Object.keys(diary.diary).length > 0 && diary.diary !== []) {
-    breakfast = (diary.diary.diary[0].breakfast);
-    lunch = (diary.diary.diary[0].lunch);
-    dinner = (diary.diary.diary[0].dinner);
+    if (diary.diary.diary.length > 0) {
+      breakfast = (diary.diary.diary[0].breakfast);
+      lunch = (diary.diary.diary[0].lunch);
+      dinner = (diary.diary.diary[0].dinner);
+    }
   }
   const percentage = Math.round(100- ((caloriesRemaining / calorieGoal) * 100));
 

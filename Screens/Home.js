@@ -9,11 +9,11 @@ import { COLORS } from '../constants/colors.js'
 import { useFocusEffect} from '@react-navigation/native';
 import CalorieTracker from "../components/CalorieGoal";
 
-
-
-
+// Define and export the Home component
 export default function Home({ navigation }) {
   let uid
+
+  // Defining and initializing state variables
   const [name, setName] = React.useState("");
   const [type, setType] = React.useState("Email");
   const [calorieGoal, setCalorieGoal] = React.useState(2000);
@@ -26,11 +26,17 @@ export default function Home({ navigation }) {
 
   const getDb = async () => {
     uid = await AsyncStorage.getItem("uid");
+
+    // Getting the user's diary from the getDiary function
     let newDiary = await getDiary()
+
+    // Setting the state variables with the retrieved data
     setDiary(newDiary);
     setCalorieGoal(2000)
     setCaloriesConsumed(newDiary.getEntry(new Date().toDateString()).getCalorieTotal())
     console.log("UUID: " + uid)
+
+    // Getting the user details from the database
     try{
       let user = await getDoc(doc(db, "users", uid));
       setType(user.data().signinType || "Email");
@@ -52,12 +58,16 @@ export default function Home({ navigation }) {
     setDiary(newDiary);
   
   };
+
+  // A function to navigate to another screen
   const nav = (name) =>{
     navigation.reset({
       index: 0,
       routes: [{ name: name }],
     });
   }
+
+  // Function to log out the user and revoke the authentication token
   const log = async () => {
     if (type == "Email") {
       await AsyncStorage.removeItem("uid");
@@ -74,6 +84,7 @@ export default function Home({ navigation }) {
     }
   };
 
+  // Rendering Home component
   return (
     <View style={styles.container}>
         <Text style={styles.Home}>Home</Text>
@@ -84,6 +95,7 @@ export default function Home({ navigation }) {
   );
 }
 
+// Defining styles using StyleSheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,

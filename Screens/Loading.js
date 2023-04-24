@@ -1,3 +1,6 @@
+/**
+ * Loading screen to display when the app is launched
+ */
 import React, { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, ActivityIndicator, Text, Image, StyleSheet } from "react-native";
@@ -7,6 +10,8 @@ const Loading = ({ navigation}) => {
   useEffect(() => {
     getUser();
   });
+
+  // A function to navigate to another screen
   const nav = (name) =>{
     navigation.reset({
       index: 0,
@@ -29,6 +34,7 @@ const Loading = ({ navigation}) => {
   );
 };
 
+// Defining styles using StyleSheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,

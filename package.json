@@ -38,7 +38,7 @@
     "expo-checkbox": "~2.2.0",
     "expo-random": "~12.3.0",
     "expo-status-bar": "~1.4.0",
-    "firebase": "^9.6.11",
+    "firebase": "^9.23.0",
     "jest": "^26.6.3",
     "jest-expo": "^48.0.2",
     "radio-buttons-react-native": "^1.0.4",
